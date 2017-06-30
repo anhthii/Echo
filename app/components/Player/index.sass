@@ -1,0 +1,89 @@
+@import 'colors'
+
+.player
+  height: 48px
+  border-top: 1px solid #e3e3e3
+  position: fixed
+  min-width: 1120px
+  bottom: 0
+  right: 0
+  left: 0
+  padding: 0 50px
+  background: white
+
+.player-info
+  width: 12%
+  height: inherit
+  float: left
+  font-size: 13px
+  padding-top: 8px
+  span
+    display: block
+    font-weight: 600
+    color: #2E4053
+  a
+    font-size: 12px
+    color: #1ABC9C
+    display: block
+    &:hover
+      text-decoration: underline
+
+.player-seek
+  float: left
+  height: inherit
+  width: 45%
+  display: flex
+  align-items: center
+  padding-left: 20px
+
+.player-btns
+  width: 18%
+  float: left
+  height: 100%
+  display: flex
+  align-items: center
+  padding-left: 20px
+  img
+    opacity: 0.8
+    &:hover
+      opacity: 1.0
+      cursor: pointer
+
+.player-btn
+  padding: 10px
+  width: 40px
+  cursor: pointer
+  &:not(:last-of-type)
+    opacity: 0.8
+  &:hover
+    opacity: 1.0
+  i
+
+    color: $gb-1
+    font-size: 16px
+
+#queue
+  &:hover
+   fill: $gb-1
+
+.player-overlay
+  position: absolute
+  width: 100%
+  height: 48px
+  top: 0
+  left: 0
+  background: rgba(255,255,255, 0.7)
+
+.player-loader
+  position: absolute
+  height: 100%
+  right: 100px
+  display: flex
+  align-items: center
+
+.player-loading
+  img
+    height: 35px
+    display: inline-block
+    margin-right: 20px
+

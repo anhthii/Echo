@@ -1,0 +1,72 @@
+@import 'colors'
+
+.search-menu
+  position: absolute
+  top: 43px
+  width: calc(100% - 40px)
+  height: 500px
+  overflow-y: scroll
+  z-index: 100
+  background: #fff
+  box-shadow: 0 0 8px rgba(0,0,0,.3)
+  > ul
+    padding: 10px 20px
+    padding-top: 0
+  li
+
+
+.top-result
+  .search-li-detail
+    box-shadow: 0 0 8px rgba(0,0,0,.3)
+  > div
+    margin-top: 10px
+.search-li
+  &-title
+    display: inline-block
+    font-size: 13px
+    color: #ccc
+    padding-bottom: 5px
+    border-bottom: 1px solid #ccc
+  &-detail
+    overflow: hidden
+    margin-top: 7px
+    font-size: 14px
+    img
+      display: block
+      width: 50px
+      height: 50px
+      float: left
+  &-info
+    width: calc(100% - 50px)
+    float: left
+    padding-left: 20px
+    height: 50px
+    padding-top: 7px
+    &:hover
+      background: #F7F9F9
+    a
+      color: #85C1E9
+
+  &-artist
+    margin-top: 5px
+    font-size: 12px
+    color: #ccc
+
+.search-song
+  padding-left: 0
+  padding-top: 0
+  height: 40px
+  &-title
+    margin-bottom: 5px
+
+.song-result
+  > li
+    height: 40px
+    transition: transform 0.2s ease-in-out
+    &:hover
+      transform: translateX(10px)
+.search-li-info.search-song
+  &:hover
+    background: #fff
+
+

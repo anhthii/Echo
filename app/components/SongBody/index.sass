@@ -1,0 +1,142 @@
+@import 'colors'
+.song-body
+  padding: 20px 20px
+  background: white
+  padding-bottom: 200px
+
+.comment-section
+  width: 40%
+  float: left
+  height: 500px
+
+.comment-section-heading
+  color: #343a40
+  font-weight: normal
+  overflow: hidden
+  padding-bottom: 10px
+  border-bottom: 2px solid #ccc
+  h3
+    margin: 0
+  > div
+    &:first-child
+      width: 70%
+      float: left
+      .cmtt
+        font-size: 14px
+      span
+        font-size: 12px
+    &:nth-child(2)
+      margin-top: 5px
+      display: flex
+      align-items: center
+      width: 30%
+      float: left
+      color: #808B96
+      font-family: 'Roboto', sans-serif
+      font-size: 14px
+      font-weight: 600
+      img
+        height: 20px
+        width: 20px
+        margin-right: 10px
+.comment
+  padding: 10px
+  overflow: hidden
+  border-bottom: 1px solid #D5DBDB
+
+  h3
+    margin: 5px
+    font-size: 14px
+  p
+    margin: 5px
+  &-image
+    width: 20%
+    float: left
+  img
+    height: 50px
+    width: 50px
+    border-radius: 100%
+  &-content
+    width: 80%
+    float: left
+    p
+      font-size: 13px
+      color: $grey-1
+.comment-wrapper
+  overflow: hidden
+  display: flex
+  align-items: center
+.comment-owner
+  span
+    padding: 1px 7px
+    font-size: 10px
+    color: white
+    border-radius: 3px
+    background: #6BCFB7
+    margin-left: 10px
+
+.comment-date
+  font-size: 12px
+  padding-left: 5px
+  font-weight: 600
+  color: $grey-1
+.sub-cm-wrapper
+  width: 80%
+  float: right
+
+.have-sub
+  padding-bottom: 10px
+  border-bottom: 1px solid #D5DBDB
+.sub-comment
+  &:last-child
+    border-bottom: none
+    padding-bottom: 0
+  display: flex
+  align-items: center
+
+
+.suggested-section
+  width: 35%
+  float: right
+  &-heading
+    padding-bottom: 10px
+    border-bottom: 1px solid #D5DBDB
+  h3
+    margin: 0
+    text-transform: uppercase
+    font-family: 'Open Sans', sans-serif
+    color: $gb-1
+
+.suggested-song
+  margin-top: 10px
+  overflow: hidden
+  padding-bottom: 10px
+  border-bottom: 1px solid #D5DBDB
+  &-info
+    width: calc(100% - 50px)
+    float: right
+    height: 50px
+    padding: 8px 10px 5px 20px
+    font-family: "Roboto", sans-serif
+    a
+      &:hover
+        color: $gb-1
+  &-name
+    display: block
+    font-size: 14px
+    color: #4dadf7
+    &:hover
+      color: #4dadf7 !important
+      text-decoration: underline
+  &-artist
+    font-size: 12px
+    color: #888
+    line-height: 15px
+
+  img
+    display: block
+    width: 50px
+    height: 50px
+    float: left
+
+

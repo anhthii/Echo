@@ -1,0 +1,36 @@
+{
+  "extends": "airbnb-base",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "env": {
+    "node": true,
+    "browser": true
+  },
+  "plugins": [
+    "babel",
+    "react"
+  ],
+  "rules": {
+    "react/jsx-uses-react": "error",
+    "react/jsx-uses-vars": "error",
+    "react/prefer-stateless-function": [0],
+    "linebreak-style": "off",
+    "indent": ["error", 2],
+    "react/jsx-indent": [2, 2],
+    "react/jsx-indent-props": [2, 2],
+    "eol-last": "off",
+    "func-names": "off",
+    "new-cap": "off",
+    "no-use-before-define": "off",
+    "no-param-reassign": "off",
+    "no-shadow": "off",
+    "no-trailing-spaces": ["error", { "skipBlankLines": true }],
+    "import/no-extraneous-dependencies": ["error", {
+      "devDependencies": ["*.config.js"]
+    }]
+  }
+}

@@ -1,0 +1,88 @@
+.queue
+  width: 35%
+  height: 500px
+  position: fixed
+  bottom: 48px
+  left: 50px
+  box-shadow: 0 0 8px rgba(0,0,0,.3)
+  background: #fff
+  z-index: 100
+  &-panel
+    height: 54px
+    padding: 9px 24px
+    padding-bottom: 0
+    border-bottom: 1px solid #e5e5e5
+    > div
+      float: left
+      display: flex
+      height: 41px
+      align-items: center
+  &-title
+    width: 70%
+    font-size: 15px
+  &-clear
+    width: 20%
+    button
+      display: inline-block
+      position: relative
+      height: 26px
+      margin: 0
+      padding: 2px 11px 2px 10px
+      border: 1px solid #e5e5e5
+      border-radius: 3px
+      background-color: #fff
+      cursor: pointer
+      color: #333
+      font-size: 14px
+      line-height: 20px
+      white-space: nowrap
+      font-weight: 100
+      text-align: center
+      vertical-align: baseline
+      -webkit-user-select: none
+      -moz-user-select: none
+      -ms-user-select: none
+      box-sizing: border-box
+  &-hide
+    width: 10%
+    button
+      background-image: url(https://a-v2.sndcdn.com/assets/images/play-queue/close-dcc8a56.svg);
+      background-position: center
+      background-repeat: no-repeat
+      background-size: 24px 24px
+      cursor: pointer
+
+.queue-list
+  > li
+    height: 58px
+    position: relative
+    margin-bottom: 5px
+    &:hover
+      background-color: rgb(248, 248, 248)
+  &-thumb
+    padding: 5px 10px 5px 20px
+    float: left
+    img
+      width: 48px
+      height: 48px
+  &-info
+    width: calc(100% - 30% - 78px)
+    float: left
+    padding: 10px
+    padding-left: 0
+    a
+      color: #999
+      font-size: 13px
+.queue-track-actions
+  width: 30%
+  float: left
+  display: flex
+  align-items: center
+  justify-content: center
+  height: inherit
+  i
+   margin-right: 10px
+   color: #999
+   cursor: pointer
+
+

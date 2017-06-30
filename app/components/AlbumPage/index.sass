@@ -1,0 +1,112 @@
+@import 'mixins'
+@import 'colors'
+
+.genre-menu
+  width: 200px
+  padding: 15px
+  overflow-y: scroll
+  @include box-shadow
+  position: fixed
+  top: 50px
+  bottom: 50px
+  a
+    color: $grey-text
+    font-weight: 400
+    font-size: 14px
+
+.submenu-link-active
+  background: $little-dark-white
+  a
+    color: $gb-1
+
+.submenu
+  li
+    &:hover
+      @extend .submenu-link-active
+    > a
+      display: block
+      padding: 10px
+
+  &-link-active
+
+
+  &-title
+    > a
+      font-size: 15px
+      color: black
+      text-transform: uppercase
+      font-weight: 500
+
+
+  &-li
+    > a
+
+.album
+  &-view
+    width: calc(100% - 200px)
+    float: right
+    margin-top: 20px
+    padding: 0 20px 0 45px
+
+  &-cards
+    overflow: hidden
+    &:not(:first-of-type) .album-cards-title
+      margin-top: 10px
+    &-title
+      padding-bottom: 20px
+      a
+        font-size: 20px
+        text-transform: uppercase
+        font-family: 'Open Sans', sans-serif
+        color: $light-blue
+      a > i
+        margin-left: 7px
+
+    &-row
+      overflow: hidden
+      margin-bottom: 10px
+
+  &-card
+    width: 25%
+    float: left
+
+  &-image
+    img
+      width: 190px
+      min-height: 190px
+
+  &-detail
+    a
+      color: $grey-text
+      font-weight: 400
+      font-size: 14px
+    > div
+      margin-bottom: 7px
+
+  &-title
+    margin-top: 10px
+    a
+      color: $light-blue
+
+.hp-track-list
+  padding: 10px 0
+
+ul.pagination
+  background: #f2f2f2
+  text-align: center
+  > li
+    display: inline-block
+    > a
+      display: inline-block
+      height: 35px
+      width: 35px
+      line-height: 35px
+      vertical-align: middle
+      text-align: center
+      display: inline-block
+      margin: 0 3px
+      color: $grey-text
+
+.pagination-item-active
+  background: #34495e
+  color: white !important
