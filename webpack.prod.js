@@ -20,6 +20,22 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            hash: 'sha512',
+            digest: 'hex',
+            name: '[hash].[ext]',
+          },
+        }, {
+          loader: 'image-webpack-loader',
+          options: {
+            bypassOnDebug: true,
+          },
+        }],
+      },
+      {
         test: /\.(scss|sass)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -30,7 +46,7 @@ module.exports = {
             }, {
               loader: 'sass-loader',
               options: {
-                includePaths: ['./vendor', './app'],
+                includePaths: ['./app/styles'],
               },
             },
           ],
