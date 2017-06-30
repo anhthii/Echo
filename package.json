@@ -4,7 +4,6 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "webpack-dashboard": "./node_modules/.bin/webpack-dashboard ",
     "dev:client": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot",
     "dev:server": "nodemon ./server",
     "build": "cross-env NODE_ENV=production webpack --env=prod --progress --profile --colors && npm run server"
