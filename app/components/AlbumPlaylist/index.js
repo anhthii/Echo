@@ -4,6 +4,13 @@ import { KaraokeContainer } from '../../containers';
 import { getSongUrl } from '../../utils/func';
 import './index.sass';
 
+/*const tweakThePlaylist = (songs) => {
+  return playlist.reduce((newobj, currobj) => {
+
+  }, {});
+};
+*/
+
 const AlbumPlaylist = ({ playlist }) => {
   if (!Object.keys(playlist).length) return null;
 
@@ -30,14 +37,14 @@ const AlbumPlaylist = ({ playlist }) => {
           fontSize="23px"
         />
         <div className='playlist-play-btn'>
-          <i className='ion-ios-play-outline'></i>
+          <button>Play</button>
         </div>
         <ul className="album-playlist-tracks">
           {playlist.songs.map((song, index) => (
             <li className="album-playlist-track" key={`playlist-${song.id}`}>
               <span className='ap-track-order'>{index + 1}</span>
               <div className='ap-track-title'>
-                <Link to={getSongUrl(song.alias, song.id)}>{song.title}</Link>
+                <Link to={getSongUrl(song.title, song.id)}>{song.title}</Link>
               </div>
               <div className="ap-track-artist">
                 Justin Bieber

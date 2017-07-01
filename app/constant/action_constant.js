@@ -34,6 +34,7 @@ export const HIDE_ANALYZER = 'HIDE_ANALYZER';
 export const TOGGLE_TRACK_DROPDOWN = 'TOGGLE_TRACK_DROPDOWN';
 export const ADD_SONG_TO_QUEUE = 'ADD_SONG_TO_QUEUE';
 export const TOGGLE_QUEUE = 'TOGGLE_QUEUE';
+export const REPLACE_QUEUE = 'REPLACE_QUEUE';
 
 // actions for handling route transition
 export const TOGGLE_PUSH_ROUTE = 'TOGGLE_PUSH_ROUTE';

@@ -6,6 +6,7 @@ const search = require('./search');
 const getdefaultAlbums = require('./default_albums');
 const getAlbums = require('./albums');
 const getAlbumPlaylist = require('./album_playlist');
+const getArtist = require('./artist');
 
 const router = express.Router();
 
@@ -22,6 +23,8 @@ router.get('/album/default', getdefaultAlbums);
 router.get('/album', getAlbums);
 
 router.get('/album_playlist', getAlbumPlaylist);
+
+router.get('/artist/:name/:type', getArtist);
 
 
 module.exports = router;

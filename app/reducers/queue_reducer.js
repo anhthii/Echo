@@ -14,6 +14,9 @@ export default function (state = initialState, action) {
   case types.TOGGLE_PUSH_ROUTE:
     return { ...state, pushRoute: action.flag };
 
+  case types.REPLACE_QUEUE:
+    return { queue: action.songs, ids: action.ids };
+
   default:
     return state;
   }
