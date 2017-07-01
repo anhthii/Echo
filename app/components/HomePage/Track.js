@@ -5,7 +5,7 @@ import { changeAlias } from '../../utils/func';
 import { toggleTrackDropDown } from '../../actions/ui';
 import Dropdown from '../Dropdown';
 import LazyloadImage from '../LazyloadImage';
-import { addSongToQueue, addThumbnail } from '../../actions/queue';
+import { addSongToQueue } from '../../actions/queue';
 
 class Track extends React.Component {
   render() {
@@ -17,7 +17,6 @@ class Track extends React.Component {
       dropDownActiveId,
       addSongToQueue,
       toggleTrackDropDown,
-      addThumbnail,
     } = this.props;
 
     return (
@@ -70,4 +69,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-{ toggleTrackDropDown, addSongToQueue, addThumbnail })(Track);
+{ toggleTrackDropDown, addSongToQueue })(Track);

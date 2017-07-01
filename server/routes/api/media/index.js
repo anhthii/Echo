@@ -5,6 +5,7 @@ const getTop100 = require('./top100');
 const search = require('./search');
 const getdefaultAlbums = require('./default_albums');
 const getAlbums = require('./albums');
+const getAlbumPlaylist = require('./album_playlist');
 
 const router = express.Router();
 
@@ -20,6 +21,7 @@ router.get('/album/default', getdefaultAlbums);
 
 router.get('/album', getAlbums);
 
+router.get('/album_playlist', getAlbumPlaylist);
 
 
 module.exports = router;

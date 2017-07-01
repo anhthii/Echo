@@ -6,6 +6,9 @@ const getLink = (title, id, page) => `/album/${title}/${id}${pageQuery(page)}`;
 
 const Pagination = (props) => {
   const { title, id, pageChunks, pageChunkIndex } = props;
+
+  if (!pageChunks.length) return null;
+
   return (
     <ul className="pagination">
       { pageChunkIndex > 0 &&

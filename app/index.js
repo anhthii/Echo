@@ -15,6 +15,7 @@ import {
   SongPageContainer,
   HomePageContainer,
   AlbumPageContainer,
+  AlbumPlaylistContainer,
 } from './containers';
 import { UPDATE_LYRIC, UPDATE_LYRIC_PERCENT, UPDATE_SONG_CURRENT_TIME } from './constant/action_constant';
 import './styles/base.sass';
@@ -36,6 +37,7 @@ render(
       <Route path='/' component= {AppContainer}>
         <IndexRoute component={HomePageContainer} onEnter={fetchDefaultTracks} />
         <Route path='song/:name/:id' component={SongPageContainer} />
+        <Route path='album/playlist/:title/:id' component={AlbumPlaylistContainer}/>
         <Route path='album(/:title)(/:id)' component={AlbumPageContainer} />
         <Route path="*" component={NotFound} />
       </Route>

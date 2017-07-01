@@ -8,6 +8,7 @@ const initialState = {
   numberOfPages: 0,
   pageChunkIndex: 0,
   pageChunks: [],
+  playlist: {},
 };
 
 export default function (state = initialState, action) {
@@ -26,6 +27,9 @@ export default function (state = initialState, action) {
       numberOfPages: action.numberOfPages,
       pageChunks: chunk(range(action.numberOfPages), 7),
     };
+
+  case types.FETCH_ALBUM_PLAYLIST:
+    return { ...state, playlist: action.playlist };
 
   case types.CHANGE_PAGE_CHUNK_INDEX:
     return { ...state, pageChunkIndex: action.pageChunkIndex };

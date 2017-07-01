@@ -1,4 +1,4 @@
-import SongHeader from './SongHeader';
+import Karaoke from './Karaoke';
 import Nav from './Nav';
 import Player from './Player';
 import SongBody from './SongBody';
@@ -9,9 +9,10 @@ import Dropdown from './Dropdown';
 import SearchMenu from './SearchMenu';
 import AlbumPage from './AlbumPage';
 import NotFound from './NotFound';
+import AlbumPlaylist from './AlbumPlaylist';
 
 export {
-  SongHeader,
+  Karaoke,
   Nav,
   Player,
   SongBody,
@@ -22,4 +23,5 @@ export {
   SearchMenu,
   AlbumPage,
   NotFound,
+  AlbumPlaylist,
 };

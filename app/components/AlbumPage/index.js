@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router';
 import chunk from 'lodash.chunk';
 import GenreMenu from './GenreMenu';
 import Pagination from './Pagination';
@@ -63,10 +64,12 @@ const AlbumRow = ({ chunk }) => (
 
 const AlbumCard = (props) => (
   <div className="album-card">
-    <LazyloadImage className="album-image" src={props.cover} />
+    <Link Link to={`/album/playlist/${props.alias}/${props.id}`}>
+      <LazyloadImage className="album-image" src={props.cover} />
+    </Link>
     <div className="album-detail">
       <div className="album-title">
-        <a href='#'>{props.title}</a>
+        <Link to={`/album/playlist/${props.alias}/${props.id}`}>{props.title}</Link>
       </div>
       <div className="album-artists">
         <a href='#'>Various artist</a>

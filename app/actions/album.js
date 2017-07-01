@@ -52,3 +52,13 @@ export function fetchAlbums(title, id, page) {
   };
 }
 
+export function fetchAlbumPlaylist(title, id) {
+  return dispatch => {
+    axios.get(`/api/media/album_playlist?title=${title}&id=${id}`)
+      .then(({ data }) => {
+        dispatch({ type: types.FETCH_ALBUM_PLAYLIST, playlist: data });
+      })
+      .catch(err => { throw err; });
+  };
+}
+
