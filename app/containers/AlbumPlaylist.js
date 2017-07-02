@@ -1,11 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Pages } from '../components';
-import { fetchAlbumPlaylist } from '../actions/album';
+import { fetchAlbumPlaylist, clearPlaylist } from '../actions/album';
 
 class AlbumPlaylist extends React.Component {
   componentDidMount() {
     const { title, id } = this.props.params;
+
+    if (Object.keys(this.props.playlist).length) {
+      // Clear the the previous playlist data in the store
+      this.props.clearPlaylist();
+    }
+
     this.props.fetchAlbumPlaylist(title, id);
   }
 
@@ -22,4 +28,5 @@ function mapStateToProps(state) {
   return { playlist };
 }
 
-export default connect(mapStateToProps, { fetchAlbumPlaylist })(AlbumPlaylist);
+export default connect(mapStateToProps,
+{ fetchAlbumPlaylist, clearPlaylist })(AlbumPlaylist);

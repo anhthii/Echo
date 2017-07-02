@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { fetchDefaultArtists, fetchArtists } from '../actions/artist';
+import { chagePageChunkIndex } from '../actions/album';
 import { Pages } from '../components';
 import { isTwoObjectEqual } from '../utils/func';
-import {
-  fetchDefaultAlbums,
-  fetchAlbums,
-  chagePageChunkIndex,
-} from '../actions/album';
 
-class AlbumGenrePage extends Component {
+class ArtistGenrePage extends Component {
   componentDidMount() {
     const { id, genre } = this.props.params;
+
     if (id && genre) {
-      this.props.fetchAlbums(genre, id);
+      this.props.fetchArtists(genre, id);
     } else {
-      this.props.fetchDefaultAlbums();
+      this.props.fetchDefaultArtists();
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    // fetch default albums if the user navigate to the index album route
-
     if (nextProps.location.pathname !== this.props.location.pathname &&
-      /albums$/.test(nextProps.location.pathname)) {
-      this.props.fetchDefaultAlbums();
+      /artists$/.test(nextProps.location.pathname)) {
+      this.props.fetchDefaultArtists();
       return;
     }
 
@@ -34,7 +30,7 @@ class AlbumGenrePage extends Component {
 
     if (!isTwoObjectEqual(nextProps.params, this.props.params)) {
       const { id, genre } = nextProps.params;
-      this.props.fetchAlbums(genre, id);
+      this.props.fetchArtists(genre, id);
       this.props.chagePageChunkIndex(0);
     }
 
@@ -42,22 +38,21 @@ class AlbumGenrePage extends Component {
 
     if (nextPage && nextPage !== currPage) {
       const { id, genre } = this.props.params;
-      this.props.fetchAlbums(genre, id, nextPage);
+      this.props.fetchArtists(genre, id, nextPage);
       return;
     }
   }
 
   render() {
     return (
-      <Pages.AlbumGenrePage {...this.props} />
+      <Pages.ArtistGenrePage {...this.props}/>
     );
   }
 }
 
 function mapStateToProps(state) {
-  return state.albumState;
+  return state.artistState;
 }
 
 export default connect(mapStateToProps,
-  { chagePageChunkIndex, fetchAlbums, fetchDefaultAlbums }
-)(AlbumGenrePage);
+{ fetchDefaultArtists, fetchArtists, chagePageChunkIndex })(ArtistGenrePage);

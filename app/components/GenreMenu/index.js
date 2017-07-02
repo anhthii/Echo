@@ -11,7 +11,7 @@ const GenreMenu = ({ genres = AlbumGenres, type }) => {
       <ul className='genre-menu'>
         <ul className='submenu'>
           <li className="submenu-title">
-            <Link to={`/${type}`} activeClassName='submenu-link-active'>Album Hot</Link>
+            <Link to={`/${type}s`} activeClassName='submenu-link-active'>{`${type}s`}</Link>
           </li>
         </ul>
         { Object.keys(genres)
@@ -25,7 +25,7 @@ const GenreMenu = ({ genres = AlbumGenres, type }) => {
 const SubMenu = ({ name, id, title, children, type }) => (
   <ul className='submenu'>
     <li className="submenu-title">
-      <Link to={`/${type}/${name}/${id}`} activeClassName='submenu-link-active'>{title}</Link>
+      <Link to={`/${type}s/${name}/${id}`} activeClassName='submenu-link-active'>{title}</Link>
     </li>
     { children.map(obj => <SubMenuLi key={obj.id} {...obj} type={type}/>) }
   </ul>
@@ -34,7 +34,7 @@ const SubMenu = ({ name, id, title, children, type }) => (
 const SubMenuLi = (props) => (
   <li className="submenu-li">
     <Link
-      to={`/${props.type}/${changeAlias(props.title)}/${props.id}`}
+      to={`/${props.type}s/${changeAlias(props.title)}/${props.id}`}
       activeClassName='submenu-link-active'
     >{props.title}</Link>
   </li>

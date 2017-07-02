@@ -1,21 +1,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchArtist } from '../actions/artist';
+import { fetchArtist, clearArtist } from '../actions/artist';
 import { Pages } from '../components';
 
 class ArtistPage extends Component {
   componentDidMount() {
-    const { cover, artistName } = this.props; // check if there is already artist data or not
-    console.log('cool');
+    const { artistName } = this.props; // check if there is already artist data or not
     if (!artistName || this.props.artistName !== this.props.params.name) {
+      // clear the previous artist data
+      if (this.props.artistName) {
+        this.props.clearArtist();
+      }
+
       this.props.fetchArtist(this.props.params.name);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
     if (nextProps.params.artistName !== this.props.params.artistName) {
-      console.log(this.props.params.artistName);
+
     }
   }
 
@@ -46,4 +49,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchArtist })(ArtistPage);
+export default connect(mapStateToProps, { fetchArtist, clearArtist })(ArtistPage);

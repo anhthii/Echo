@@ -23,7 +23,7 @@ module.exports = function getDefaultArtists(req, res, next) {
         innerParser
           .setKey('artist') // the key will be artists
           .extractAttr('src', '.thumb img', 'thumb')
-          .extractAttr('href', '.title-item a', 'link');
+          .extractAttrs(['href', 'text'], '.title-item a', ['link', 'name']);
 
         return Object.assign(origin, innerParser.get());
       });

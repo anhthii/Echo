@@ -1,6 +1,6 @@
 import React from 'react';
-import KaraokeLyric from 'react-karaoke-lyric';
 import PropTypes from 'prop-types';
+import KaraokeLyric from './KaraokeLyric';
 import SeekBar from './seekbar';
 import WithBackgroundImg from '../WithBgImg';
 import './index.sass';

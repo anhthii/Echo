@@ -3,7 +3,8 @@ import { range } from '../utils/func';
 import * as types from '../constant/action_constant';
 
 const initialState = {
-  defaultAlbums: [],
+  defaultAlbums: [
+  ],
   albums: [],
   numberOfPages: 0,
   pageChunkIndex: 0,
@@ -33,6 +34,9 @@ export default function (state = initialState, action) {
 
   case types.CHANGE_PAGE_CHUNK_INDEX:
     return { ...state, pageChunkIndex: action.pageChunkIndex };
+
+  case types.CLEAR_PLAYLIST:
+    return { ...state, playlist: {} };
 
   default:
     return state;

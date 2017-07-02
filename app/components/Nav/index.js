@@ -69,10 +69,10 @@ class Nav extends React.Component {
             <a href="#">
               <li>BXH</li>
             </a>
-            <Link to="/album">
+            <Link to="/albums">
               <li>Album</li>
             </Link>
-            <Link to="/artist">
+            <Link to="/artists">
               <li>Artist</li>
             </Link>
             <a href="#">

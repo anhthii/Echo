@@ -37,10 +37,10 @@ export function fetchDefaultAlbums() {
   };
 }
 
-export function fetchAlbums(title, id, page) {
+export function fetchAlbums(genre, id, page) {
   const pageQuery = page ? `&page=${page}` : '';
   return dispatch => {
-    axios.get(`/api/media/album?title=${title}&id=${id}${pageQuery}`)
+    axios.get(`/api/media/albums?genre=${genre}&id=${id}${pageQuery}`)
       .then(({ data }) => {
         if (data.albums && data.albums.length) {
           dispatch({ type: types.FETCH_ALBUMS, albums: data.albums });
@@ -60,5 +60,8 @@ export function fetchAlbumPlaylist(title, id) {
       })
       .catch(err => { throw err; });
   };
+}
+export function clearPlaylist() {
+  return { type: types.CLEAR_PLAYLIST };
 }
 

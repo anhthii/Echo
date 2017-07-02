@@ -3,16 +3,15 @@ const PageParser = require('../../../lib/Page');
 
 module.exports = function getAlbums(req, res, next) {
   const { genre, id, page } = req.query;
-  request(`http://mp3.zing.vn/the-loai-album/${genre}/${id}.html?${pageQuery(page)}`)
+  request(`http://mp3.zing.vn/the-loai-nghe-si/${genre}/${id}.html?${pageQuery(page)}`)
     .then(html => {
       const parser = new PageParser(html);
 
       parser
-        .list('.row .pone-of-four .item')
-        .setKey('album')
-        .extractAttr('src', 'img', 'cover')
-        .extractAttrs(['text', 'href', 'href'], '.title-item .txt-primary', ['title', 'id', 'alias'])
-        .artist('.title-sd-item .txt-info')
+        .list('.row .pone-of-five .item')
+        .setKey('artist')
+        .extractAttr('src', 'img', 'thumb')
+        .extractAttr('text', '.title-item .txt-primary', 'name')
         .paginate();
 
       res.json(parser.get());

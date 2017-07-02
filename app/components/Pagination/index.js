@@ -6,12 +6,13 @@ import './index.sass';
 
 /* type can be album or artist */
 
-const getLink = (title, id, page, type) => `/${type}/${title}/${id}${pageQuery(page)}`;
+const getLink = (genre, id, page, type) => {
+  return `/${type}s/${genre}/${id}${pageQuery(page)}`;
+};
 
 const Pagination = (props) => {
-  const { title, id, pageChunks, pageChunkIndex, type } = props;
-
-  if (!pageChunks.length) return null;
+  const { genre, id, pageChunks, pageChunkIndex, type } = props;
+  if (pageChunks.length <= 1) return null;
 
   return (
     <ul className="pagination">
@@ -28,7 +29,7 @@ const Pagination = (props) => {
       {
         pageChunks.length && pageChunks[pageChunkIndex].map(num => (
           <li key={`pagination-item${num}`}>
-            <Link to={getLink(title, id, num + 1, type)} activeClassName='pagination-item-active'>
+            <Link to={getLink(genre, id, num + 1, type)} activeClassName='pagination-item-active'>
               { num + 1 }
             </Link>
           </li>
@@ -49,8 +50,9 @@ const Pagination = (props) => {
 };
 
 Pagination.propTypes = {
-  title: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  id: PropTypes.string,
+  name: PropTypes.string,
   pageChunks: PropTypes.array.isRequired,
   pageChunkIndex: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,

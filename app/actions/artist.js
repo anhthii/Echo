@@ -1,6 +1,43 @@
 import axios from 'axios';
 import * as types from '../constant/action_constant';
 
+export function setNumberOfPages(numberOfPages) {
+  return {
+    type: types.SET_NUMBER_OF_PAGES,
+    numberOfPages,
+  };
+}
+
+export function clearArtist() {
+  return {
+    type: types.CLEAR_ARTIST,
+  };
+}
+
+export function fetchDefaultArtists() {
+  return dispatch => {
+    axios.get('/api/media/artist/default')
+      .then(({ data }) => {
+        dispatch({ type: types.FETCH_DEFAULT_ARTISTS, defaultArtists: data.origins });
+      })
+      .catch(err => { throw err; });
+  };
+}
+
+export function fetchArtists(genre, id, page) {
+  const pageQuery = page ? `&page=${page}` : '';
+  return dispatch => {
+    axios.get(`/api/media/artists?genre=${genre}&id=${id}${pageQuery}`)
+      .then(({ data }) => {
+        dispatch({
+          type: types.FETCH_ARTISTS,
+          artists: data.artists,
+          numberOfPages: data.numberOfPages,
+        });
+      })
+      .catch(err => { throw err; });
+  };
+}
 
 export function fetchArtist(name, type = 'songs') {
   return dispatch => {
@@ -10,12 +47,15 @@ export function fetchArtist(name, type = 'songs') {
         case 'songs':
           dispatch(fetchSong(data));
           break;
+
         case 'albums':
           dispatch(fetchAlbum(data));
           break;
+
         case 'biography':
           dispatch(fetchBio(data));
           break;
+
         default:
         }
       })
