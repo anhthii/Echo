@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { changeAlias } from '../../utils/func';
+import { changeAlias } from '../../../utils/func';
 
 function SuggestedSection(props) {
   const songList = props.songs.map(song =>

@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import SuggestedSection from './SuggestedSection';
-import addCircle from '../../svg/android-add-circle.svg';
 import './index.sass';
 
 const propTypes = {
   suggestedSongs: PropTypes.array.isRequired,
 };
 
-class SongBody extends React.Component {
+class SongPageBody extends React.Component {
   render() {
     return (
       <div className="song-body">
@@ -18,7 +17,7 @@ class SongBody extends React.Component {
               <h3>Bình luận <span>(23)</span></h3>
             </div>
             <div>
-              <img src={addCircle} />
+              <img src={''} />
               <span>Thêm bình luận</span>
             </div>
           </div>
@@ -85,6 +84,6 @@ class SongBody extends React.Component {
   }
 }
 
-SongBody.propTypes = propTypes;
+SongPageBody.propTypes = propTypes;
 
-export default SongBody;
+export default SongPageBody;

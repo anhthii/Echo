@@ -1,6 +1,6 @@
 import Player from './playerContainer';
 import Karaoke from './karaokeContainer';
-import SongPage from './songPageContainer';
+import SongPage from './SongPage';
 import HomePage from './homePageContainer';
 import AlbumGenrePage from './AlbumGenrePage';
 import App from './App';

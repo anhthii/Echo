@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { AlbumPlaylist } from '../components';
+import { Pages } from '../components';
 import { fetchAlbumPlaylist } from '../actions/album';
 
-class AlbumPlaylistContainer extends React.Component {
+class AlbumPlaylist extends React.Component {
   componentDidMount() {
     const { title, id } = this.props.params;
     this.props.fetchAlbumPlaylist(title, id);
@@ -11,7 +11,7 @@ class AlbumPlaylistContainer extends React.Component {
 
   render() {
     return (
-      <AlbumPlaylist playlist={this.props.playlist} />
+      <Pages.AlbumPlaylist playlist={this.props.playlist} />
     );
   }
 }
@@ -22,4 +22,4 @@ function mapStateToProps(state) {
   return { playlist };
 }
 
-export default connect(mapStateToProps, { fetchAlbumPlaylist })(AlbumPlaylistContainer);
+export default connect(mapStateToProps, { fetchAlbumPlaylist })(AlbumPlaylist);

@@ -1,7 +1,7 @@
 import React from 'react';
-import Playlist from '../Playlist';
-import { KaraokeContainer } from '../../containers';
-import './index.sass';
+import Playlist from '../../Playlist';
+import { Karaoke } from '../../../containers';
+import './album_playlist.sass';
 
 /*const tweakThePlaylist = (songs) => {
   return playlist.reduce((newobj, currobj) => {
@@ -31,7 +31,7 @@ const AlbumPlaylist = ({ playlist }) => {
         </div>
       </div>
       <div className="album-playlist-content">
-        <KaraokeContainer
+        <Karaoke
           className='karaoke-album-playlist'
           fontSize="23px"
         />
