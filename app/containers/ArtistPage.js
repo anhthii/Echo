@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchArtist } from '../actions/artist';
-import { ArtistPage } from '../components';
+import { Pages } from '../components';
 
-class ArtistPageContainer extends Component {
+class ArtistPage extends Component {
   componentDidMount() {
     const { cover, artistName } = this.props; // check if there is already artist data or not
     console.log('cool');
@@ -23,7 +23,7 @@ class ArtistPageContainer extends Component {
     const { cover, avatar, songs, numberOfPages, artistName } = this.props;
     return (
       <div>
-        <ArtistPage
+        <Pages.ArtistPage
           cover={cover}
           avatar={avatar}
           songs={songs}
@@ -46,4 +46,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchArtist })(ArtistPageContainer);
+export default connect(mapStateToProps, { fetchArtist })(ArtistPage);

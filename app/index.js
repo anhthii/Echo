@@ -10,14 +10,7 @@ import { NotFound } from './components';
 import rootReducer from './reducers';
 import initHistoryEvents from './history_events';
 import { fetchDefaultTracks } from './route_callbacks';
-import {
-  AppContainer,
-  SongPageContainer,
-  HomePageContainer,
-  AlbumPageContainer,
-  AlbumPlaylistContainer,
-  ArtistPageContainer,
-} from './containers';
+import * as Containers from './containers';
 import { UPDATE_LYRIC, UPDATE_LYRIC_PERCENT, UPDATE_SONG_CURRENT_TIME } from './constant/action_constant';
 import './styles/base.sass';
 
@@ -35,12 +28,12 @@ initHistoryEvents();
 render(
   <Provider store={store}>
     <Router history={history} onUpdate={() => window.scrollTo(0, 0)}>
-      <Route path='/' component= {AppContainer}>
-        <IndexRoute component={HomePageContainer} onEnter={fetchDefaultTracks} />
-        <Route path='song/:name/:id' component={SongPageContainer} />
-        <Route path='album/playlist/:title/:id' component={AlbumPlaylistContainer}/>
-        <Route path='album(/:title)(/:id)' component={AlbumPageContainer} />
-        <Route path='artist/:name' component={ArtistPageContainer} />
+      <Route path='/' component= {Containers.App}>
+        <IndexRoute component={Containers.HomePage} onEnter={fetchDefaultTracks} />
+        <Route path='song/:name/:id' component={Containers.SongPage} />
+        <Route path='album/playlist/:title/:id' component={Containers.AlbumPlaylist}/>
+        <Route path='album(/:title)(/:id)' component={Containers.AlbumGenrePage} />
+        <Route path='artist/:name' component={Containers.ArtistPage} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import Playlist from '../Playlist';
 import { KaraokeContainer } from '../../containers';
 import './index.sass';

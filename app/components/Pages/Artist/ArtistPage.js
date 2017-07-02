@@ -1,6 +1,6 @@
 import React from 'react';
-import Playlist from '../Playlist';
-import WithBackgroundImage from '../WithBgImg';
+import Playlist from '../../Playlist';
+import WithBackgroundImage from '../../WithBgImg';
 import './index.sass';
 
 const ArtistPage = ({ avatar, cover, songs, artistName }) => {

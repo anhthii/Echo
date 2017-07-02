@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { AlbumPage } from '../components';
+import { Pages } from '../components';
 import { isTwoObjectEqual } from '../utils/func';
 import {
   fetchDefaultAlbums,
@@ -8,7 +8,7 @@ import {
   chagePageChunkIndex,
 } from '../actions/album';
 
-class AlbumPageContainer extends Component {
+class AlbumGenrePage extends Component {
   componentDidMount() {
     const { id, title } = this.props.params;
     if (id && title) {
@@ -49,7 +49,7 @@ class AlbumPageContainer extends Component {
 
   render() {
     return (
-      <AlbumPage {...this.props} />
+      <Pages.AlbumGenrePage {...this.props} />
     );
   }
 }
@@ -60,4 +60,4 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps,
   { chagePageChunkIndex, fetchAlbums, fetchDefaultAlbums }
-)(AlbumPageContainer);
+)(AlbumGenrePage);

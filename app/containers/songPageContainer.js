@@ -1,7 +1,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
-import { KaraokeContainer } from './';
+import { Karaoke as KarokeContainer } from './';
 import { SongBody } from '../components';
 import { fetchSong, fetchSuggestedSongs } from '../actions/song';
 import { showAnalyzer } from '../actions/ui';
@@ -50,7 +50,7 @@ class SongPage extends React.Component {
   render() {
     return (
       <div>
-        <KaraokeContainer className='karaoke-song-page'/>
+        <KarokeContainer className='karaoke-song-page'/>
         <SongBody suggestedSongs={this.props.suggestedSongs}/>
       </div>
     );

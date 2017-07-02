@@ -7,10 +7,9 @@ import HomePage from './HomePage';
 import Queue from './Queue';
 import Dropdown from './Dropdown';
 import SearchMenu from './SearchMenu';
-import AlbumPage from './AlbumPage';
-import ArtistPage from './ArtistPage';
 import NotFound from './NotFound';
 import AlbumPlaylist from './AlbumPlaylist';
+import * as Pages from './Pages';
 
 export {
   Karaoke,
@@ -22,8 +21,7 @@ export {
   Queue,
   Dropdown,
   SearchMenu,
-  AlbumPage,
   NotFound,
   AlbumPlaylist,
-  ArtistPage,
+  Pages,
 };

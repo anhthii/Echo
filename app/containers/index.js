@@ -1,21 +1,21 @@
-import PlayerContainer from './playerContainer';
-import KaraokeContainer from './karaokeContainer';
-import SongPageContainer from './songPageContainer';
-import HomePageContainer from './homePageContainer';
-import AlbumPageContainer from './albumPageContainer';
-import AppContainer from './appContainer';
-import QueueContainer from './queueContainer';
-import AlbumPlaylistContainer from './albumPlaylistContainer';
-import ArtistPageContainer from './artistPageContainer';
+import Player from './playerContainer';
+import Karaoke from './karaokeContainer';
+import SongPage from './songPageContainer';
+import HomePage from './homePageContainer';
+import AlbumGenrePage from './AlbumGenrePage';
+import App from './App';
+import Queue from './queueContainer';
+import AlbumPlaylist from './AlbumPlaylist';
+import ArtistPage from './ArtistPage';
 
 export {
-  PlayerContainer,
-  KaraokeContainer,
-  SongPageContainer,
-  HomePageContainer,
-  AppContainer,
-  QueueContainer,
-  AlbumPageContainer,
-  AlbumPlaylistContainer,
-  ArtistPageContainer,
+  Player,
+  Karaoke,
+  SongPage,
+  HomePage,
+  App,
+  Queue,
+  AlbumGenrePage,
+  AlbumPlaylist,
+  ArtistPage,
 };

@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Nav, Analyzer } from '../components';
-import { PlayerContainer, QueueContainer } from './';
+import * as Containers from './';
 
-class AppContainer extends React.Component {
+class App extends React.Component {
   render() {
     const { showPlayer, showAnalyzer: show, showQueue } = this.props;
 
@@ -14,8 +14,8 @@ class AppContainer extends React.Component {
           {this.props.children}
           <Analyzer show={show}/>
         </div>
-        { showQueue && <QueueContainer /> }
-        { showPlayer && <PlayerContainer /> }
+        { showQueue && <Containers.Queue /> }
+        { showPlayer && <Containers.Player /> }
       </div>
     );
   }
@@ -29,4 +29,4 @@ function mapStateToProps({ songData, UIState }) {
   };
 }
 
-export default connect(mapStateToProps)(AppContainer);
+export default connect(mapStateToProps)(App);
