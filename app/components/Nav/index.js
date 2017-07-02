@@ -72,9 +72,9 @@ class Nav extends React.Component {
             <Link to="/album">
               <li>Album</li>
             </Link>
-            <a href="#">
-              <li>Nghệ sĩ</li>
-            </a>
+            <Link to="/artist">
+              <li>Artist</li>
+            </Link>
             <a href="#">
               <li>Top 100</li>
             </a>

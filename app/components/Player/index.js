@@ -161,6 +161,8 @@ class Player extends React.Component {
   render() {
     const { songData } = this.props;
     const { name, id } = songData;
+    const artists = songData.artist.split(/,\s*/);
+
     return (
       <div className='player'>
         <audio
@@ -173,10 +175,15 @@ class Player extends React.Component {
           <Link
             to={getSongUrl(name, id)}
             className='ellipsis'
-            title='Whatya want from me yeah really cool'
+            title={songData.name}
           >{songData.name}
           </Link>
-          <a href='#' className='ellipsis' title='title'>Adam lambert</a>
+          <Link
+            to={`/artist/${changeAlias(artists[0])}`}
+            className='ellipsis'
+            title={songData.artist}
+          >{songData.artist}
+          </Link>
         </div>
         <div className="player-btns">
           <button

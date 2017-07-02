@@ -1,11 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { pageQuery } from '../../utils/func';
+import './index.sass';
 
-const getLink = (title, id, page) => `/album/${title}/${id}${pageQuery(page)}`;
+/* type can be album or artist */
+
+const getLink = (title, id, page, type) => `/${type}/${title}/${id}${pageQuery(page)}`;
 
 const Pagination = (props) => {
-  const { title, id, pageChunks, pageChunkIndex } = props;
+  const { title, id, pageChunks, pageChunkIndex, type } = props;
 
   if (!pageChunks.length) return null;
 
@@ -24,7 +28,7 @@ const Pagination = (props) => {
       {
         pageChunks.length && pageChunks[pageChunkIndex].map(num => (
           <li key={`pagination-item${num}`}>
-            <Link to={getLink(title, id, num + 1)} activeClassName='pagination-item-active'>
+            <Link to={getLink(title, id, num + 1, type)} activeClassName='pagination-item-active'>
               { num + 1 }
             </Link>
           </li>
@@ -42,6 +46,14 @@ const Pagination = (props) => {
       }
     </ul>
   );
+};
+
+Pagination.propTypes = {
+  title: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  pageChunks: PropTypes.array.isRequired,
+  pageChunkIndex: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Pagination;

@@ -30,8 +30,9 @@ const getSongs = (name, res, next) => {
     .then(html => {
       const parser = new PageParser(html);
       parser
-        .extract('src', '.box-info-artist img', 'avartar')
+        .extract('src', '.box-info-artist img', 'avatar')
         .extract('src', '.container > img', 'cover')
+        .extract('text', '.info-summary > h1', 'artistName')
         .list('.group.fn-song')
         .setKey('song')
         .extractAttrs(['href', 'text'], '._trackLink', ['id', 'title'])
@@ -48,8 +49,9 @@ const getAlbums = (name, res, next) => {
       const parser = new PageParser(html);
 
       parser
-        .extract('src', '.box-info-artist img', 'avartar')
+        .extract('src', '.box-info-artist img', 'avatar')
         .extract('src', '.container > img', 'cover')
+        .extract('text', '.info-summary > h1', 'artistName')
         .setRoot('.wrap-content')
         .list('.album-item')
         .setKey('album')
@@ -81,6 +83,7 @@ const getBio = (name, res, next) => {
 
       const avatar = $('.box-info-artist img').attr('src');
       const cover = $('.container > img').attr('src');
+      const artistName = $('.info-summary > h1').text();
       const description = $entry.contents().not('.hoz-list').text().trim();
       const fullName = $li(0).text().replace(/.+:/, '').trim();
       const dateOfBirth = $li(1).text().replace(/.+:/, '').trim();
@@ -90,9 +93,15 @@ const getBio = (name, res, next) => {
         result.genres.push($(value).text().trim());
       });
 
-      res.json(Object.assign(result,
-        { avatar, cover, description, fullName, dateOfBirth, country }
-      ));
+      res.json(Object.assign(result, {
+        avatar,
+        cover,
+        description,
+        fullName,
+        dateOfBirth,
+        country,
+        artistName,
+      }));
     })
     .catch(err => next(err));
 };

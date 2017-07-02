@@ -7,6 +7,7 @@ import trackReducer from './track_reducer';
 import UIReducer from './ui_reducer';
 import queueReducer from './queue_reducer';
 import albumReducer from './album_reducer';
+import artistReducer from './artist_reducer';
 
 export default combineReducers({
   playerState: playerReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
   UIState: UIReducer,
   queueState: queueReducer,
   albumState: albumReducer,
+  artistState: artistReducer,
 });

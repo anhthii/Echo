@@ -16,6 +16,7 @@ import {
   HomePageContainer,
   AlbumPageContainer,
   AlbumPlaylistContainer,
+  ArtistPageContainer,
 } from './containers';
 import { UPDATE_LYRIC, UPDATE_LYRIC_PERCENT, UPDATE_SONG_CURRENT_TIME } from './constant/action_constant';
 import './styles/base.sass';
@@ -27,7 +28,7 @@ const logger = createLogger({
     && action.type !== UPDATE_SONG_CURRENT_TIME),
 });
 
-export const store = createStore(rootReducer, applyMiddleware(thunk, logger));
+export const store = createStore(rootReducer, applyMiddleware(thunk));
 export const history = syncHistoryWithStore(browserHistory, store);
 initHistoryEvents();
 
@@ -39,6 +40,7 @@ render(
         <Route path='song/:name/:id' component={SongPageContainer} />
         <Route path='album/playlist/:title/:id' component={AlbumPlaylistContainer}/>
         <Route path='album(/:title)(/:id)' component={AlbumPageContainer} />
+        <Route path='artist/:name' component={ArtistPageContainer} />
         <Route path="*" component={NotFound} />
       </Route>
     </Router>

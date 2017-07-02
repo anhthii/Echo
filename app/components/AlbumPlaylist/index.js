@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
+import Playlist from '../Playlist';
 import { KaraokeContainer } from '../../containers';
-import { getSongUrl } from '../../utils/func';
 import './index.sass';
 
 /*const tweakThePlaylist = (songs) => {
@@ -39,22 +39,9 @@ const AlbumPlaylist = ({ playlist }) => {
         <div className='playlist-play-btn'>
           <button>Play</button>
         </div>
-        <ul className="album-playlist-tracks">
-          {playlist.songs.map((song, index) => (
-            <li className="album-playlist-track" key={`playlist-${song.id}`}>
-              <span className='ap-track-order'>{index + 1}</span>
-              <div className='ap-track-title'>
-                <Link to={getSongUrl(song.title, song.id)}>{song.title}</Link>
-              </div>
-              <div className="ap-track-artist">
-                Justin Bieber
-              </div>
-              <div className="ap-track-actions">
-                actions
-              </div>
-            </li>
-          ))}
-        </ul>
+
+        <Playlist songs={playlist.songs} className='ap'/>
+
         <div className='album-playlist-artist-info'>
           <div className="album-laylist-artist-thumb image-wrapper">
             <img src={playlist.artist_thumb} />

@@ -6,6 +6,7 @@ import AlbumPageContainer from './albumPageContainer';
 import AppContainer from './appContainer';
 import QueueContainer from './queueContainer';
 import AlbumPlaylistContainer from './albumPlaylistContainer';
+import ArtistPageContainer from './artistPageContainer';
 
 export {
   PlayerContainer,
@@ -16,4 +17,5 @@ export {
   QueueContainer,
   AlbumPageContainer,
   AlbumPlaylistContainer,
+  ArtistPageContainer,
 };

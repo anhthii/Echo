@@ -2,16 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import chunk from 'lodash.chunk';
-import GenreMenu from './GenreMenu';
-import Pagination from './Pagination';
+import GenreMenu from '../GenreMenu';
+import Pagination from '../Pagination';
 import LazyloadImage from '../LazyloadImage';
+import './index.sass';
 
 const AlbumPage = (props) => {
   const { defaultAlbums, albums, params } = props;
 
   return (
     <div>
-      <GenreMenu />
+      <GenreMenu type="album"/>
       <div className="album-view">
         { !albums.length && <DefaultAlbums origins={defaultAlbums} /> }
         { chunk(albums, 4).map((chunk, index) =>
@@ -24,6 +25,7 @@ const AlbumPage = (props) => {
               pageChunks={props.pageChunks}
               pageChunkIndex={props.pageChunkIndex}
               chagePageChunkIndex={props.chagePageChunkIndex}
+              type='album'
             /> : null
         }
       </div>
