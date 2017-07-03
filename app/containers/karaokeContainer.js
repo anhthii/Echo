@@ -13,12 +13,10 @@ class KaraokeContainer extends Component {
 function mapStateToProps(state) {
   const {
     playerState,
-    seekBarState,
     songData: { data: { cover, artist, name, lyric }, isFetching },
   } = state;
 
   return { playerState,
-    seekBarState,
     isFetching,
     cover: cover || '',
     artist,

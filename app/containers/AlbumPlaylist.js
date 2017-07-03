@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Pages } from '../components';
+import { isEmpty } from '../utils/func';
 import { fetchAlbumPlaylist, clearPlaylist } from '../actions/album';
 
 class AlbumPlaylist extends React.Component {
   componentDidMount() {
     const { title, id } = this.props.params;
 
-    if (Object.keys(this.props.playlist).length) {
+    if (!isEmpty(this.props.playlist)) {
       // Clear the the previous playlist data in the store
       this.props.clearPlaylist();
     }

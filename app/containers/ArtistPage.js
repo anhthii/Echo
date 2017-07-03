@@ -31,21 +31,9 @@ class ArtistPage extends Component {
   }
 
   render() {
-    const { cover, avatar, songs, numberOfPages, artistName } = this.props;
-
     return (
       <div>
-        <Pages.ArtistPage
-          cover={cover}
-          avatar={avatar}
-          songs={songs}
-          numberOfPages={numberOfPages}
-          artistName={artistName}
-          pageChunkIndex={this.props.pageChunkIndex}
-          pageChunks={this.props.pageChunks}
-          changePageChunkIndex={this.props.changePageChunkIndex}
-          page={this.props.location.query.page}
-        />
+        <Pages.ArtistPage {...this.props} />
       </div>
     );
   }

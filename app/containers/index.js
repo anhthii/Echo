@@ -8,6 +8,7 @@ import Queue from './queueContainer';
 import AlbumPlaylist from './AlbumPlaylist';
 import ArtistPage from './ArtistPage';
 import ArtistGenrePage from './ArtistGenrePage';
+import ChartPage from './ChartPage';
 
 export {
   Player,
@@ -20,4 +21,5 @@ export {
   AlbumPlaylist,
   ArtistPage,
   ArtistGenrePage,
+  ChartPage,
 };

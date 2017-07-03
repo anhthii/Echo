@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import KaraokeLyric from './KaraokeLyric';
-import SeekBar from './seekbar';
 import WithBackgroundImg from '../WithBgImg';
 import './index.sass';
 
@@ -38,18 +37,12 @@ const Karaoke = (props) => {
           <KLyric {...{ fontSize, per: per2, text: lyric2.text }}/>
         </div>
       )}
-      <SeekBar
-        seekBarState={props.seekBarState}
-        updatePlayedPercent={props.updatePlayedPercent}
-      />
     </WithBackgroundImg>
   );
 };
 
 const propTypes = {
   playerState: PropTypes.object.isRequired,
-  seekBarState: PropTypes.object.isRequired,
-  updatePlayedPercent: PropTypes.func.isRequired,
   cover: PropTypes.string.isRequired,
   isFetching: PropTypes.bool.isRequired,
   className: PropTypes.string,

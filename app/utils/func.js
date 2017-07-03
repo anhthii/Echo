@@ -46,3 +46,7 @@ export function range(r) {
   }
   return arr;
 }
+
+export function isEmpty(obj) {
+  return Object.keys(obj).length === 0;
+}

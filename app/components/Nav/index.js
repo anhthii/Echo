@@ -66,9 +66,9 @@ class Nav extends React.Component {
         </div>
         <div className="navRight">
           <ul className="nav-menu">
-            <a href="#">
+            <Link to="/charts">
               <li>BXH</li>
-            </a>
+            </Link>
             <Link to="/albums">
               <li>Album</li>
             </Link>

@@ -15,22 +15,32 @@ class Player extends React.Component {
       progress: 0,
       isSeeking: false,
       isPlaying: false,
+      audioState: 0,
     };
   }
 
   componentDidMount() {
     this.audio = this.refs.audio;
+
+    this.audio.addEventListener('loadeddata', () => {
+      if (this.audio.readyState >= 2) {
+        this.audio.play();
+      }
+      this.setState({ audioState: this.audio.readyState });
+    });
+
     this.audio.onplay = () => {
-      this.props.unFullFillSeekBar();
-      this.props.updateSongDuration(this.audio.duration);
       this.timer = setInterval(() => this.updateProgress(this.audio), 50);
       this.setState({ isPlaying: true });
     };
+
     this.audio.onended = () => this.playPrevOrNextSong('next');
+
     this.audio.onpause = () => {
       clearInterval(this.timer);
       this.setState({ isPlaying: false });
     };
+
     // initialize the audio analyzer
     initAnalyzer(this.audio);
   }
@@ -50,7 +60,7 @@ class Player extends React.Component {
 
     const nextPercent = nextProps.playerState.playedPercent;
     const currentPercent = this.props.playerState.playedPercent;
-    /*if (nextPercent != currentPercent  && nextPercent != undefined)*/
+
     if (nextPercent != currentPercent  && nextPercent) {
       this.audio.currentTime = this.audio.duration * nextPercent / 100;
     }
@@ -93,7 +103,6 @@ class Player extends React.Component {
 
   updateProgress(audio) {
     const lyric = this.props.songData.lyric;
-    const { updateSongCurrentTime } = this.props;
 
     // update progress bar
     let val = 0;
@@ -103,8 +112,6 @@ class Player extends React.Component {
     if (!this.state.isSeeking) {
       this.setState({ progress: val });
     }
-
-    updateSongCurrentTime(this.audio.currentTime);
 
     if (!lyric.length) return;
 
@@ -149,12 +156,15 @@ class Player extends React.Component {
 
   handleChangeComplete(value) {
     if (value == 100) {
-      this.props.fullFillSeekBar();
       this.props.updateLyric([], []);
     }
 
     this.audio.play();
-    this.audio.currentTime = (value / 100) * this.audio.duration;
+
+    if (this.audio.duration) {
+      this.audio.currentTime = (value / 100) * this.audio.duration;
+    }
+
     this.setState({ isSeeking: false });
   }
 
@@ -171,6 +181,7 @@ class Player extends React.Component {
           crossOrigin='anonymous'
           ref='audio'
         />
+        {JSON.stringify(this.state.isPlaying)}
         <div className="player-info">
           <Link
             to={getSongUrl(name, id)}
@@ -231,10 +242,6 @@ Player.propTypes = {
   updateLyric: PropTypes.func.isRequired,
   updateLyricPercent: PropTypes.func.isRequired,
   songData: PropTypes.object.isRequired,
-  updateSongDuration: PropTypes.func.isRequired,
-  updateSongCurrentTime: PropTypes.func.isRequired,
-  fullFillSeekBar: PropTypes.func.isRequired,
-  unFullFillSeekBar: PropTypes.func.isRequired,
   fetchSong: PropTypes.func.isRequired,
   queue: PropTypes.array.isRequired,
   toggleQueue: PropTypes.func.isRequired,

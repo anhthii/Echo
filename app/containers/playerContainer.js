@@ -5,7 +5,6 @@ import { updateLyric, updateLyricPercent } from '../actions/player';
 import { toggleQueue } from '../actions/ui';
 import { togglePushRoute } from '../actions/queue';
 import * as songActions from '../actions/song';
-import * as seekBarActions from '../actions/seekbar';
 
 class PlayerContainer extends Component {
   render() {
@@ -33,6 +32,5 @@ export default connect(mapStateToProps,
     toggleQueue,
     togglePushRoute,
     ...songActions,
-    ...seekBarActions,
   })(PlayerContainer);
 

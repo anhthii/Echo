@@ -5,7 +5,7 @@ import { Karaoke as KarokeContainer } from './';
 import { Pages } from '../components';
 import { fetchSong, fetchSuggestedSongs } from '../actions/song';
 import { showAnalyzer } from '../actions/ui';
-import { getSongUrl } from '../utils/func';
+import { getSongUrl, isEmpty } from '../utils/func';
 
 const fetch = (ctx, name, id) => {
   ctx.props.fetchSong(name, id);
@@ -20,7 +20,7 @@ class SongPage extends React.Component {
     // only fetch new song data when the user enter the url directly into the url bar on the browser
     // or the url params.id is different from the playing song id
 
-    if (!Object.keys(this.props.songData).length || id !== this.props.songData.id) {
+    if (isEmpty(this.props.songData) || id !== this.props.songData.id) {
       fetch(this, name, id);
     }
   }
