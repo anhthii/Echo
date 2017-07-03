@@ -9,6 +9,7 @@ const getArtists = require('./artists');
 const getAlbumPlaylist = require('./album_playlist');
 const getDefaultArtists = require('./default_artists');
 const getArtist = require('./artist');
+const getChart = require('./chart');
 
 const router = express.Router();
 
@@ -31,6 +32,9 @@ router.get('/artist/default', getDefaultArtists);
 router.get('/artists', getArtists);
 
 router.get('/artist/:name/:type', getArtist);
+
+router.get('/chart/:id', getChart);
+
 
 
 module.exports = router;

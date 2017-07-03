@@ -14,7 +14,7 @@ export function setNumberOfPages(numberOfPages) {
   };
 }
 
-export function chagePageChunkIndex(pageChunkIndex) {
+export function changePageChunkIndex(pageChunkIndex) {
   return {
     type: types.CHANGE_PAGE_CHUNK_INDEX,
     pageChunkIndex,

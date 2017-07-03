@@ -4,12 +4,14 @@ import PropTypes from 'prop-types';
 import { getSongUrl } from '../../utils/func';
 import './index.sass';
 
-const Playlist = ({ songs, className }) => {
+const Playlist = ({ songs, className, page }) => {
   return (
     <ul className={`${className} playlist-tracks`}>
       {songs.map((song, index) => (
         <li className="playlist-track" key={`playlist-${song.id}`}>
-          <span className='playlist-track-order'>{index + 1}</span>
+          <span className='playlist-track-order'>
+            {page ? (((page - 1) * 20) + index + 1) : (index + 1)}
+          </span>
           <div className='playlist-track-title ellipsis'>
             <Link to={getSongUrl(song.title, song.id)}>{song.title}</Link>
           </div>

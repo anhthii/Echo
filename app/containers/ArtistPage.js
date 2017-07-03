@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchArtist, clearArtist } from '../actions/artist';
+import { fetchArtist, clearArtist, changePageChunkIndex } from '../actions/artist';
 import { Pages } from '../components';
 
 class ArtistPage extends Component {
@@ -17,13 +17,22 @@ class ArtistPage extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.params.artistName !== this.props.params.artistName) {
+    if (nextProps.params.name !== this.props.params.name) {
+      this.props.clearArtist();
+      this.props.fetchArtist(nextProps.params.name);
+    }
 
+    const nextPage = nextProps.location.query.page;
+    const currPage = this.props.location.query.page;
+
+    if (nextPage && nextPage !== currPage) {
+      this.props.fetchArtist(this.props.params.name, 'songs', nextPage);
     }
   }
 
   render() {
     const { cover, avatar, songs, numberOfPages, artistName } = this.props;
+
     return (
       <div>
         <Pages.ArtistPage
@@ -32,6 +41,10 @@ class ArtistPage extends Component {
           songs={songs}
           numberOfPages={numberOfPages}
           artistName={artistName}
+          pageChunkIndex={this.props.pageChunkIndex}
+          pageChunks={this.props.pageChunks}
+          changePageChunkIndex={this.props.changePageChunkIndex}
+          page={this.props.location.query.page}
         />
       </div>
     );
@@ -39,14 +52,23 @@ class ArtistPage extends Component {
 }
 
 function mapStateToProps(state) {
-  const { cover, avatar, artistName, song: { songs, numberOfPages } } = state.artistState.artist;
+  const { cover,
+    avatar,
+    artistName,
+    song: { songs, numberOfPages } } = state.artistState.artist;
+
+  const { pageChunkIndex, pageChunks } = state.artistState;
+
   return {
     cover,
     avatar,
     songs,
     numberOfPages,
     artistName,
+    pageChunks,
+    pageChunkIndex,
   };
 }
 
-export default connect(mapStateToProps, { fetchArtist, clearArtist })(ArtistPage);
+export default connect(mapStateToProps,
+{ fetchArtist, clearArtist, changePageChunkIndex })(ArtistPage);

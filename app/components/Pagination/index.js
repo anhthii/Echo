@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { pageQuery } from '../../utils/func';
+import { pageQuery, changeAlias } from '../../utils/func';
 import './index.sass';
 
 /* type can be album or artist */
 
-const getLink = (genre, id, page, type) => {
+const getLink = (genre, id, page, type, artistName) => {
+  if (type === 'single-artist' && artistName) {
+    return `/artist/${changeAlias(artistName)}?page=${page}`;
+  }
+
   return `/${type}s/${genre}/${id}${pageQuery(page)}`;
 };
 
 const Pagination = (props) => {
-  const { genre, id, pageChunks, pageChunkIndex, type } = props;
-  if (pageChunks.length <= 1) return null;
+  const { genre, id, pageChunks, pageChunkIndex, type, artistName } = props;
+  if (!pageChunks.length) return null;
 
   return (
     <ul className="pagination">
@@ -20,16 +24,18 @@ const Pagination = (props) => {
         <li>
           <a href='#' onClick={(e) => {
             e.preventDefault();
-            props.chagePageChunkIndex(pageChunkIndex - 1);
+            props.changePageChunkIndex(pageChunkIndex - 1);
           }}>
             <i className="ion-chevron-left"></i>
           </a>
         </li>
       }
       {
-        pageChunks.length && pageChunks[pageChunkIndex].map(num => (
+        pageChunks.length && pageChunks[0].length > 1 && pageChunks[pageChunkIndex].map(num => (
           <li key={`pagination-item${num}`}>
-            <Link to={getLink(genre, id, num + 1, type)} activeClassName='pagination-item-active'>
+            <Link
+              to={getLink(genre, id, num + 1, type, artistName)}
+              activeClassName='pagination-item-active'>
               { num + 1 }
             </Link>
           </li>
@@ -39,7 +45,7 @@ const Pagination = (props) => {
         <li>
           <a href='#' onClick={(e) => {
             e.preventDefault();
-            props.chagePageChunkIndex(pageChunkIndex + 1);
+            props.changePageChunkIndex(pageChunkIndex + 1);
           }}>
             <i className="ion-chevron-right"></i>
           </a>
@@ -50,7 +56,7 @@ const Pagination = (props) => {
 };
 
 Pagination.propTypes = {
-  title: PropTypes.string,
+  genre: PropTypes.string,
   id: PropTypes.string,
   name: PropTypes.string,
   pageChunks: PropTypes.array.isRequired,

@@ -1,20 +1,26 @@
-const { request } = require('../../../utils');
 const PageParser = require('../../../lib/Page');
+const { request } = require('../../../utils');
 const cheerio = require('cheerio');
 
-const rq = (type, name) => request(`http://mp3.zing.vn/nghe-si/${name}/${type}`);
+const rq = (type, name, page) => {
+  if (page) {
+    return request(`http://mp3.zing.vn/nghe-si/${name}/${type}?&page=${page}`);
+  }
 
+  return request(`http://mp3.zing.vn/nghe-si/${name}/${type}`);
+};
 
 module.exports = function getArtist(req, res, next) {
   const { name, type } = req.params;
+  const { page } = req.query;
 
   switch (type) {
   case 'albums':
-    getAlbums(name, res, next);
+    getAlbums(name, res);
     break;
 
   case 'songs':
-    getSongs(name, res, next);
+    getSongs(name, page, res, next);
     break;
 
   case 'biography':
@@ -25,8 +31,8 @@ module.exports = function getArtist(req, res, next) {
   }
 };
 
-const getSongs = (name, res, next) => {
-  rq('bai-hat', name)
+const getSongs = (name, page, res, next) => {
+  rq('bai-hat', name, page)
     .then(html => {
       const parser = new PageParser(html);
       parser

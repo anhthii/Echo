@@ -33,6 +33,7 @@ export const FETCH_SINGLE_ARTIST_BIOGRAPHY = 'FETCH_SINGLE_ARTIST_BIOGRAPHY';
 export const FETCH_ARTISTS = 'FETCH_ARTISTS';
 export const FETCH_DEFAULT_ARTISTS = 'FETCH_DEFAULT_ARTISTS';
 export const CLEAR_ARTIST = 'CLEAR_ARTIST';
+export const CLEAR_ARTISTS = 'CLEAR_ARTISTS';
 
 // actions for homepage
 export const FETCH_TRACKS = 'FETCH_TRACKS';
@@ -47,3 +48,10 @@ export const REPLACE_QUEUE = 'REPLACE_QUEUE';
 
 // actions for handling route transition
 export const TOGGLE_PUSH_ROUTE = 'TOGGLE_PUSH_ROUTE';
+
+
+// action for chart
+export const FETCH_POP_CHART = 'FETCH_POP_CHART';
+export const FETCH_KPOP_CHART = 'FETCH_KPOP_CHART';
+export const FETCH_VPOP_CHART = 'FETCH_VPOP_CHART';
+export const CHANGE_ACTIVE_CHART = 'CHANGE_ACTIVE_CHART';

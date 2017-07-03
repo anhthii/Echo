@@ -3,8 +3,7 @@ import { range } from '../utils/func';
 import * as types from '../constant/action_constant';
 
 const initialState = {
-  defaultAlbums: [
-  ],
+  defaultAlbums: [],
   albums: [],
   numberOfPages: 0,
   pageChunkIndex: 0,

@@ -1,0 +1,106 @@
+@import 'mixins'
+@import 'colors'
+
+.chart
+  @include box-shadow
+
+  .featured-image
+    height: 140px
+    background-size: 100%
+
+  .chart
+    &-list
+      margin-top: -60px
+
+    &-item
+      height: 60px
+      border-bottom: 1px solid #ccc
+      &:not(:first-child)
+        margin: 10px
+        border-bottom: 1px solid #f2f2f2
+
+      > div
+        height: inherit
+
+      &-order
+        width: 20%
+        float: left
+        height: 100%
+        vertical-align: middle
+        text-align: center
+        line-height: 60px
+      &-info
+        width: 80%
+        float: left
+        padding-top: 5px
+        padding-left: 10px
+
+
+      &-thumb
+       width: 20%
+       float: left
+       padding: 5px 8px
+       img
+        width: 100%
+        height: 100%
+
+      &-detail
+        width: 80%
+        float: right
+        &-left
+          width: 70%
+          float: left
+          height: 100%
+
+        &-right
+          width: 30%
+          float: right
+          height: 60px
+          display: flex
+          align-items: center
+          justify-content: center
+          i
+            font-size: 17px
+
+          button
+            cursor: pointer
+
+      &:first-child .chart-item-detail
+        font-family: "Open Sans", sans-serif
+        a
+          color: white
+
+      &-title
+        margin-top: 5px
+        padding-bottom: 2px
+        a
+          color: #000
+          font-size: 14px
+          &:hover
+            text-decoration: underline
+
+      &-artist
+        margin-top: 2px
+        a
+          font-size: 12px
+          color: $light-blue
+          &:hover
+            color: $grey-text
+
+.detail-first
+  background: linear-gradient(to bottom,rgba(0,0,0,0.6) 0%,rgba(0,0,0,0.6) 100%)
+  padding-top: 0 !important
+  padding-left: 20px !important
+
+  .chart-item-artist
+    a
+      &:hover
+        color: $light-blue !important
+
+  i.ion-more, i.ion-android-download
+    color: #fff !important
+
+.order-first
+  background: #3498db
+  color: #fff
+  font-size: 25px !important

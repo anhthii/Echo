@@ -14,6 +14,19 @@ export function clearArtist() {
   };
 }
 
+export function clearArtists() {
+  return {
+    type: types.CLEAR_ARTISTS,
+  };
+}
+
+export function changePageChunkIndex(pageChunkIndex) {
+  return {
+    type: types.CHANGE_PAGE_CHUNK_INDEX,
+    pageChunkIndex,
+  };
+}
+
 export function fetchDefaultArtists() {
   return dispatch => {
     axios.get('/api/media/artist/default')
@@ -39,9 +52,10 @@ export function fetchArtists(genre, id, page) {
   };
 }
 
-export function fetchArtist(name, type = 'songs') {
+export function fetchArtist(name, type = 'songs', page) {
+  const pageQuery = page ? `?page=${page}` : '';
   return dispatch => {
-    axios.get(`/api/media/artist/${name}/${type}`)
+    axios.get(`/api/media/artist/${name}/${type}${pageQuery}`)
       .then(({ data }) => {
         switch (type) {
         case 'songs':

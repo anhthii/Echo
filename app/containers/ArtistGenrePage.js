@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchDefaultArtists, fetchArtists } from '../actions/artist';
-import { chagePageChunkIndex } from '../actions/album';
+import { fetchDefaultArtists, fetchArtists, clearArtists } from '../actions/artist';
+import { changePageChunkIndex } from '../actions/album';
 import { Pages } from '../components';
 import { isTwoObjectEqual } from '../utils/func';
 
@@ -12,6 +12,7 @@ class ArtistGenrePage extends Component {
     if (id && genre) {
       this.props.fetchArtists(genre, id);
     } else {
+      this.props.clearArtists();
       this.props.fetchDefaultArtists();
     }
   }
@@ -19,6 +20,7 @@ class ArtistGenrePage extends Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.location.pathname !== this.props.location.pathname &&
       /artists$/.test(nextProps.location.pathname)) {
+      this.props.clearArtists();
       this.props.fetchDefaultArtists();
       return;
     }
@@ -31,7 +33,7 @@ class ArtistGenrePage extends Component {
     if (!isTwoObjectEqual(nextProps.params, this.props.params)) {
       const { id, genre } = nextProps.params;
       this.props.fetchArtists(genre, id);
-      this.props.chagePageChunkIndex(0);
+      this.props.changePageChunkIndex(0);
     }
 
     // fetch new albums if the current album route is appended with the `?page=` query
@@ -55,4 +57,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-{ fetchDefaultArtists, fetchArtists, chagePageChunkIndex })(ArtistGenrePage);
+{ fetchDefaultArtists, fetchArtists, changePageChunkIndex, clearArtists })(ArtistGenrePage);

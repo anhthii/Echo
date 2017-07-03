@@ -8,6 +8,7 @@ import UIReducer from './ui_reducer';
 import queueReducer from './queue_reducer';
 import albumReducer from './album_reducer';
 import artistReducer from './artist_reducer';
+import chartReducer from './chart_reducer';
 
 export default combineReducers({
   playerState: playerReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
   queueState: queueReducer,
   albumState: albumReducer,
   artistState: artistReducer,
+  chartState: chartReducer,
 });

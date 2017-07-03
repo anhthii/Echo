@@ -5,7 +5,7 @@ import { isTwoObjectEqual } from '../utils/func';
 import {
   fetchDefaultAlbums,
   fetchAlbums,
-  chagePageChunkIndex,
+  changePageChunkIndex,
 } from '../actions/album';
 
 class AlbumGenrePage extends Component {
@@ -35,7 +35,7 @@ class AlbumGenrePage extends Component {
     if (!isTwoObjectEqual(nextProps.params, this.props.params)) {
       const { id, genre } = nextProps.params;
       this.props.fetchAlbums(genre, id);
-      this.props.chagePageChunkIndex(0);
+      this.props.changePageChunkIndex(0);
     }
 
     // fetch new albums if the current album route is appended with the `?page=` query
@@ -59,5 +59,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-  { chagePageChunkIndex, fetchAlbums, fetchDefaultAlbums }
+  { changePageChunkIndex, fetchAlbums, fetchDefaultAlbums }
 )(AlbumGenrePage);

@@ -1,9 +1,11 @@
 import React from 'react';
 import Playlist from '../../Playlist';
+import Pagination from '../../Pagination';
 import WithBackgroundImage from '../../WithBgImg';
 import './index.sass';
 
-const ArtistPage = ({ avatar, cover, songs, artistName }) => {
+const ArtistPage = (props) => {
+  const { avatar, cover, songs, artistName, pageChunks, pageChunkIndex, page } = props;
   return (
     <div className="artist-page">
       <WithBackgroundImage className="artist-page-header" src={cover}>
@@ -16,7 +18,14 @@ const ArtistPage = ({ avatar, cover, songs, artistName }) => {
           </div>
         </div>
       </WithBackgroundImage>
-      <Playlist className='artist-playlist' songs={songs}/>
+      <Playlist className='artist-playlist' songs={songs} page={page}/>
+      <Pagination
+        pageChunks={pageChunks}
+        pageChunkIndex={pageChunkIndex}
+        type="single-artist"
+        artistName={artistName}
+        changePageChunkIndex={props.changePageChunkIndex}
+      />
     </div>
   );
 };
