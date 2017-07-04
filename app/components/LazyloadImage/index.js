@@ -8,9 +8,11 @@ class LazyloadImage extends React.Component {
     this.tempImg.src = this.refs.img.src;
     this.tempImg.onload = () => {
       const $wrapper = this.refs.wrapper;
-      const placeHolder = $wrapper.children[0];
-      $wrapper.replaceChild(this.tempImg, placeHolder);
-      $wrapper.className += ' loaded';
+      if ($wrapper) {
+        const placeHolder = $wrapper.children[0];
+        $wrapper.replaceChild(this.tempImg, placeHolder);
+        $wrapper.className += ' loaded';
+      }
     };
   }
 

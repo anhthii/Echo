@@ -6,7 +6,7 @@ import './index.sass';
 
 const HomePage = (props) =>
   <div className='homepage'>
-    <TrackList tracks={props.tracks} />
+    <TrackList {...props} />
     <div className='chart-wrapper'>
       <button onClick={() => props.changeActiveChart('kpop')}>Kpop</button>
       <button onClick={() => props.changeActiveChart('vpop')}>vpop</button>
@@ -19,6 +19,11 @@ HomePage.propTypes = {
   tracks: PropTypes.array.isRequired,
   chart: PropTypes.object.isRequired,
   changeActiveChart: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+  dropDownActiveId: PropTypes.string.isRequired,
+  addSongToQueue: PropTypes.func.isRequired,
+  toggleTrackDropDown: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default HomePage;

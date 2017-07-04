@@ -181,7 +181,6 @@ class Player extends React.Component {
           crossOrigin='anonymous'
           ref='audio'
         />
-        {JSON.stringify(this.state.isPlaying)}
         <div className="player-info">
           <Link
             to={getSongUrl(name, id)}

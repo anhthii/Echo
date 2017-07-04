@@ -1,11 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
+
 import { Link } from 'react-router';
 import { changeAlias } from '../../utils/func';
-import { toggleTrackDropDown } from '../../actions/ui';
+
 import Dropdown from '../Dropdown';
 import LazyloadImage from '../LazyloadImage';
-import { addSongToQueue } from '../../actions/queue';
+
 
 class Track extends React.Component {
   render() {
@@ -24,7 +24,7 @@ class Track extends React.Component {
         <div className="trackPosition">
           {order}
         </div>
-        <LazyloadImage src={thumbnail} className='track-thumb image-wrapper' />
+        <img src={thumbnail} className='track-thumb image-wrapper' />
         <div className="trackDetail">
           <div className="trackTitle">
             <Link
@@ -61,12 +61,4 @@ class Track extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    show: state.UIState.dropDown.show,
-    dropDownActiveId: state.UIState.dropDown.activeId,
-  };
-}
-
-export default connect(mapStateToProps,
-{ toggleTrackDropDown, addSongToQueue })(Track);
+export default Track;

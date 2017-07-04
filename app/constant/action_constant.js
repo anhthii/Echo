@@ -30,8 +30,9 @@ export const CLEAR_ARTIST = 'CLEAR_ARTIST';
 export const CLEAR_ARTISTS = 'CLEAR_ARTISTS';
 
 // actions for homepage
-export const FETCH_TRACKS = 'FETCH_TRACKS';
-
+export const START_FETCHING_TRACKS = 'START_FETCHING_TRACKS';
+export const FETCH_TRACK_SUCCESS = 'FETCH_TRACK_SUCCESS';
+export const FETCH_TRACK_FAILURE = 'FETCH_TRACK_FAILURE';
 // acitons for UI
 export const SHOW_ANALYZER = 'SHOW_ANALYZER';
 export const HIDE_ANALYZER = 'HIDE_ANALYZER';

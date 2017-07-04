@@ -13,10 +13,12 @@ class WithBgImg extends React.Component {
   }
 
   fadeIn = () => {
-    this.setState({
-      opacity: 1,
-      backgroundImage: 'url(' + this.props.src + ')',
-    });
+    if (this.node) {
+      this.setState({
+        opacity: 1,
+        backgroundImage: 'url(' + this.props.src + ')',
+      });
+    }
   }
 
   componentDidMount() {
@@ -39,6 +41,7 @@ class WithBgImg extends React.Component {
       <div
         className={`bgImageContainer ${this.props.className}`}
         src={this.props.src}
+        ref={(node) => { this.node = node; }}
         style={{
           opacity: this.state.opacity,
           backgroundImage: this.state.backgroundImage,

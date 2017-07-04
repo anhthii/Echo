@@ -29,6 +29,7 @@
     "no-param-reassign": "off",
     "no-shadow": "off",
     "no-trailing-spaces": ["error", { "skipBlankLines": true }],
+    "import/prefer-default-export": "off",
     "import/no-extraneous-dependencies": ["error", {
       "devDependencies": ["*.config.js"]
     }]

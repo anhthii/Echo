@@ -1,12 +1,17 @@
 import axios from 'axios';
-import { FETCH_TRACKS } from '../constant/action_constant';
+import * as types from '../constant/action_constant';
+import { pageQuery } from '../utils/query';
+import { MEDIA_ENDPOINT } from '../constant/endpoint_constant';
 
-export function fetchTracks() {
+
+export function fetchTracks(page) {
   return dispatch => {
-    axios.get('/api/media/top100/IWZ9Z097')
+    dispatch({ type: types.START_FETCHING_TRACKS });
+
+    axios.get(`${MEDIA_ENDPOINT}/top100/IWZ9Z097${pageQuery(page)}`)
       .then(({ data }) => {
-        dispatch({ type: FETCH_TRACKS, tracks: data.data.songs });
+        dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.data.songs, page });
       })
-      .catch(err => console.log(err));
+      .catch(() => dispatch({ type: types.FETCH_TRACK_FAILURE }));
   };
 }

@@ -1,8 +1,12 @@
-import { store, history } from './';
+import { syncHistoryWithStore } from 'react-router-redux';
+import { browserHistory } from 'react-router';
 import { hideAnalyzer } from './actions/ui';
 import { clearAlbums } from './actions/album';
+import store from './store';
 
-export default function initHistoryEvents() {
+export const history = syncHistoryWithStore(browserHistory, store);
+
+export function initHistoryEvents() {
   history.listen(location => {
     const state = store.getState();
 

@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { HomePage } from '../components';
 import { changeActiveChart } from '../actions/chart';
+import { addSongToQueue } from '../actions/queue';
+import { toggleTrackDropDown } from '../actions/ui';
 
 class HomePageContainer extends Component {
   render() {
-    const { chart, tracks, changeActiveChart } = this.props;
-
     return (
-      <HomePage
-        chart={chart}
-        tracks={tracks}
-        changeActiveChart={changeActiveChart}
-      />
+      <HomePage {...this.props}/>
     );
   }
 }
 
 function mapStateToProps(state) {
   const { activeChart } = state.chartState;
+  const { isLoading, tracks } = state.trackState;
 
   return {
     chart: state.chartState[activeChart],
-    tracks: state.trackState.tracks,
+    show: state.UIState.dropDown.show,
+    dropDownActiveId: state.UIState.dropDown.activeId,
+    isLoading,
+    tracks,
   };
 }
 
-export default connect(mapStateToProps, { changeActiveChart })(HomePageContainer);
+export default connect(mapStateToProps,
+{ changeActiveChart, addSongToQueue, toggleTrackDropDown })(HomePageContainer);
 
