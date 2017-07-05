@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Pages } from '../components';
 import { isEmpty } from '../utils/func';
 import { fetchAlbumPlaylist, clearPlaylist } from '../actions/album';
+import { replaceQueue } from '../actions/queue';
 
 class AlbumPlaylist extends React.Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ class AlbumPlaylist extends React.Component {
 
   render() {
     return (
-      <Pages.AlbumPlaylist playlist={this.props.playlist} />
+      <Pages.AlbumPlaylist playlist={this.props.playlist} replaceQueue={this.props.replaceQueue}/>
     );
   }
 }
@@ -30,4 +31,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-{ fetchAlbumPlaylist, clearPlaylist })(AlbumPlaylist);
+{ fetchAlbumPlaylist, clearPlaylist, replaceQueue })(AlbumPlaylist);

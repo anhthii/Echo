@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchArtist, clearArtist, changePageChunkIndex } from '../actions/artist';
+import { replaceQueue } from '../actions/queue';
+import { fetchSong, fetchSuggestedSongs } from '../actions/song';
 import { Pages } from '../components';
 
 class ArtistPage extends Component {
@@ -33,7 +35,7 @@ class ArtistPage extends Component {
   render() {
     return (
       <div>
-        <Pages.ArtistPage {...this.props} />
+        <Pages.ArtistPage {...this.props} activePage={this.props.location.query.page}/>
       </div>
     );
   }
@@ -55,8 +57,15 @@ function mapStateToProps(state) {
     artistName,
     pageChunks,
     pageChunkIndex,
+    queueIds: state.queueState.ids,
   };
 }
 
 export default connect(mapStateToProps,
-{ fetchArtist, clearArtist, changePageChunkIndex })(ArtistPage);
+  { fetchArtist,
+    clearArtist,
+    changePageChunkIndex,
+    replaceQueue,
+    fetchSong,
+    fetchSuggestedSongs,
+  })(ArtistPage);

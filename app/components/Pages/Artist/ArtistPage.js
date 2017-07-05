@@ -5,7 +5,8 @@ import WithBackgroundImage from '../../WithBgImg';
 import './index.sass';
 
 const ArtistPage = (props) => {
-  const { avatar, cover, songs, artistName, pageChunks, pageChunkIndex, page } = props;
+  const { avatar, cover, songs, artistName, pageChunks, pageChunkIndex } = props;
+
   return (
     <div className="artist-page">
       <WithBackgroundImage className="artist-page-header" src={cover}>
@@ -18,13 +19,17 @@ const ArtistPage = (props) => {
           </div>
         </div>
       </WithBackgroundImage>
-      <Playlist className='artist-playlist' songs={songs} page={page}/>
+
+      <button onClick={() => props.replaceQueue(songs)}>play</button>
+
+      <Playlist className='artist-playlist' songs={songs} />
       <Pagination
         pageChunks={pageChunks}
         pageChunkIndex={pageChunkIndex}
         type="single-artist"
         artistName={artistName}
         changePageChunkIndex={props.changePageChunkIndex}
+        activePage={props.activePage}
       />
     </div>
   );

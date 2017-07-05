@@ -23,6 +23,7 @@ function mapStateToProps(state) {
     isFetching: songData.isFetching,
     routing,
     queue: queueState.queue,
+    queueIds: queueState.ids,
   };
 }
 

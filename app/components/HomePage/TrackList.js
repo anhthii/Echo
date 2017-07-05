@@ -16,6 +16,7 @@ function TrackList(props) {
 
 TrackList.propTypes = {
   tracks: PropTypes.array.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 export default TrackList;

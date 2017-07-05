@@ -5,7 +5,8 @@ import LazyloadImage from '../../LazyloadImage';
 import './artist_card.sass';
 
 const ArtistCard = (props) => {
-  const url = `/artist/${changeAlias(props.name)}` ;
+  const url = `/artist/${changeAlias(props.name)}`;
+
   return (
     <div className="artist-card">
       <Link to={url}>
@@ -17,7 +18,7 @@ const ArtistCard = (props) => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default ArtistCard;

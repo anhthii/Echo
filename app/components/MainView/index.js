@@ -6,7 +6,6 @@ import './index.sass';
 
 const MainView = (props) => {
   const { type } = props;
-
   return (
     <div>
       {
@@ -23,7 +22,7 @@ MainView.propTypes = {
   albums: PropTypes.array,
   pageChunks: PropTypes.array,
   pageChunkIndex: PropTypes.number,
-  chagePageChunkIndex: PropTypes.func,
+  changePageChunkIndex: PropTypes.func,
   chunkSize: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
 };
@@ -44,8 +43,9 @@ const AlbumView = (props) => {
             {...params}
             pageChunks={props.pageChunks}
             pageChunkIndex={props.pageChunkIndex}
-            chagePageChunkIndex={props.chagePageChunkIndex}
+            changePageChunkIndex={props.changePageChunkIndex}
             type='album'
+            activePage={location.query.page}
           /> : null
       }
     </div>
@@ -70,7 +70,7 @@ const ArtistView = (props) => {
             {...params}
             pageChunks={props.pageChunks}
             pageChunkIndex={props.pageChunkIndex}
-            chagePageChunkIndex={props.chagePageChunkIndex}
+            changePageChunkIndex={props.changePageChunkIndex}
             type='artist'
           /> : null
       }

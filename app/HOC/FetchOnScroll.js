@@ -29,7 +29,7 @@ export default function (ComposedComponent) {
 
       this.timer = window.setTimeout(() => {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
-          if (this.props.pageLoaded < NUMBER_OF_PAGES) {
+          if (this.props.pageLoaded < NUMBER_OF_PAGES && !this.props.isLoading) {
             const page = this.props.pageLoaded + 1;
             this.props.fetchTracks(page);
           }
@@ -45,8 +45,12 @@ export default function (ComposedComponent) {
   FetchOnScroll.propTypes = {
     fetchTracks: PropTypes.func.isRequired,
     pageLoaded: PropTypes.number.isRequired,
+    isLoading: PropTypes.bool.isRequired,
   };
 
-  return connect((state) => ({ pageLoaded: state.trackState.pageLoaded }),
+  return connect((state) =>
+  ({ pageLoaded: state.trackState.pageLoaded,
+    isLoading: state.trackState.isLoading,
+  }),
   { fetchTracks })(FetchOnScroll);
 }

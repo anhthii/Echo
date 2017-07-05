@@ -15,7 +15,7 @@ class App extends React.Component {
           <Analyzer show={show}/>
         </div>
         { showQueue && <Containers.Queue /> }
-        { showPlayer && <Containers.Player /> }
+        { showPlayer ? <Containers.Player /> : null }
       </div>
     );
   }

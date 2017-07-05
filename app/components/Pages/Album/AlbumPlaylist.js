@@ -1,17 +1,11 @@
 import React from 'react';
 import Playlist from '../../Playlist';
 import { Karaoke } from '../../../containers';
+import { isEmpty } from '../../../utils/func';
 import './album_playlist.sass';
 
-/*const tweakThePlaylist = (songs) => {
-  return playlist.reduce((newobj, currobj) => {
-
-  }, {});
-};
-*/
-
-const AlbumPlaylist = ({ playlist }) => {
-  if (!Object.keys(playlist).length) return null;
+const AlbumPlaylist = ({ playlist, replaceQueue }) => {
+  if (isEmpty(playlist)) return null;
 
   return (
     <div className='album-playlist'>
@@ -36,7 +30,9 @@ const AlbumPlaylist = ({ playlist }) => {
           fontSize="23px"
         />
         <div className='playlist-play-btn'>
-          <button>Play</button>
+          <button onClick={() => replaceQueue(playlist.songs)}>
+            Play
+          </button>
         </div>
 
         <Playlist songs={playlist.songs} className='ap'/>

@@ -1,5 +1,7 @@
 import axios from 'axios';
 import * as types from '../constant/action_constant';
+import { MEDIA_ENDPOINT } from '../constant/endpoint_constant';
+import { pageQuery } from '../utils/query';
 
 export function clearAlbums() {
   return {
@@ -23,7 +25,7 @@ export function changePageChunkIndex(pageChunkIndex) {
 
 export function fetchDefaultAlbums() {
   return dispatch => {
-    axios.get('/api/media/album/default')
+    axios.get(`${MEDIA_ENDPOINT}/album/default`)
       .then(({ data }) => {
         if (data.result && data.origins.length) {
           dispatch({ type: types.FETCH_DEFAULT_ALBUMS, defaultAlbums: data.origins });
@@ -38,9 +40,8 @@ export function fetchDefaultAlbums() {
 }
 
 export function fetchAlbums(genre, id, page) {
-  const pageQuery = page ? `&page=${page}` : '';
   return dispatch => {
-    axios.get(`/api/media/albums?genre=${genre}&id=${id}${pageQuery}`)
+    axios.get(`${MEDIA_ENDPOINT}/albums?genre=${genre}&id=${id}${pageQuery(page)}`)
       .then(({ data }) => {
         if (data.albums && data.albums.length) {
           dispatch({ type: types.FETCH_ALBUMS, albums: data.albums });
@@ -54,13 +55,14 @@ export function fetchAlbums(genre, id, page) {
 
 export function fetchAlbumPlaylist(title, id) {
   return dispatch => {
-    axios.get(`/api/media/album_playlist?title=${title}&id=${id}`)
+    axios.get(`${MEDIA_ENDPOINT}/album_playlist?title=${title}&id=${id}`)
       .then(({ data }) => {
         dispatch({ type: types.FETCH_ALBUM_PLAYLIST, playlist: data });
       })
       .catch(err => { throw err; });
   };
 }
+
 export function clearPlaylist() {
   return { type: types.CLEAR_PLAYLIST };
 }

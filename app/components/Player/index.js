@@ -4,7 +4,8 @@ import InputRange from 'react-input-range';
 import { Link } from 'react-router';
 import PlayerLoader from './PlayerLoader';
 import initAnalyzer from '../../utils/initAnalyzer';
-import { changeAlias, getSongUrl } from '../../utils/func';
+import { changeAlias, getSongUrl, isTwoObjectEqual } from '../../utils/func';
+
 import './index.sass';
 
 
@@ -58,6 +59,13 @@ class Player extends React.Component {
       }
     }
 
+    if (!isTwoObjectEqual(nextProps.queueIds, this.props.queueIds) &&
+      !nextProps.queueIds.includes(this.props.songData.id)) {
+      const { name, id } = nextProps.queue[0];
+      this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
+      this.props.fetchSuggestedSongs(id);
+    }
+
     const nextPercent = nextProps.playerState.playedPercent;
     const currentPercent = this.props.playerState.playedPercent;
 
@@ -88,6 +96,8 @@ class Player extends React.Component {
         return queue[index];
       }
     }
+
+    return queue[0];
   }
 
   playPrevOrNextSong(prevOrnext) {
@@ -243,6 +253,7 @@ Player.propTypes = {
   songData: PropTypes.object.isRequired,
   fetchSong: PropTypes.func.isRequired,
   queue: PropTypes.array.isRequired,
+  queueIds: PropTypes.array,
   toggleQueue: PropTypes.func.isRequired,
   togglePushRoute: PropTypes.func.isRequired,
   isFetching: PropTypes.bool.isRequired,

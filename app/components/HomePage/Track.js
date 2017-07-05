@@ -1,15 +1,13 @@
 import React from 'react';
-
 import { Link } from 'react-router';
 import { changeAlias } from '../../utils/func';
-
 import Dropdown from '../Dropdown';
-import LazyloadImage from '../LazyloadImage';
-
+import LinksByComma from '../LinksByComma';
 
 class Track extends React.Component {
   render() {
-    const { name,
+    const {
+      name,
       thumbnail,
       order,
       id,
@@ -17,6 +15,7 @@ class Track extends React.Component {
       dropDownActiveId,
       addSongToQueue,
       toggleTrackDropDown,
+      artists,
     } = this.props;
 
     return (
@@ -27,14 +26,15 @@ class Track extends React.Component {
         <img src={thumbnail} className='track-thumb image-wrapper' />
         <div className="trackDetail">
           <div className="trackTitle">
-            <Link
-              to={`song/${changeAlias(name)}/${id}`}
-
-            >{name}</Link>
+            <Link to={`song/${changeAlias(name)}/${id}`}>{name}</Link>
           </div>
-          <div className="trackArtist">
-            <a href='#' className=''>Justin Bieber</a>
-          </div>
+          <LinksByComma
+            className="trackArtist"
+            data={artists}
+            titleEntry="name"
+            pathEntry="link"
+            definePath={(link) => link.replace('/nghe-si/', '/artist/')}
+          />
         </div>
         <div className="trackActions">
           <div className="hp-track-toolbar">

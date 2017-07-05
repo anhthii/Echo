@@ -15,7 +15,7 @@ const getLink = (genre, id, page, type, artistName) => {
 };
 
 const Pagination = (props) => {
-  const { genre, id, pageChunks, pageChunkIndex, type, artistName } = props;
+  const { genre, id, pageChunks, pageChunkIndex, type, artistName, activePage } = props;
   if (!pageChunks.length) return null;
 
   return (
@@ -33,11 +33,19 @@ const Pagination = (props) => {
       {
         pageChunks.length && pageChunks[0].length > 1 && pageChunks[pageChunkIndex].map(num => (
           <li key={`pagination-item${num}`}>
-            <Link
-              to={getLink(genre, id, num + 1, type, artistName)}
-              activeClassName='pagination-item-active'>
-              { num + 1 }
-            </Link>
+            {
+              num === 0 && !activePage ?
+                <Link
+                  to={getLink(genre, id, num + 1, type, artistName)}
+                  className='pagination-item-active'>
+                  { num + 1 }
+                </Link> :
+                <Link
+                  to={getLink(genre, id, num + 1, type, artistName)}
+                  activeClassName='pagination-item-active'>
+                  { num + 1 }
+                </Link>
+            }
           </li>
         ))
       }
