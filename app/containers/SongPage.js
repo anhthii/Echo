@@ -30,6 +30,9 @@ class SongPage extends React.Component {
     const { routing: { locationBeforeTransitions: nextLoc } } = nextProps;
     const { id: nextId, name } = nextProps.songData;
 
+
+
+
     if (nextProps.canPushRoute && nextId !== this.props.songData.id) {
       browserHistory.push(getSongUrl(name, nextId));
       return;

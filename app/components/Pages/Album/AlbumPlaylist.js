@@ -35,7 +35,7 @@ const AlbumPlaylist = ({ playlist, replaceQueue }) => {
           </button>
         </div>
 
-        <Playlist songs={playlist.songs} className='ap'/>
+        <Playlist songs={playlist.songs} className='ap' pathEntry="alias" />
 
         <div className='album-playlist-artist-info'>
           <div className="album-laylist-artist-thumb image-wrapper">

@@ -12,7 +12,7 @@ export function fetchSong(name, id) {
 
       dispatch(togglePushRoute(false));
 
-      dispatch({ type: types.ADD_SONG_TO_QUEUE, song: { name, id } });
+      dispatch({ type: types.ADD_SONG_TO_QUEUE, song: { name: data.name, id, artist: data.artist } });
     })
     .catch(err => { throw err; });
   };

@@ -47,7 +47,7 @@ class ArtistGenrePage extends Component {
 
   render() {
     return (
-      <Pages.ArtistGenrePage {...this.props}/>
+      <Pages.ArtistGenrePage {...this.props} />
     );
   }
 }

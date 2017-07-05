@@ -7,7 +7,7 @@ const AlbumGenrePage = (props) => {
   return (
     <div>
       <GenreMenu type="album"/>
-      <MainView type="album" chunkSize={4} {...props} Card={AlbumCard}/>
+      <MainView type="album" chunkSize={4} {...props} Card={AlbumCard} />
     </div>
   );
 };

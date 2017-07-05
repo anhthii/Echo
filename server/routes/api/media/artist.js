@@ -41,7 +41,7 @@ const getSongs = (name, page, res, next) => {
         .extract('text', '.info-summary > h1', 'artistName')
         .list('.group.fn-song')
         .setKey('song')
-        .extractAttrs(['href', 'text'], '._trackLink', ['id', 'title'])
+        .extractAttrs(['href', 'href', 'text'], '._trackLink', ['id', 'alias', 'title'])
         .extractAttr('text', '._trackLink span', 'artist_text')
         .paginate();
       res.json(parser.get());

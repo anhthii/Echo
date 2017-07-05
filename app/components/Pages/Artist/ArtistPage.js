@@ -22,7 +22,7 @@ const ArtistPage = (props) => {
 
       <button onClick={() => props.replaceQueue(songs)}>play</button>
 
-      <Playlist className='artist-playlist' songs={songs} />
+      <Playlist className='artist-playlist' songs={songs} pathEntry="alias" />
       <Pagination
         pageChunks={pageChunks}
         pageChunkIndex={pageChunkIndex}

@@ -10,10 +10,10 @@ export function initHistoryEvents() {
   history.listen(location => {
     const state = store.getState();
 
-    if (location && !/album\//.test(location.pathname) && state.albumState.albums.length) {
+   /* if (location && !/album\//.test(location.pathname) && state.albumState.albums.length) {
       // Clear the albums state if the user navigate out of the `/album/:title/:id` route
       store.dispatch(clearAlbums());
-    }
+    }*/
     // hide the analyzer if the current route doesn't match `/song/{songname}/id`
     if (location && /song\//.test(location.pathname)) return;
 

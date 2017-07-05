@@ -53,7 +53,7 @@ const AlbumView = (props) => {
 };
 
 const ArtistView = (props) => {
-  const { params, chunkSize, defaultArtists, artists, Card } = props;
+  const { params, chunkSize, defaultArtists, artists, Card, location } = props;
 
   return (
     <div className="view">
@@ -72,6 +72,7 @@ const ArtistView = (props) => {
             pageChunkIndex={props.pageChunkIndex}
             changePageChunkIndex={props.changePageChunkIndex}
             type='artist'
+            activePage={location.query.page}
           /> : null
       }
     </div>

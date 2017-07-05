@@ -101,9 +101,15 @@ class Player extends React.Component {
   }
 
   playPrevOrNextSong(prevOrnext) {
-    const { name, id } = this.findSong(prevOrnext);
+    const { name, alias, id } = this.findSong(prevOrnext);
     this.props.togglePushRoute(true); // enable .push for browserHistory
-    this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
+
+    if (alias) {
+      this.props.fetchSong(alias, id);
+    } else {
+      this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
+    }
+
     this.props.fetchSuggestedSongs(id);
   }
 
@@ -181,7 +187,7 @@ class Player extends React.Component {
   render() {
     const { songData } = this.props;
     const { name, id } = songData;
-    const artists = songData.artist.split(/,\s*/);
+    const artists = songData.artist.split(/\s*,\s*/);
 
     return (
       <div className='player'>
@@ -190,6 +196,7 @@ class Player extends React.Component {
           src={songData.source_list && songData.source_list[0]}
           crossOrigin='anonymous'
           ref='audio'
+          loop='true'
         />
         <div className="player-info">
           <Link

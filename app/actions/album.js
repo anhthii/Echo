@@ -1,7 +1,6 @@
 import axios from 'axios';
 import * as types from '../constant/action_constant';
 import { MEDIA_ENDPOINT } from '../constant/endpoint_constant';
-import { pageQuery } from '../utils/query';
 
 export function clearAlbums() {
   return {
@@ -40,8 +39,9 @@ export function fetchDefaultAlbums() {
 }
 
 export function fetchAlbums(genre, id, page) {
+  const pageQuery = page ? `&page=${page}` : '';
   return dispatch => {
-    axios.get(`${MEDIA_ENDPOINT}/albums?genre=${genre}&id=${id}${pageQuery(page)}`)
+    axios.get(`${MEDIA_ENDPOINT}/albums?genre=${genre}&id=${id}${pageQuery}`)
       .then(({ data }) => {
         if (data.albums && data.albums.length) {
           dispatch({ type: types.FETCH_ALBUMS, albums: data.albums });

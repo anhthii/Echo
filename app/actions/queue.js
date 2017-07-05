@@ -30,6 +30,7 @@ function tweakSongs(songs) {
     return {
       id: song.id,
       name: song.title,
+      alias: song.alias,
     };
   });
 
