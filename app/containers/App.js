@@ -6,7 +6,6 @@ import * as Containers from './';
 class App extends React.Component {
   render() {
     const { showPlayer, showAnalyzer: show, showQueue } = this.props;
-
     return (
       <div>
         <Nav />

@@ -17,7 +17,7 @@ export function fetchDefaultTracks() {
     return store.dispatch(fetchTracks());
   }
 
-  return null;
+  return undefined;
 }
 
 function shouldGetChart(charts, type) {

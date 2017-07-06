@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { changeAlias } from '../../utils/func';
 import WithBackgroundImage from '../WithBgImg';
+import LinksByComma from '../LinksByComma';
 import './index.sass';
 
 const Chart = ({ chart }) => {
@@ -26,7 +27,7 @@ const Chart = ({ chart }) => {
   );
 };
 
-const ChartFirstItem = ({ name, order, id }) => (
+const ChartFirstItem = ({ name, order, id, artists }) => (
   <li className="chart-item">
     <div className="chart-item-order order-first">
       { order }
@@ -36,9 +37,14 @@ const ChartFirstItem = ({ name, order, id }) => (
         <div className="chart-item-title ellipsis" title={name}>
           <Link to={`/song/${changeAlias(name)}/${id}`}>{name}</Link>
         </div>
-        <div className="chart-item-artist">
-          <Link to='/'>We loved</Link>
-        </div>
+        <LinksByComma
+          className="chart-item-artist ellipsis"
+          data={artists}
+          definePath={(url) => url.replace('nghe-si', 'artist')}
+          defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
+          pathEntry="link"
+          titleEntry="name"
+        />
       </div>
       <div className="chart-item-detail-right">
         <button className="sc-ir"><i className="ion-android-download" title="download the track"></i></button>
@@ -48,7 +54,7 @@ const ChartFirstItem = ({ name, order, id }) => (
   </li>
 );
 
-const ChartItem = ({ name, order, id, thumbnail }) => (
+const ChartItem = ({ name, order, id, thumbnail, artists }) => (
   <li className="chart-item">
     <div className="chart-item-thumb">
       <img src={thumbnail} />
@@ -60,9 +66,14 @@ const ChartItem = ({ name, order, id, thumbnail }) => (
           <div className="chart-item-title ellipsis" title={name}>
             <Link to={`/song/${changeAlias(name)}/${id}`}>{name}</Link>
           </div>
-          <div className="chart-item-artist">
-            <Link to='/'>We loved</Link>
-          </div>
+          <LinksByComma
+            className="chart-item-artist ellipsis"
+            data={artists}
+            pathEntry="link"
+            titleEntry="name"
+            definePath={(url) => url.replace('nghe-si', 'artist')}
+            defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
+          />
         </div>
       </div>
       <div className="chart-item-detail-right">

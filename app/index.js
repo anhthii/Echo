@@ -4,10 +4,8 @@ import { Provider } from 'react-redux';
 import { Router } from 'react-router';
 import routes from './routes';
 import store from './store';
-import { history, initHistoryEvents } from './history';
+import history from './history';
 import './styles/base.sass';
-
-initHistoryEvents();
 
 render(
   <Provider store={store}>

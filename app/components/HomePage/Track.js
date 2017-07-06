@@ -34,6 +34,7 @@ class Track extends React.Component {
             titleEntry="name"
             pathEntry="link"
             definePath={(link) => link.replace('/nghe-si/', '/artist/')}
+            defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
           />
         </div>
         <div className="trackActions">
