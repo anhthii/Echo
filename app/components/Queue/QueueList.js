@@ -3,7 +3,7 @@ import { Link } from 'react-router';
 import { getSongUrl } from '../../utils/func';
 import LazyloadImage from '../LazyloadImage';
 
-const Li = ({ name, id, thumbnail, alias, artist }) => {
+const Li = ({ name, id, thumbnail, alias, artist, removeSongFromQueue }) => {
   return (
     <li>
       <LazyloadImage
@@ -19,7 +19,7 @@ const Li = ({ name, id, thumbnail, alias, artist }) => {
         </div>
       </div>
       <div className="queue-track-actions">
-        <i className="ion-trash-b"></i>
+        <i className="ion-trash-b" onClick={() => removeSongFromQueue(id)}></i>
         <i className='ion-android-download'></i>
         <i className="ion-ios-heart"></i>
         <i className="ion-more"></i>
@@ -28,10 +28,12 @@ const Li = ({ name, id, thumbnail, alias, artist }) => {
   );
 };
 
-export default function QueueList({ songs }) {
+export default function QueueList({ songs, removeSongFromQueue }) {
   return (
     <ul className="queue-list">
-      {songs.map(song => <Li key={`queue-${song.id}`} {...song}/>)}
+      {songs.map(song =>
+        <Li key={`queue-${song.id}`} {...song} removeSongFromQueue={removeSongFromQueue}/>
+      )}
     </ul>
   );
 }

@@ -17,6 +17,12 @@ export default function (state = initialState, action) {
   case types.REPLACE_QUEUE:
     return { queue: action.songs, ids: action.ids };
 
+  case types.CLEAR_QUEUE:
+    return { ...state, queue: action.queue, ids: action.ids };
+
+  case types.REMOVE_SONG_FROM_QUEUE:
+    return { ...state, queue: action.queue, ids: action.ids };
+
   default:
     return state;
   }
@@ -30,3 +36,5 @@ function addSongToQueue(state, action) {
   }
   return state;
 }
+
+

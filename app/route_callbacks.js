@@ -1,9 +1,10 @@
 import store from './store';
-import { isEmpty } from './utils/func';
+import { isEmpty, changeAlias } from './utils/func';
 import { fetchTracks } from './actions/home';
+import { fetchSong, fetchSuggestedSongs } from './actions/song';
 import { getChart, changeActiveChart } from './actions/chart';
 
-export function fetchDefaultTracks() {
+export function fetchDataForHomePage() {
   const state = store.getState();
   // Only fetch `pop` chart if there isn't one else get it from the state
   if (isEmpty(state.chartState.pop)) {
@@ -14,10 +15,16 @@ export function fetchDefaultTracks() {
 
   if (!state.trackState.tracks.length) {
     // only fetch tracks if there is no trackss in the trackState
-    return store.dispatch(fetchTracks());
+    store.dispatch(fetchTracks());
   }
 
-  return undefined;
+  // play the first song in the queue saved in localstorage if there is one
+  const queueState = state.queueState;
+  if (queueState.queue.length && isEmpty(state.songData.data)) {
+    const { name, id, alias } = queueState.queue[0];
+    store.dispatch(fetchSong(alias || changeAlias(name), id));
+    store.dispatch(fetchSuggestedSongs(id));
+  }
 }
 
 function shouldGetChart(charts, type) {

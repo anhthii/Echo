@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import InputRange from 'react-input-range';
-import { Link } from 'react-router';
+import { Link, browserHistory } from 'react-router';
 import PlayerLoader from './PlayerLoader';
 import initAnalyzer from '../../utils/initAnalyzer';
 import { changeAlias, getSongUrl, isTwoObjectEqual } from '../../utils/func';
@@ -17,6 +17,7 @@ class Player extends React.Component {
       isSeeking: false,
       isPlaying: false,
       audioState: 0,
+      loop: false,
     };
   }
 
@@ -60,10 +61,13 @@ class Player extends React.Component {
     }
 
     if (!isTwoObjectEqual(nextProps.queueIds, this.props.queueIds) &&
-      !nextProps.queueIds.includes(this.props.songData.id)) {
+      !nextProps.queueIds.includes(this.props.songData.id) &&
+      nextProps.queue[0]
+      ) {
       const { name, id } = nextProps.queue[0];
       this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
       this.props.fetchSuggestedSongs(id);
+      browserHistory.push(`/song/${changeAlias(name)}/${id}`);
     }
 
     const nextPercent = nextProps.playerState.playedPercent;
@@ -97,11 +101,16 @@ class Player extends React.Component {
       }
     }
 
-    return queue[0];
+    return undefined;
   }
 
   playPrevOrNextSong(prevOrnext) {
-    const { name, alias, id } = this.findSong(prevOrnext);
+    const prevOrnextSong = this.findSong(prevOrnext);
+
+    if (!prevOrnextSong) return;
+
+    const { name, alias, id } = prevOrnextSong;
+
     this.props.togglePushRoute(true); // enable .push for browserHistory
 
     if (alias) {
@@ -196,7 +205,7 @@ class Player extends React.Component {
           src={songData.source_list && songData.source_list[0]}
           crossOrigin='anonymous'
           ref='audio'
-          loop='true'
+          loop={this.state.loop}
         />
         <div className="player-info">
           <Link
@@ -246,6 +255,15 @@ class Player extends React.Component {
             onChange={this.handleChange.bind(this)}
             onChangeComplete={this.handleChangeComplete.bind(this)}
           />
+        </div>
+        <div className="player-other">
+          <button className="sc-ir" title="Loop">
+            <i
+              className="ion-loop"
+              style={{ color: this.state.loop ? '#23B89A' : '#adb5bd' }}
+              onClick={() => this.setState({ loop: !this.state.loop })}
+            ></i>
+          </button>
         </div>
         { this.props.isFetching && <PlayerLoader /> }
       </div>

@@ -23,14 +23,14 @@ export default function (ComposedComponent) {
 
     onScroll() {
       // delay the scroll event
-      (_throttle(() => {
+      _throttle(() => {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
           if (this.props.pageLoaded < NUMBER_OF_PAGES && !this.props.isLoading) {
             const page = this.props.pageLoaded + 1;
             this.props.fetchTracks(page);
           }
         }
-      }, 100))();
+      }, 100)();
     }
 
     render() {

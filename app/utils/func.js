@@ -54,3 +54,24 @@ export function range(r) {
 export function isEmpty(obj) {
   return Object.keys(obj).length === 0;
 }
+
+export function isObject(obj) {
+  return Object.prototype.toString.call(obj) === '[object Object]';
+}
+
+export function findIndex(arr, entry, value) {
+  for (let i = 0, length = arr.length; i < length; i++) {
+    if (arr[i][entry] === value) return i;
+  }
+  return undefined;
+}
+
+export function removeById(arr, id) {
+  if (isObject(arr[0])) {
+    arr.splice(findIndex(arr, 'id', id), 1);
+    return arr;
+  }
+
+  arr.splice(arr.indexOf(id), 1);
+  return arr;
+}

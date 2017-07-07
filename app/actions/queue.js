@@ -1,5 +1,7 @@
+import { browserHistory } from 'react-router';
 import * as types from '../constant/action_constant';
 import { fetchSong, fetchSuggestedSongs } from './song';
+import { removeById, findIndex, changeAlias } from '../utils/func';
 
 export function addSongToQueue(song) {
   const { name, id } = song;
@@ -10,9 +12,22 @@ export function addSongToQueue(song) {
       // if the queue doesn't have any songs, fetch this song and play it
 
       dispatch(fetchSong(name, id));
+      dispatch(fetchSuggestedSongs(id));
     } else {
       dispatch({ type: types.ADD_SONG_TO_QUEUE, song });
     }
+  };
+}
+
+
+export function removeSongFromQueue(id) {
+  return (dispatch, getState) => {
+    const queueState = getState().queueState;
+    const queue = [...queueState.queue]; // avoid mutating the state
+    const newQueue = removeById(queue, id);
+    const queueIds = removeById([...queueState.ids], id);
+
+    dispatch({ type: types.REMOVE_SONG_FROM_QUEUE, queue: newQueue, ids: queueIds });
   };
 }
 
@@ -49,5 +64,17 @@ export function replaceQueue(songs) {
     } else {
       dispatch({ type: types.REPLACE_QUEUE, ...tweakSongs(songs) });
     }
+  };
+}
+
+export function clearQueue() {
+  return (dispatch, getState) => {
+    const state = getState();
+    const playingSongId = state.songData.data.id;
+    const queueState = state.queueState;
+    const clearedQueue = queueState.queue.filter(song => song.id === playingSongId);
+    const newQueueIds = queueState.ids.filter(id => id === playingSongId);
+
+    dispatch({ type: types.CLEAR_QUEUE, queue: clearedQueue, ids: newQueueIds });
   };
 }

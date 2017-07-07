@@ -40,6 +40,8 @@ export const TOGGLE_TRACK_DROPDOWN = 'TOGGLE_TRACK_DROPDOWN';
 export const ADD_SONG_TO_QUEUE = 'ADD_SONG_TO_QUEUE';
 export const TOGGLE_QUEUE = 'TOGGLE_QUEUE';
 export const REPLACE_QUEUE = 'REPLACE_QUEUE';
+export const CLEAR_QUEUE = 'CLEAR_QUEUE';
+export const REMOVE_SONG_FROM_QUEUE = 'REMOVE_SONG_FROM_QUEUE';
 
 // actions for handling route transition
 export const TOGGLE_PUSH_ROUTE = 'TOGGLE_PUSH_ROUTE';
@@ -50,3 +52,4 @@ export const FETCH_POP_CHART = 'FETCH_POP_CHART';
 export const FETCH_KPOP_CHART = 'FETCH_KPOP_CHART';
 export const FETCH_VPOP_CHART = 'FETCH_VPOP_CHART';
 export const CHANGE_ACTIVE_CHART = 'CHANGE_ACTIVE_CHART';
+

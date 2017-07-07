@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Queue } from '../components';
+import { clearQueue, removeSongFromQueue } from '../actions/queue';
 import { toggleQueue } from '../actions/ui';
 
 class QueueContainer extends Component {
@@ -24,4 +25,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-{ toggleQueue })(QueueContainer);
+{ toggleQueue, clearQueue, removeSongFromQueue })(QueueContainer);

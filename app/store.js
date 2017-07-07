@@ -5,10 +5,11 @@ import rootReducer from './reducers';
 import { saveQueueState, loadQueueState } from './localStorage';
 
 let middleware = [thunk];
-// apply logger middleware in development environment
+// apply logger middleware in the development environment
 
 if (process.env.NODE_ENV !== 'production') {
   const logger = require('./logger').default;
+
   middleware = [...middleware, logger];
 }
 
@@ -20,6 +21,7 @@ const store = createStore(rootReducer, persistedData, applyMiddleware(...middlew
 
 store.subscribe(_throttle(() => {
   saveQueueState(store.getState());
-}), 1000 * 60 * 5); // save songs in queue in state every 5 minutes
+}, 1000 * 60));
+// save songs in queue to the localStorage every 1 minutes
 
 export default store;
