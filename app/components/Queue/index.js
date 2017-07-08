@@ -4,10 +4,8 @@ import QueueList from './QueueList';
 import './index.sass';
 
 function Queue({ songs, toggleQueue, clearQueue, removeSongFromQueue }) {
-  console.log(songs);
-
   return (
-    <div className='queue'>
+    <div className='queue' key='cool' >
       <div className="queue-panel">
         <div className="queue-title">
           Next Up

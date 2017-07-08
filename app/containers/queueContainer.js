@@ -10,11 +10,7 @@ class QueueContainer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Queue {...this.props}/>
-      </div>
-    );
+    return <Queue {...this.props}/>;
   }
 }
 

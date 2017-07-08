@@ -1,7 +1,6 @@
-import { browserHistory } from 'react-router';
 import * as types from '../constant/action_constant';
 import { fetchSong, fetchSuggestedSongs } from './song';
-import { removeById, findIndex, changeAlias } from '../utils/func';
+import { removeById } from '../utils/func';
 
 export function addSongToQueue(song) {
   const { name, id } = song;

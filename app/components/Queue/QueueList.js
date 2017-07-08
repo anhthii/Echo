@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getSongUrl } from '../../utils/func';
 import LazyloadImage from '../LazyloadImage';
 
@@ -31,9 +32,14 @@ const Li = ({ name, id, thumbnail, alias, artist, removeSongFromQueue }) => {
 export default function QueueList({ songs, removeSongFromQueue }) {
   return (
     <ul className="queue-list">
-      {songs.map(song =>
-        <Li key={`queue-${song.id}`} {...song} removeSongFromQueue={removeSongFromQueue}/>
-      )}
+      <ReactCSSTransitionGroup
+        transitionName="queue-item"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}>
+        {songs.map(song =>
+          <Li key={`queue-${song.id}`} {...song} removeSongFromQueue={removeSongFromQueue}/>
+        )}
+      </ReactCSSTransitionGroup>
     </ul>
   );
 }
