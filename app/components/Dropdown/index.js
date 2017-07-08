@@ -1,20 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import queueAdd from '../../svg/queue-add.svg';
 import queueNext from '../../svg/queue-next.svg';
 import './index.sass';
 
 class DropDown extends React.Component {
+  state = { mounted: false };
 
   handleClickOutside = () => {
     const { id, toggleTrackDropDown } = this.props;
     toggleTrackDropDown(id);
   }
 
-  render() {
+  componentDidMount() {
+    this.setState({ mounted: true });
+  }
+
+  renderDropdown() {
     const { name, id, thumbnail, addSongToQueue, toggleTrackDropDown } = this.props;
     const songObj = { name, id, thumbnail };
+
     return (
       <div className='dropdown'>
         <div className="dropdown-nextup" onClick={() => {
@@ -33,6 +40,17 @@ class DropDown extends React.Component {
           Share
         </div>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <ReactCSSTransitionGroup
+        transitionName="dropdown"
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={300}>
+        { this.state.mounted && this.renderDropdown() }
+      </ReactCSSTransitionGroup>
     );
   }
 }

@@ -6,7 +6,7 @@
   position: absolute
   top: 20px
   background: #fff
-  z-index: 200
+  z-index: 400
   top: 55px
   right: -85px
   > div
@@ -39,5 +39,22 @@
     float: left
     margin-left: 7px
     margin-right: 12px
+
+.dropdown-enter
+  opacity: 0.01
+
+
+.dropdown-enter.dropdown-enter-active
+  opacity: 1
+  transition: opacity 300ms ease-in
+
+
+.dropdown-leave
+  opacity: 1
+
+
+.dropdown-leave.dropdown-leave-active
+  opacity: 0.01
+  transition: opacity 300ms ease-in
 
 
