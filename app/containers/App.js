@@ -13,7 +13,7 @@ class App extends React.Component {
           {this.props.children}
           <Analyzer show={show}/>
         </div>
-        { showQueue && <Containers.Queue /> }
+        <Containers.Queue show={showQueue}/>
         { showPlayer ? <Containers.Player /> : null }
       </div>
     );

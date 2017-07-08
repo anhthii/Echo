@@ -23,13 +23,41 @@
   width: 35%
   height: 500px
   position: fixed
+  opacity: 0
   bottom: 48px
   left: 50px
   box-shadow: 0 0 8px rgba(0,0,0,.3)
   background: #fff
-  z-index: 100
+  z-index: 200
   overflow-y: scroll
   overflow-x: hidden
+  transition-property: -webkit-transform,opacity
+  transition-property: transform,opacity
+  transition-duration: .2s
+  transition-timing-function: cubic-bezier(.66,-.41,1,1)
+  -webkit-transform: translateY(100px)
+  transform: translateY(100px)
+  pointer-events: none
+  opacity: 0
+
+  &-visible
+    width: 35%
+    height: 500px
+    position: fixed
+    bottom: 48px
+    left: 50px
+    box-shadow: 0 0 8px rgba(0,0,0,.3)
+    background: #fff
+    z-index: 200
+    overflow-y: scroll
+    overflow-x: hidden
+    pointer-events: auto
+    -webkit-transform: translateY(0)
+    transform: translateY(0)
+    opacity: 1
+    transition-duration: .35s
+    transition-timing-function: cubic-bezier(0,0,0,1.2)
+
   &-panel
     height: 54px
     padding: 9px 24px

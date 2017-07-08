@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import QueueList from './QueueList';
 import './index.sass';
 
-function Queue({ songs, toggleQueue, clearQueue, removeSongFromQueue }) {
+function Queue({ songs, toggleQueue, clearQueue, removeSongFromQueue, show }) {
   return (
-    <div className='queue' key='cool' >
+    <div className={`queue${show ? '-visible' : ''}`}>
       <div className="queue-panel">
         <div className="queue-title">
           Next Up
@@ -26,6 +26,7 @@ Queue.propTypes = {
   songs: PropTypes.array.isRequired,
   toggleQueue: PropTypes.func.isRequired,
   removeSongFromQueue: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
 };
 
 export default Queue;
