@@ -5,7 +5,7 @@ import './index.sass';
 
 function Queue({ songs, toggleQueue, clearQueue, removeSongFromQueue, show }) {
   return (
-    <div className={`queue${show ? '-visible' : ''}`}>
+    <div className={`queue${show ? ' queue-visible' : ''}`}>
       <div className="queue-panel">
         <div className="queue-title">
           Next Up
