@@ -4,6 +4,7 @@ import ArtistGenrePage from './Artist/ArtistGenrePage';
 import AlbumPlaylist from './Album/AlbumPlaylist';
 import SongPageBody from './Song/SongPageBody';
 import ChartPage from './Chart';
+import AuthPage from './Auth';
 
 export {
   AlbumGenrePage,
@@ -12,4 +13,5 @@ export {
   SongPageBody,
   ArtistGenrePage,
   ChartPage,
+  AuthPage,
 };

@@ -24,3 +24,9 @@ export function toggleQueue() {
     type: types.TOGGLE_QUEUE,
   };
 }
+
+export function redirectToHome() {
+  return {
+    type: types.REDIRECT_TO_HOME_PAGE,
+  };
+}

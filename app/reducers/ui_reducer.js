@@ -4,6 +4,7 @@ const initialState = {
   showAnalyzer: false,
   dropDown: { activeId: '', show: false },
   showQueue: false,
+  redirectedFromLoginPage: false,
 };
 
 
@@ -20,6 +21,9 @@ export default function (state = initialState, action) {
 
   case types.TOGGLE_QUEUE:
     return { ...state, showQueue: !state.showQueue };
+
+  case types.REDIRECT_TO_HOME_PAGE:
+    return { ...state, redirectedFromLoginPage: true };
 
   default:
     return state;

@@ -22,6 +22,10 @@ export default (
 
     <Route path='charts' component={Containers.ChartPage} onEnter={getCharts} />
 
+    <Route path='signin' component={Containers.LogInPage} />
+
+    <Route path='signup' component={Containers.SignupPage} />
+
     <Route path="*" component={NotFound} />
 
   </Route>

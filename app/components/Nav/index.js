@@ -80,9 +80,9 @@ class Nav extends React.Component {
             </a>
           </ul>
 
-          <div className="auth">
+          <div className="auth-btns">
             <a href="#" className='sInLink'>Đăng nhập</a>
-            <a href="#" className='sUpLink'>Đăng kí</a>
+            <Link to="signin" className='sUpLink'>Đăng kí</Link>
           </div>
 
           <div className="more">

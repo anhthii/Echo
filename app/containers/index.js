@@ -9,6 +9,7 @@ import AlbumPlaylist from './AlbumPlaylist';
 import ArtistPage from './ArtistPage';
 import ArtistGenrePage from './ArtistGenrePage';
 import ChartPage from './ChartPage';
+import LogInPage from './LogInPage';
 
 export {
   Player,
@@ -22,4 +23,5 @@ export {
   ArtistPage,
   ArtistGenrePage,
   ChartPage,
+  LogInPage,
 };

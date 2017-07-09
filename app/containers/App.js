@@ -5,11 +5,13 @@ import * as Containers from './';
 
 class App extends React.Component {
   render() {
-    const { showPlayer, showAnalyzer: show, showQueue } = this.props;
+    const { showPlayer, showAnalyzer: show, showQueue, redirectedFromLoginPage } = this.props;
+    const className = `container animated ${redirectedFromLoginPage && 'slideInRight'}`;
+
     return (
       <div>
         <Nav />
-        <div className="container">
+        <div className={className}>
           {this.props.children}
           <Analyzer show={show}/>
         </div>
@@ -21,10 +23,13 @@ class App extends React.Component {
 }
 
 function mapStateToProps({ songData, UIState }) {
+  const { showQueue, showAnalyzer, redirectedFromLoginPage } = UIState;
+
   return {
     showPlayer: Object.keys(songData.data).length,
-    showAnalyzer: UIState.showAnalyzer,
-    showQueue: UIState.showQueue,
+    showAnalyzer,
+    showQueue,
+    redirectedFromLoginPage,
   };
 }
 
