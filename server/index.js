@@ -1,8 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const database = require('./lib/Database');
+const requireAuth = require('./middlewares/authenticate');
 const api = require('./routes/api');
-const needAuth = require('./middlewares/authenticate');
+const download = require('./routes/download');
 
 const app = express();
 database.init();
@@ -11,11 +12,10 @@ database.init();
 app.use(bodyParser.json());
 
 app.use('/api', api);
-app.get('/secret', needAuth, (req, res) => {
-  res.json(req.currentUser);
-});
+app.use('/download', requireAuth, download);
 
-//
+
+// Not found route
 app.use((req, res, next) => {
   const err = new Error('Not Found');
   err.status = 404;
@@ -27,7 +27,7 @@ app.use((req, res, next) => {
 if (app.get('env') === 'development') {
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    if (err.errors || err.message) {
+    if (err.errors) {
       res.json({ error: true, errors: err.errors, message: err.message });
     } else {
       res.send(err.stack);

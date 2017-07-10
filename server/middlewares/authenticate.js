@@ -8,8 +8,9 @@ module.exports = function (req, res, next) {
   if (token) {
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
       if (err) {
-        const err = { status: 401, message: 'Failed to authenticate' };
-        next(err);
+        const error = new Error('Failed to authenticate');
+        error.status = 401;
+        next(error);
       } else {
         const { _doc: { _id: id } } = decoded;
 
@@ -19,11 +20,16 @@ module.exports = function (req, res, next) {
             throw err;
           }
 
-          req.currentUser = user;
+          const { username, _id } = user;
+          req.currentUser = { username, _id };
           next();
         })
         .catch(err => next(err));
       }
     });
+  } else {
+    const error = new Error('Failed to authenticate');
+    error.status = 401;
+    next(error);
   }
 };
