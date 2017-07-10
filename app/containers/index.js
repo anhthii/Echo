@@ -10,6 +10,7 @@ import ArtistPage from './ArtistPage';
 import ArtistGenrePage from './ArtistGenrePage';
 import ChartPage from './ChartPage';
 import LogInPage from './LogInPage';
+import SignUpPage from './SignUpPage';
 
 export {
   Player,
@@ -24,4 +25,5 @@ export {
   ArtistGenrePage,
   ChartPage,
   LogInPage,
+  SignUpPage,
 };

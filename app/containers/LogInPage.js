@@ -4,7 +4,7 @@ import { Pages } from '../components';
 
 class LogInPage extends Component {
   render() {
-    return <Pages.AuthPage dispatch={this.props.dispatch} />;
+    return <Pages.LogInPage dispatch={this.props.dispatch} />;
   }
 }
 
