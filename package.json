@@ -29,20 +29,25 @@
     "style-loader": "^0.13.1",
     "webpack-dev-server": "^2.4.1",
     "file-loader": "^0.11.2",
-    "image-webpack-loader": "^3.3.1"
+    "image-webpack-loader": "^3.3.1",
+    "redux-logger": "^3.0.6"
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
     "cheerio": "^0.22.0",
     "co": "^4.6.0",
     "cross-env": "^4.0.0",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "extract-text-webpack-plugin": "^2.1.0",
+    "jsonwebtoken": "^7.4.1",
     "lodash.chunk": "^4.2.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
+    "mongoose": "^4.11.1",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.6.0",
@@ -53,10 +58,10 @@
     "react-router": "^3.0.0",
     "react-router-redux": "^4.0.0",
     "redux": "^3.6.0",
-    "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
+    "validator": "^8.0.0",
     "webpack": "^2.2.1"
   }
 }

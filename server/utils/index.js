@@ -24,3 +24,7 @@ exports.pageQuery = function (page) {
   return page ? `&page=${page}` : '';
 };
 
+exports.isEmpty = function (obj) {
+  return Object.keys(obj).length === 0;
+};
+

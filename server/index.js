@@ -1,16 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const database = require('./lib/Database');
 const api = require('./routes/api');
-
-const PORT = 3000;
+const needAuth = require('./middlewares/authenticate');
 
 const app = express();
+database.init();
 
 // middlewares
 app.use(bodyParser.json());
 
 app.use('/api', api);
-
+app.get('/secret', needAuth, (req, res) => {
+  res.json(req.currentUser);
+});
 
 //
 app.use((req, res, next) => {
@@ -24,7 +27,11 @@ app.use((req, res, next) => {
 if (app.get('env') === 'development') {
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.send(err.stack || err.message);
+    if (err.errors || err.message) {
+      res.json({ error: true, errors: err.errors, message: err.message });
+    } else {
+      res.send(err.stack);
+    }
   });
 }
 
@@ -34,8 +41,11 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({
     error: true,
-    message: err.message,
+    errors: err.errors || {},
+    message: err.message || '',
   });
 });
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => console.log('server is listening on port ' + PORT));

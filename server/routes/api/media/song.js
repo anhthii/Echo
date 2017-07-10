@@ -6,7 +6,7 @@ module.exports = function getSong(req, res, next) {
   const { name, id } = req.query;
   // TO DO: use async await when targeting node 8.0
 
-  co(function *() {
+  co(function* () {
     const html = yield request(`http://mp3.zing.vn/bai-hat/${name}/${id}.html`);
     const regex = /json\/song\/get-source\/.{24}/; // get the resouce url
     const match = html.match(regex);
