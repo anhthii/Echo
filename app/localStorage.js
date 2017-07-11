@@ -17,3 +17,14 @@ export function saveQueueState(state) {
     // ignore
   }
 }
+
+export function loadUserData() {
+  try {
+    const serializedQueueState = localStorage.getItem('user');
+    if (!serializedQueueState) return undefined;
+
+    return JSON.parse(serializedQueueState);
+  } catch (err) {
+    return undefined;
+  }
+}

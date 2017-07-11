@@ -8,7 +8,7 @@ module.exports = function validateInput(data) {
     errors.username = 'Username is required';
   }
 
-  if (!Validator.isAlphanumeric(data.username)) {
+  if (!Validator.isAlphanumeric(data.username || '')) {
     errors.username = 'Username must be alphanumeric';
   }
 
@@ -21,7 +21,7 @@ module.exports = function validateInput(data) {
   }
 
   if (!Validator.isLength(data.password, { min: 6, max: undefined })) {
-    errors.username = 'Password must be at least 6 characters';
+    errors.password = 'Password must be at least 6 characters';
   }
 
   if (Validator.isEmpty(data.passwordConfirmation || '')) {

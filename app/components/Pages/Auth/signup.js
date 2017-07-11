@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { redirectToHome } from '../../../actions/ui';
+import TextInputGroup from './TextInputGroup';
+import { slideInRight } from '../../../actions/ui';
+import { signup } from '../../../actions/auth';
 import './index.sass';
 
 class SignUpPage extends React.Component {
@@ -8,7 +10,12 @@ class SignUpPage extends React.Component {
     router: PropTypes.object,
   }
 
-  state = { animate: false };
+  state = {
+    animate: false,
+    username: '',
+    password: '',
+    passwordConfirmation: '',
+  };
 
   componentDidMount() {
     this.setState({
@@ -17,32 +24,72 @@ class SignUpPage extends React.Component {
     });
   }
 
-  handleOnClick() {
-    this.setState({ leave: true });
-    setTimeout(() => {
-      this.props.dispatch(redirectToHome()); // UI action
-      this.context.router.push('/');
-    }, 700);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.auth.authenticated) {
+      this.setState({ leave: true });
+      setTimeout(() => {
+        this.props.dispatch(slideInRight()); // UI action
+        this.context.router.push('/');
+      }, 700);
+    }
+  }
+
+  onChange(e) {
+    this.setState({ [e.target.name]: e.target.value });
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+    const { username, password, passwordConfirmation } = this.state;
+
+    this.props.dispatch(signup({
+      username,
+      password,
+      passwordConfirmation,
+    }));
   }
 
   renderAuthBox() {
-    const className = `auth-box animated ${this.state.animate && (this.state.leave ? 'bounceOutLeft' : 'bounceInRight')}`;
+    const className = `auth-box animated ${this.state.animate &&
+      (this.state.leave ? 'bounceOutLeft' : 'bounceInRight')}`;
+    const errors = this.props.auth.errors;
 
     return (
       <div className={className}>
-        Sign Up With
+        Sign Up Below:
         <br />
         <br />
         <div>
-          <form>
-            <label htmlFor=""></label>
-            <input type="text" className="form-control" placeholder="Username" />
-            <label htmlFor=""></label>
-            <input type="text" className="form-control" placeholder="Password" />
-            <label htmlFor=""></label>
-            <input type="text" className="form-control" placeholder="Confirm password" />
+          <form onSubmit={this.onSubmit.bind(this)}>
+            <TextInputGroup
+              placeholder="Username"
+              name="username"
+              error={errors.username}
+              onChange={this.onChange.bind(this)}
+
+            />
+            <TextInputGroup
+              type="password"
+              placeholder="Password"
+              name="password"
+              error={errors.password}
+              onChange={this.onChange.bind(this)}
+            />
+            <TextInputGroup
+              type="password"
+              placeholder="Confirm your password"
+              name="passwordConfirmation"
+              error={errors.passwordConfirmation}
+              onChange={this.onChange.bind(this)}
+            />
+            <button
+              id="sign_up"
+              type="submit"
+              disabled={this.props.auth.isProcessing}
+            >
+              {!this.props.auth.isProcessing ? 'Sign Up' : '...Processing'}
+            </button>
           </form>
-          <button id="sign_up" onClick={this.handleOnClick.bind(this)}>Sign up</button>
         </div>
       </div>
     );
@@ -61,6 +108,11 @@ class SignUpPage extends React.Component {
 
 SignUpPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool.isRequired,
+    errors: PropTypes.object.isRequired,
+    isProcessing: PropTypes.bool,
+  }),
 };
 
 export default SignUpPage;

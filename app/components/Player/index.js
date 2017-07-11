@@ -206,6 +206,7 @@ class Player extends React.Component {
           crossOrigin='anonymous'
           ref='audio'
           loop={this.state.loop}
+          muted
         />
         <div className="player-info">
           <Link

@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt-nodejs');
-const jwt = require('jsonwebtoken');
-require('dotenv').config();
+const getToken = require('../utils/getTokenForUser');
 
 const Schema = mongoose.Schema;
 
@@ -21,7 +20,7 @@ userSchema.pre('save', function (next) {
       if (err) return next(err);
 
       user.password = hash;
-      user.access_token = jwt.sign(user, process.env.JWT_SECRET);
+      user.access_token = getToken(user);
       next();
     });
   });

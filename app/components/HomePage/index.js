@@ -24,6 +24,7 @@ HomePage.propTypes = {
   addSongToQueue: PropTypes.func.isRequired,
   toggleTrackDropDown: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 export default HomePage;

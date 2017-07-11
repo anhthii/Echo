@@ -10,6 +10,9 @@ module.exports = {
     chunkFilename: '[id].js',
   },
   devServer: {
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
     stats: 'errors-only',
     hot: true,
     inline: true,

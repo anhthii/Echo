@@ -1,7 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const database = require('./lib/Database');
-const requireAuth = require('./middlewares/authenticate');
 const api = require('./routes/api');
 const download = require('./routes/download');
 
@@ -12,7 +11,7 @@ database.init();
 app.use(bodyParser.json());
 
 app.use('/api', api);
-app.use('/download', requireAuth, download);
+app.use('/download', download);
 
 
 // Not found route
@@ -38,6 +37,7 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use((err, req, res, next) => {
+  console.log(err);
   res.status(err.status || 500);
   res.json({
     error: true,

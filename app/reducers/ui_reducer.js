@@ -4,7 +4,11 @@ const initialState = {
   showAnalyzer: false,
   dropDown: { activeId: '', show: false },
   showQueue: false,
-  redirectedFromLoginPage: false,
+  slideInRight: false,
+  downloading: {
+    id: '',
+    state: false,
+  },
 };
 
 
@@ -22,8 +26,17 @@ export default function (state = initialState, action) {
   case types.TOGGLE_QUEUE:
     return { ...state, showQueue: !state.showQueue };
 
-  case types.REDIRECT_TO_HOME_PAGE:
-    return { ...state, redirectedFromLoginPage: true };
+  case types.SLIDE_IN_RIGHT:
+    return { ...state, slideInRight: true };
+
+  case types.RESET_SLIDE_IN_RIGHT:
+    return { ...state, slideInRight: false };
+
+  case types.START_DOWNLOADING:
+    return { ...state, downloading: { state: true, id: action.id } };
+
+  case types.FINISH_DOWNLOADING:
+    return { ...state, downloading: { state: false, id: '' } };
 
   default:
     return state;

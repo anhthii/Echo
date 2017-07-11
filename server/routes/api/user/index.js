@@ -25,7 +25,7 @@ router.post('/signup', (req, res, next) => {
     const user = new User({ username, password });
     return user.save();
   })
-  .then(user => res.json(user))
+  .then(user => res.json({ username: user.username, access_token: user.access_token }))
   .catch(err => next(err));
 });
 
@@ -52,7 +52,7 @@ router.post('/login', (req, res, next) => {
 
     return user;
   })
-  .then(user => res.json(user))
+  .then(user => res.json({ username: user.username, access_token: user.access_token }))
   .catch(err => next(err));
 });
 

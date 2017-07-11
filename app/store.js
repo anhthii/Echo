@@ -2,7 +2,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import _throttle from 'lodash.throttle';
 import rootReducer from './reducers';
-import { saveQueueState, loadQueueState } from './localStorage';
+import { saveQueueState, loadQueueState, loadUserData } from './localStorage';
 
 let middleware = [thunk];
 // apply logger middleware in the development environment
@@ -16,6 +16,11 @@ if (process.env.NODE_ENV !== 'production') {
 const queueFromLocalStorage = loadQueueState();
 const persistedData = {
   queueState: queueFromLocalStorage,
+  auth: {
+    authenticated: loadUserData() ? true : false,
+    user: loadUserData(),
+    errors: {},
+  },
 };
 const store = createStore(rootReducer, persistedData, applyMiddleware(...middleware));
 

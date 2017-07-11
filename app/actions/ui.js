@@ -25,8 +25,14 @@ export function toggleQueue() {
   };
 }
 
-export function redirectToHome() {
+export function slideInRight() {
   return {
-    type: types.REDIRECT_TO_HOME_PAGE,
+    type: types.SLIDE_IN_RIGHT,
+  };
+}
+
+export function resetSlideInRight() {
+  return {
+    type: types.RESET_SLIDE_IN_RIGHT,
   };
 }

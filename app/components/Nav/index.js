@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import SearchMenu from '../SearchMenu';
+import { logout } from '../../actions/auth';
 import './nav.sass';
 
 class Nav extends React.Component {
@@ -40,7 +42,14 @@ class Nav extends React.Component {
     this.setState({ term: '', searchResult: {} });
   }
 
+  logOut(e) {
+    e.preventDefault();
+    this.props.dispatch(logout());
+  }
+
   render() {
+    const { authenticated, user } = this.props.auth;
+
     return (
       <nav>
         <div className="logo">
@@ -79,19 +88,30 @@ class Nav extends React.Component {
               <li>Top 100</li>
             </a>
           </ul>
-
-          <div className="auth-btns">
+        </div>
+        {
+          !authenticated
+          ? <div className="auth-btns">
             <Link to="/login" className='sInLink'>Log In</Link>
             <Link to="/signup" className='sUpLink'>Sign Up</Link>
           </div>
-
-          <div className="more">
-
+          : <div className="user">
+            <Link to="/user">{user.username}</Link>
+            <a href="#" onClick={this.logOut.bind(this)}>Log out</a>
           </div>
-        </div>
+
+        }
       </nav>
     );
   }
 }
+
+Nav.propTypes = {
+  auth: PropTypes.shape({
+    authenticated: PropTypes.bool.isRequired,
+    errors: PropTypes.object.isRequired,
+  }),
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default Nav;

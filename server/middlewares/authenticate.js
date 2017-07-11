@@ -13,7 +13,6 @@ module.exports = function (req, res, next) {
         next(error);
       } else {
         const { _doc: { _id: id } } = decoded;
-
         User.findById(id).then(user => {
           if (!user) {
             const err = { status: 404, message: 'No such user' };
@@ -22,7 +21,8 @@ module.exports = function (req, res, next) {
 
           const { username, _id } = user;
           req.currentUser = { username, _id };
-          next();
+
+          return next();
         })
         .catch(err => next(err));
       }

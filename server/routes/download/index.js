@@ -5,9 +5,10 @@ const { request } = require('../../utils');
 const router = express.Router();
 
 router.get('/song/:songTitle/:id', (req, res, next) => {
-  const { songTitle, id, filename } = req.params;
+  const { songTitle, id } = req.params;
+
   co(function* () {
-    const html = yield request(`http://mp3.zing.vn/bai-hat/${filename || songTitle}/${id}.html`);
+    const html = yield request(`http://mp3.zing.vn/bai-hat/${songTitle}/${id}.html`);
     const regex = /json\/song\/get-source\/.{24}/; // get the resouce url
     const match = html.match(regex);
     if (!match) throw new Error("can't find the resource URL");

@@ -42,7 +42,10 @@ export const TOGGLE_QUEUE = 'TOGGLE_QUEUE';
 export const REPLACE_QUEUE = 'REPLACE_QUEUE';
 export const CLEAR_QUEUE = 'CLEAR_QUEUE';
 export const REMOVE_SONG_FROM_QUEUE = 'REMOVE_SONG_FROM_QUEUE';
-export const REDIRECT_TO_HOME_PAGE = 'REDIRECT_TO_HOME_PAGE';
+export const SLIDE_IN_RIGHT = 'SLIDE_IN_RIGHT';
+export const RESET_SLIDE_IN_RIGHT = 'RESET_SLIDE_IN_RIGHT';
+export const START_DOWNLOADING = 'START_DOWNLOADING';
+export const FINISH_DOWNLOADING = 'FINISH_DOWNLOADING';
 
 // actions for handling route transition
 export const TOGGLE_PUSH_ROUTE = 'TOGGLE_PUSH_ROUTE';
@@ -53,4 +56,15 @@ export const FETCH_POP_CHART = 'FETCH_POP_CHART';
 export const FETCH_KPOP_CHART = 'FETCH_KPOP_CHART';
 export const FETCH_VPOP_CHART = 'FETCH_VPOP_CHART';
 export const CHANGE_ACTIVE_CHART = 'CHANGE_ACTIVE_CHART';
+
+// action for authentication
+export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS';
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE';
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS';
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE';
+export const LOG_OUT = 'LOG_OUT';
+export const START_PROCESSING = 'START_PROCESSING';
+export const FINISH_PROCESSING = 'FINISH_PROCESSING';
+export const CLEAR_ERRORS = 'CLEAR_ERRORS';
+
 
