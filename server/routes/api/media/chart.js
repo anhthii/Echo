@@ -1,6 +1,6 @@
-const { request } = require('../../../utils');
-const redisClient = require('../../../lib/Redis');
-const { getRedisKey } = require('../../../utils');
+const { request } = require('utils');
+const redisClient = require('lib/Redis');
+const { getRedisKey } = require('utils');
 
 module.exports = function (req, res, next) {
   const { id } = req.params;

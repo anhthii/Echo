@@ -33,6 +33,7 @@
     "redux-logger": "^3.0.6"
   },
   "dependencies": {
+    "app-module-path": "^2.2.0",
     "axios": "^0.16.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",

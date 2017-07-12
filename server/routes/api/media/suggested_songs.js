@@ -1,5 +1,5 @@
 const axios = require('axios');
-const Page = require('../../../lib/Page');
+const Page = require('lib/Page');
 
 module.exports = function getSuggestedSongs(req, res, next) {
   const { id } = req.params;

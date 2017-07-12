@@ -1,6 +1,5 @@
-const request = require('../../../utils').request;
-const redisClient = require('../../../lib/Redis');
-const { getRedisKey } = require('../../../utils');
+const redisClient = require('lib/Redis');
+const { getRedisKey, request } = require('utils');
 
 module.exports = function getTop100(req, res, next) {
   const [popId, kpopId, vpopId] = ['IWZ9Z097', 'IWZ9Z08W', 'IWZ9Z088'];

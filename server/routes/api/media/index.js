@@ -10,7 +10,7 @@ const getAlbumPlaylist = require('./album_playlist');
 const getDefaultArtists = require('./default_artists');
 const getArtist = require('./artist');
 const getChart = require('./chart');
-const cached = require('../../../middlewares/cached');
+const cached = require('middlewares/cached');
 
 const router = express.Router();
 

@@ -1,5 +1,5 @@
-const PageParser = require('../../../lib/Page');
-const { request } = require('../../../utils');
+const PageParser = require('lib/Page');
+const { request } = require('utils');
 const cheerio = require('cheerio');
 
 const rq = (type, name, page) => {
