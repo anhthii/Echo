@@ -1,4 +1,4 @@
-const { request, spliceOne } = require('../../../utils');
+const { request, spliceOne } = require('utils');
 
 module.exports = function (req, res, next) {
   const { term } = req.query;

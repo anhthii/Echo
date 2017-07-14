@@ -1,5 +1,5 @@
-const { request, pageQuery } = require('../../../utils');
-const PageParser = require('../../../lib/Page');
+const { request, pageQuery } = require('utils');
+const PageParser = require('lib/Page');
 
 module.exports = function getAlbums(req, res, next) {
   const { genre, id, page } = req.query;

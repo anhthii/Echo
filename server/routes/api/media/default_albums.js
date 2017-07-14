@@ -1,5 +1,5 @@
-const PageParser = require('../../../lib/Page');
-const request = require('../../../utils').request;
+const PageParser = require('lib/Page');
+const request = require('utils').request;
 
 module.exports = function getDefaultAlbums(req, res, next) {
   request('http://mp3.zing.vn/the-loai-album.html')

@@ -1,6 +1,6 @@
 const co = require('co');
-const { request } = require('../../../utils');
-const convertLrcToJSON = require('../../../lib/convertLrcToJSON');
+const { request } = require('utils');
+const convertLrcToJSON = require('lib/convertLrcToJSON');
 
 module.exports = function getSong(req, res, next) {
   const { name, id } = req.query;

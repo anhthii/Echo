@@ -1,4 +1,5 @@
-const request = require('../../../utils').request;
+const redisClient = require('lib/Redis');
+const { getRedisKey, request } = require('utils');
 
 module.exports = function getTop100(req, res, next) {
   const [popId, kpopId, vpopId] = ['IWZ9Z097', 'IWZ9Z08W', 'IWZ9Z088'];
@@ -22,6 +23,9 @@ module.exports = function getTop100(req, res, next) {
   const uri = `http://mp3.zing.vn/json/song/get-top-100?start=${start}&length=20&id=${id}`;
 
   request(uri)
-    .then(data => res.send(JSON.parse(data)))
+    .then(data => {
+      redisClient.set(getRedisKey(req), data, 'EX', 60 * 60 * 24 * 5); // cache the data for 5 days
+      res.send(JSON.parse(data));
+    })
     .catch(err => next(err));
 };
