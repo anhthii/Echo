@@ -22,7 +22,7 @@ function mapStateToProps(state) {
   return {
     chart: state.chartState[activeChart],
     show: state.UIState.dropDown.show,
-    downloading: state.UIState.downloading,
+    downloadProgress: state.UIState.downloadProgress,
     dropDownActiveId: state.UIState.dropDown.activeId,
     isLoading,
     tracks,

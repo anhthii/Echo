@@ -1,4 +1,5 @@
 import React from 'react';
+import CircularProgressbar from 'react-circular-progressbar';
 import { Link } from 'react-router';
 import { changeAlias } from '../../utils/func';
 import Dropdown from '../Dropdown';
@@ -15,8 +16,9 @@ const Track = (props) => {
     addSongToQueue,
     toggleTrackDropDown,
     artists,
-    downloading,
+    downloadProgress,
   } = props;
+
   return (
     <li>
       <div className="trackPosition">
@@ -39,8 +41,8 @@ const Track = (props) => {
       <div className="trackActions">
         <div className="hp-track-toolbar">
           {
-            downloading.state === true && id === downloading.id
-            ? <span className="isDownloading">...downloading</span>
+            downloadProgress.isDownloading === true && id === downloadProgress.id
+            ? <CircularProgressbar percentage={downloadProgress.percent} />
             : <button className='sc-ir' onClick={() => props.download({
               songName: changeAlias(name),
               id,

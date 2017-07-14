@@ -5,9 +5,10 @@ const initialState = {
   dropDown: { activeId: '', show: false },
   showQueue: false,
   slideInRight: false,
-  downloading: {
+  downloadProgress: {
+    isDownloading: false,
     id: '',
-    state: false,
+    percent: 0,
   },
 };
 
@@ -33,10 +34,26 @@ export default function (state = initialState, action) {
     return { ...state, slideInRight: false };
 
   case types.START_DOWNLOADING:
-    return { ...state, downloading: { state: true, id: action.id } };
+    return {
+      ...state,
+      downloadProgress: {
+        isDownloading: true,
+        id: action.id,
+        percent: 0,
+      },
+    };
+
+  case types.UPDATE_DOWNLOAD_PROGRESS:
+    return { ...state, downloadProgress: { ...state.downloadProgress, percent: action.percent } };
 
   case types.FINISH_DOWNLOADING:
-    return { ...state, downloading: { state: false, id: '' } };
+    return {
+      ...state,
+      downloadProgress: {
+        isDownloading: false,
+        id: '',
+      },
+    };
 
   default:
     return state;

@@ -25,6 +25,7 @@ HomePage.propTypes = {
   toggleTrackDropDown: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
+  downloadProgress: PropTypes.object.isRequired,
 };
 
 export default HomePage;

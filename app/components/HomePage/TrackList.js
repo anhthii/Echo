@@ -37,6 +37,7 @@ TrackList.propTypes = {
   tracks: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
+  downloadProgress: PropTypes.object.isRequired,
 };
 
 export default TrackList;

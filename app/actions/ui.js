@@ -36,3 +36,24 @@ export function resetSlideInRight() {
     type: types.RESET_SLIDE_IN_RIGHT,
   };
 }
+
+export function startDownloading(id) {
+  return {
+    type: types.START_DOWNLOADING,
+    id,
+  };
+}
+
+export function updateDownloadProgress(percent) {
+  return {
+    type: types.UPDATE_DOWNLOAD_PROGRESS,
+    percent,
+  };
+}
+
+export function finishDownloading() {
+  return {
+    type: types.FINISH_DOWNLOADING,
+  };
+}
+
