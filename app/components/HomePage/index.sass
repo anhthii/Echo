@@ -1,4 +1,6 @@
 @import 'colors'
+@import 'mixins'
+
 .hp-track-list-wrapper
   width: 60%
   float: left
@@ -23,6 +25,7 @@
 .track-thumb
   padding: 10px 20px 10px 0
   width: 80px
+  height: 100%
   float: left
 .trackPosition
   line-height: 80px
@@ -91,3 +94,50 @@ i.ion-more
 
 .isDownloading
   margin-right: 5px
+
+.home-nav
+  margin: 20px
+.choice
+  width: 20%
+  height: 40px
+  border-radius: 5px
+  border: 1px solid #27DED5
+  line-height: 40px
+  vertical-align: middle
+  padding-left: 20px
+  color: #27DED5
+  font-size: 13px
+  cursor: pointer
+  position: relative
+  font-family: "Open Sans", sans-serif
+
+  &-active, &:hover
+    @extend .choice-active
+
+  i
+    float: right
+    margin-right: 20px
+
+  &-list
+    position: absolute
+    left: 0
+    right: 0
+    z-index: 1
+    background: #fff
+    color: #000
+    box-shadow: 0 1px 8px rgba(0,0,0,.2)
+
+    li
+      padding-left: 20px
+      &:hover
+        color: #27DED5
+
+
+.choice-active
+  background: #27DED5
+  color: #fff
+
+.choice-active-item
+  color: #27DED5
+
+

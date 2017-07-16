@@ -4,7 +4,7 @@ import { HomePage } from '../components';
 import { changeActiveChart } from '../actions/chart';
 import { addSongToQueue } from '../actions/queue';
 import { toggleTrackDropDown } from '../actions/ui';
-import { download } from '../actions/home';
+import { download, fetchTracks } from '../actions/home';
 
 class HomePageContainer extends Component {
   render() {
@@ -31,5 +31,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-{ changeActiveChart, addSongToQueue, toggleTrackDropDown, download })(HomePageContainer);
+{ changeActiveChart, addSongToQueue, toggleTrackDropDown, download, fetchTracks })(HomePageContainer);
 

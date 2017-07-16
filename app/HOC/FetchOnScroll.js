@@ -27,7 +27,7 @@ export default function (ComposedComponent) {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
           if (this.props.pageLoaded < NUMBER_OF_PAGES && !this.props.isLoading) {
             const page = this.props.pageLoaded + 1;
-            this.props.fetchTracks(page);
+            this.props.fetchTracks(page, this.props.activeId);
           }
         }
       }, 100)();
@@ -42,11 +42,13 @@ export default function (ComposedComponent) {
     fetchTracks: PropTypes.func.isRequired,
     pageLoaded: PropTypes.number.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    activeId: PropTypes.string.isRequired,
   };
 
   return connect((state) =>
   ({ pageLoaded: state.trackState.pageLoaded,
     isLoading: state.trackState.isLoading,
+    activeId: state.trackState.activeId,
   }),
   { fetchTracks })(FetchOnScroll);
 }

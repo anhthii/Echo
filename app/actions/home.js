@@ -5,13 +5,13 @@ import { MEDIA_ENDPOINT, ROOT_URL } from '../constant/endpoint_constant';
 import { startDownloading, updateDownloadProgress, finishDownloading } from '../actions/ui';
 
 
-export function fetchTracks(page) {
+export function fetchTracks(page, id = 'IWZ9Z097') {
   return dispatch => {
     dispatch({ type: types.START_FETCHING_TRACKS });
 
-    axios.get(`${MEDIA_ENDPOINT}/top100/IWZ9Z088${pageQuery(page)}`)
+    axios.get(`${MEDIA_ENDPOINT}/top100/${id}${pageQuery(page)}`)
       .then(({ data }) => {
-        dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.data.songs, page });
+        dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.data.songs, page, id });
       })
       .catch(() => dispatch({ type: types.FETCH_TRACK_FAILURE }));
   };

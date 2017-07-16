@@ -2,10 +2,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import TrackList from './TrackList';
 import Chart from '../Chart';
+import Choices from './Choices';
 import './index.sass';
 
 const HomePage = (props) =>
   <div className='homepage'>
+    <div className="home-nav">
+      <Choices fetchTracks={props.fetchTracks} />
+    </div>
     <TrackList {...props} />
     <div className='chart-wrapper'>
       <button onClick={() => props.changeActiveChart('kpop')}>Kpop</button>
@@ -26,6 +30,7 @@ HomePage.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
   downloadProgress: PropTypes.object.isRequired,
+  fetchTracks: PropTypes.func.isRequired,
 };
 
 export default HomePage;
