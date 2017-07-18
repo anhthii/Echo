@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import TrackList from './TrackList';
 import Chart from '../Chart';
 import Choices from './Choices';
+import Tab from './Tab';
 import './index.sass';
 
 const HomePage = (props) =>
@@ -12,10 +13,9 @@ const HomePage = (props) =>
     </div>
     <TrackList {...props} />
     <div className='chart-wrapper'>
-      <button onClick={() => props.changeActiveChart('kpop')}>Kpop</button>
-      <button onClick={() => props.changeActiveChart('vpop')}>vpop</button>
-      <button onClick={() => props.changeActiveChart('pop')}>pop</button>
-      <Chart chart={props.chart}/>
+      <Tab changeActiveChart={props.changeActiveChart}>
+        <Chart chart={props.chart}/>
+      </Tab>
     </div>
   </div>;
 
