@@ -5,7 +5,7 @@ const getToken = require('../utils/getTokenForUser');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  username: String,
+  username: { type: String, unique: true },
   password: String,
   access_token: String,
 });

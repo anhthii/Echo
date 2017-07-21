@@ -36,6 +36,4 @@ router.get('/artist/:name/:type', getArtist);
 
 router.get('/chart/:id', cached, getChart);
 
-
-
 module.exports = router;
