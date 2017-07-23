@@ -1,12 +1,15 @@
 language: node_js
 
 before_script:
-  - npm install
+  - npm install -g ava
 
 node_js:
   - 8
   - 7
   - 6
+
+before_script:
+  - ava --init
 
 script:
   - npm run build
