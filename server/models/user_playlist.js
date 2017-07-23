@@ -7,16 +7,18 @@ const SongSchema = new Schema({
   title: { type: String, required: true },
   artists: { type: Schema.Types.Mixed, required: true }, // string or array
   url_alias: String,
-});
+}, { _id: false });
 
 const PlaylistSchema = new Schema({
   songs: [SongSchema],
-  title: { type: String, required: true },
+  title: { type: String, required: true, unique: true },
 });
 
 const UserPlaylistSchema = new Schema({
   playlists: [PlaylistSchema],
-  _userId: Schema.Types.ObjectId,
+  _username: { type: String, required: true },
 });
 
-module.exports = mongoose.model('UserPlaylist', UserPlaylistSchema);
+const Playlist = mongoose.model('UserPlaylist', UserPlaylistSchema);
+
+module.exports = Playlist;
