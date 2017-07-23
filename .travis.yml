@@ -13,3 +13,5 @@ before_script:
 
 script:
   - npm run build
+  - node server &
+  - npm test
