@@ -37,7 +37,7 @@ router.post('/', (req, res, next) => {
   const username = req.body.username;
   Playlist.findOne({ _username: username })
     .then(user => {
-      if (user) { return res.status(400).send(`${username} playlists already exists`); }
+      if (user) { return res.status(400).send(`${username} playlist collection already exists`); }
 
       const playlist = new Playlist({
         _username: username,
