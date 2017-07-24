@@ -32,10 +32,13 @@ module.exports = function (app) {
   // no stacktraces leaked to user
   app.use((err, req, res, next) => {
     res.status(err.status || 500);
-    res.json({
-      error: true,
-      errors: err.errors || {},
-      message: err.message || '',
-    });
+    if (err.errors && Object.keys(err.errors).length) {
+      res.json({
+        error: true,
+        errors: err.errors || {},
+      });
+    } else {
+      res.send(err.message);
+    }
   });
 };

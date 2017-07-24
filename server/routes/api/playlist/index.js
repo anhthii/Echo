@@ -24,14 +24,6 @@ router.get('/:username/:title', (req, res, next) => {
   .catch(err => next(err));
 });
 
-router.get('/:id', (req, res, next) => {
-  Playlist.find(
-    { 'playlists._id': req.params.id }, // { playlists: [ { _id: ''} ] }
-    { 'playlists.$': 1 } // returns only the first element
-  ).then(playlist => res.json(playlist))
-  .catch(err => next(err));
-});
-
 // initialize playlist placeholder for user
 router.post('/', (req, res, next) => {
   const username = req.body.username;
