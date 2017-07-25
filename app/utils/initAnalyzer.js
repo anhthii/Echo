@@ -27,7 +27,11 @@ function frameLooper() {
   fbcArray = new Uint8Array(analyser.frequencyBinCount);
   analyser.getByteFrequencyData(fbcArray);
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
-  ctx.fillStyle = '#00b2b3'; // Color of the bars
+  const gradient = ctx.createLinearGradient(0, 0, 0, 512);
+  gradient.addColorStop(0.3, '#A569BD');
+  gradient.addColorStop(0.2, '#5DADE2');
+  gradient.addColorStop(0.1, '#239B56');
+  ctx.fillStyle = gradient;
   bars = 150;
   for (let i = 0; i < bars; i++) {
     barX = i * 2;
