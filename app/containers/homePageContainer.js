@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { HomePage } from '../components';
 import { changeActiveChart } from '../actions/chart';
 import { addSongToQueue } from '../actions/queue';
-import { toggleTrackDropDown } from '../actions/ui';
+import { toggleTrackDropDown, toggleModal } from '../actions/ui';
 import { download, fetchTracks } from '../actions/home';
 
 class HomePageContainer extends Component {
@@ -31,5 +31,12 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps,
-{ changeActiveChart, addSongToQueue, toggleTrackDropDown, download, fetchTracks })(HomePageContainer);
+  {
+    changeActiveChart,
+    addSongToQueue,
+    toggleTrackDropDown,
+    download,
+    fetchTracks,
+    toggleModal,
+  })(HomePageContainer);
 

@@ -17,6 +17,7 @@ const Track = (props) => {
     toggleTrackDropDown,
     artists,
     downloadProgress,
+    toggleModal,
   } = props;
 
   return (
@@ -65,6 +66,7 @@ const Track = (props) => {
           thumbnail={thumbnail}
           addSongToQueue={addSongToQueue}
           toggleTrackDropDown={toggleTrackDropDown}
+          toggleModal={toggleModal}
         />
       }
     </li>

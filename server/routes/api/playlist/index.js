@@ -5,10 +5,25 @@ const co = require('co');
 const router = express.Router();
 
 
-// get all playlists
+// get user playlist collection
 router.get('/:username', (req, res, next) => {
-  Playlist.findOne({ _username: req.params.username })
-  .then(doc => res.json(doc.playlists))
+  co(function* () {
+    const doc = yield Playlist.findOne(
+      { _username: req.params.username },
+      { 'playlists._id': false }
+    );
+    // create a new playlist collection for the user if he/she hasn't created any yet
+
+    if (doc) { return doc.playlists; }
+    const playlist = new Playlist({
+      _username: req.params.username,
+      playlists: [],
+    });
+
+    yield playlist.save();
+    return [];
+  })
+  .then(collection => res.json(collection))
   .catch(err => next(err));
 });
 
@@ -18,29 +33,10 @@ router.get('/:username/:title', (req, res, next) => {
 
   Playlist.findOne(
     { _username: username, 'playlists.title': title },
-    { 'playlists.$': 1 }
+    { _id: false, 'playlists._id': false }
   )
   .then(playlist => res.json(playlist))
   .catch(err => next(err));
-});
-
-// initialize playlist placeholder for user
-router.post('/', (req, res, next) => {
-  const username = req.body.username;
-  Playlist.findOne({ _username: username })
-    .then(user => {
-      if (user) { return res.status(400).send(`${username} playlist collection already exists`); }
-
-      const playlist = new Playlist({
-        _username: username,
-        playlists: [],
-      });
-
-      playlist.save()
-        .then((playlists) => res.json(playlists))
-        .catch(err => next(err));
-    })
-    .catch(err => next(err));
 });
 
 // create a playlist
@@ -64,7 +60,8 @@ router.post('/:username', (req, res, next) => {
     const New = yield Playlist.findOneAndUpdate(
       { _username: username },
       { $push: { playlists: { title, songs: [] } } },
-      { new: true } // return the updated docs
+      { safe: true, upsert: true, new: true }
+      // return the updated docs
     );
 
     return New;

@@ -11,7 +11,7 @@ const SongSchema = new Schema({
 
 const PlaylistSchema = new Schema({
   songs: [SongSchema],
-  title: { type: String, required: true, unique: true },
+  title: { type: String, required: true },
 });
 
 const UserPlaylistSchema = new Schema({

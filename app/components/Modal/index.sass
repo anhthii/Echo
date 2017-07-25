@@ -1,0 +1,56 @@
+@import "mixins"
+
+
+.modal
+  width: 100%
+  border-radius: 5px
+  background: #fff
+  padding: 20px
+
+
+  @include box-shadow
+
+
+
+  &-warn
+    margin-bottom: 20px
+
+  form
+      display: inline
+  input
+    margin: 0
+    margin-left: 20px
+    width: 200px
+.modal-close-btn
+  position: absolute
+  right: 0
+  top: 0
+  padding: 10px
+  cursor: pointer
+  i
+    color: #95A5A6
+.modal-playlists
+  max-height: 200px
+  overflow-y: scroll
+  padding-right: 10px
+
+.modal-playlist
+  height: 50px
+  border: 1px solid #f2f2f2
+  line-height: 50px
+  vertical-align: middle
+  margin-bottom: 10px
+  padding-left: 20px
+  cursor: pointer
+  color: #85929E
+  &:hover
+        background-color: #f8f8f8
+
+.modal-wrapper
+  width: 400px
+  position: fixed
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+

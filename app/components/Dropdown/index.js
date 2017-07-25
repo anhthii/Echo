@@ -18,21 +18,38 @@ class DropDown extends React.Component {
     this.setState({ mounted: true });
   }
 
-  renderDropdown() {
-    const { name, id, thumbnail, addSongToQueue, toggleTrackDropDown } = this.props;
-    const songObj = { name, id, thumbnail };
+  handleDropdownAdd() {
+    const { id, toggleTrackDropDown, toggleModal } = this.props;
+    toggleTrackDropDown(id);
+    toggleModal();
+  }
 
+  handleDropdownNextUp() {
+    const { name, id, thumbnail, toggleTrackDropDown, addSongToQueue } = this.props;
+    const songObj = { name, id, thumbnail };
+    addSongToQueue(songObj);
+    toggleTrackDropDown(id);
+  }
+
+  renderDropdown() {
     return (
       <div className='dropdown'>
-        <div className="dropdown-nextup" onClick={() => {
-          addSongToQueue(songObj);
-          toggleTrackDropDown(id);
-        }}>
+        <div
+          className="dropdown-nextup"
+          onClick={this.handleDropdownNextUp.bind(this)}
+        >
           <img src={queueAdd} alt=""/>
           Add to next up
         </div>
-        <div className="dropdown-add">
-          <img src={queueNext} style={{ height: '30px', width: '30px', marginRight: '5px' }} alt=""/>
+        <div
+          className="dropdown-add"
+          onClick={this.handleDropdownAdd.bind(this)}
+        >
+          <img
+            src={queueNext}
+            style={{ height: '30px', width: '30px', marginRight: '5px' }}
+            alt=""
+          />
           Add to playlist
         </div>
         <div className="dropdown-share">
@@ -61,6 +78,7 @@ DropDown.propTypes = {
   thumbnail: PropTypes.string.isRequired,
   addSongToQueue: PropTypes.func.isRequired,
   toggleTrackDropDown: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 export default onClickOutside(DropDown);

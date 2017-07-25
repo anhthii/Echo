@@ -9,6 +9,7 @@ import albumReducer from './album_reducer';
 import artistReducer from './artist_reducer';
 import chartReducer from './chart_reducer';
 import authReducer from './auth_reducer';
+import playlistReducer from './user_playlist_reducer';
 
 export default combineReducers({
   playerState: playerReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
   artistState: artistReducer,
   chartState: chartReducer,
   auth: authReducer,
+  playlistState: playlistReducer,
 });

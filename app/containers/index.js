@@ -11,6 +11,8 @@ import ArtistGenrePage from './ArtistGenrePage';
 import ChartPage from './ChartPage';
 import LogInPage from './LogInPage';
 import SignUpPage from './SignUpPage';
+import UserPage from './UserPageContainer';
+import Modal from './Modal';
 
 export {
   Player,
@@ -26,4 +28,6 @@ export {
   ChartPage,
   LogInPage,
   SignUpPage,
+  UserPage,
+  Modal,
 };

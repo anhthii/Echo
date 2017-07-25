@@ -1,0 +1,104 @@
+@import "colors"
+@import "mixins"
+
+.user-page
+  margin-top: 20px
+
+  &-left
+    width: 40%
+    float: left
+
+    form
+      display: inline
+    input
+      margin: 0
+      margin-left: 20px
+      width: 300px
+
+.playlist-btn
+  border: 0
+  text-shadow: none
+  outline: 0
+  background-color: $light-blue
+  color: white
+  padding: 10px
+  border-radius: 5px
+  cursor: pointer
+  margin-bottom: 20px
+
+  i
+    margin-left: 10px
+
+.user-playlist
+  margin-bottom: 20px
+  &-header
+    @include box-shadow
+    line-height: 50px
+    vertical-align: middle
+    padding-left: 20px
+    color: #868e96
+    cursor: pointer
+
+    b
+      margin-left: 10px
+      color: $light-blue
+
+    i
+      float: right
+      margin-right: 30px
+      color: $light-blue
+
+    .user-playlist-title
+      width: 70%
+      float: left
+
+  &-play-btn
+    height: 50px
+    margin-top: 10px
+    display: flex
+    justify-content: center
+    align-items: center
+
+    button
+      cursor: pointer
+      i
+        font-size: 30px
+        color: #85C1E9
+
+.user-playlist-inside
+  overflow: hidden
+  margin-left: 20px
+
+.playlist-song
+  border: 1px solid #f2f2f2
+  overflow: hidden
+  margin-top: 10px
+  font-size: 13px
+  > div
+    float: left
+    line-height: 50px
+    vertical-align: middle
+    color: #85929E
+    a
+      color: #85929E
+      &:hover
+        text-decoration: underline
+
+  &-title
+    width: 50%
+    padding-left: 20px
+
+  &-artists
+    width: 40%
+
+  &-remove-btn
+    width: 10%
+    height: 50px
+    display: flex
+    align-items: center
+
+    button
+      cursor: pointer
+    i
+      font-size: 20px
+      color: #E74C3C

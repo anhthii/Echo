@@ -31,6 +31,7 @@ HomePage.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   downloadProgress: PropTypes.object.isRequired,
   fetchTracks: PropTypes.func.isRequired,
+  toggleModal: PropTypes.func.isRequired,
 };
 
 export default HomePage;

@@ -20,10 +20,10 @@ export function saveQueueState(state) {
 
 export function loadUserData() {
   try {
-    const serializedQueueState = localStorage.getItem('user');
-    if (!serializedQueueState) return undefined;
+    const serializedUserData = localStorage.getItem('user');
+    if (!serializedUserData) return undefined;
 
-    return JSON.parse(serializedQueueState);
+    return JSON.parse(serializedUserData);
   } catch (err) {
     return undefined;
   }

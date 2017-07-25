@@ -17,6 +17,7 @@ class App extends React.Component {
         </div>
         <Containers.Queue show={showQueue}/>
         { showPlayer ? <Containers.Player /> : null }
+        <Containers.Modal />
       </div>
     );
   }

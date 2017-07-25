@@ -5,6 +5,7 @@ const initialState = {
   dropDown: { activeId: '', show: false },
   showQueue: false,
   slideInRight: false,
+  showModal: false,
   downloadProgress: {
     isDownloading: false,
     id: '',
@@ -26,6 +27,9 @@ export default function (state = initialState, action) {
 
   case types.TOGGLE_QUEUE:
     return { ...state, showQueue: !state.showQueue };
+
+  case types.TOGGLE_MODAL:
+    return { ...state, showModal: !state.showModal };
 
   case types.SLIDE_IN_RIGHT:
     return { ...state, slideInRight: true };

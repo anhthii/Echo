@@ -12,6 +12,12 @@ export function hideAnalyzer() {
   };
 }
 
+export function toggleModal() {
+  return {
+    type: types.TOGGLE_MODAL,
+  };
+}
+
 export function toggleTrackDropDown(id) {
   return {
     type: types.TOGGLE_TRACK_DROPDOWN,
@@ -56,4 +62,5 @@ export function finishDownloading() {
     type: types.FINISH_DOWNLOADING,
   };
 }
+
 

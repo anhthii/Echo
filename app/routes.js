@@ -2,13 +2,13 @@ import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import * as Containers from './containers';
 import { NotFound } from './components';
-import { fetchDataForHomePage, getCharts } from './route_callbacks';
-import { FetchOnScroll } from './HOC';
+import { fetchDataForHomePage, getCharts, getPlaylistOnEnter } from './route_callbacks';
+import { fetchOnScroll } from './HOC';
 
 export default (
   <Route path='/' component= {Containers.App}>
 
-    <IndexRoute component={FetchOnScroll(Containers.HomePage)} onEnter={fetchDataForHomePage} />
+    <IndexRoute component={fetchOnScroll(Containers.HomePage)} onEnter={fetchDataForHomePage} />
 
     <Route path='song/:name/:id' component={Containers.SongPage} />
 
@@ -25,6 +25,8 @@ export default (
     <Route path='login' component={Containers.LogInPage} />
 
     <Route path='signup' component={Containers.SignUpPage} />
+
+    <Route path='user' component={Containers.UserPage} onEnter={getPlaylistOnEnter}/>
 
     <Route path="*" component={NotFound} />
 

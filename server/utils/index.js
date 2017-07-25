@@ -30,7 +30,7 @@ exports.isEmpty = function (obj) {
 
 exports.getRedisKey = function (req) {
   const pageQuery = req.query.page && `?page=${req.query.page}`;
-  const key = `${req.params.id || req.params.type}${pageQuery}`;
+  const key = `${req.params.id || req.params.type}${pageQuery || ''}`;
   return key;
 };
 
