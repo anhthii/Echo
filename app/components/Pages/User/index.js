@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-import { getSongUrl } from '../../../utils/func';
+import { getSongUrl, changeAlias } from '../../../utils/func';
 import { createPlaylist, deleteSong } from '../../../actions/user_playlist';
 import LinksByComma from '../../LinksByComma';
 
@@ -23,8 +23,8 @@ class UserPage extends React.Component {
 
   handleOnSubmit(e) {
     e.preventDefault();
-    const playlistTitle = this.input.value;
-
+    // sanitize playlist's title before submitting to server
+    const playlistTitle = changeAlias(this.input.value);
     this.props.dispatch(createPlaylist(playlistTitle));
     this.setState({ showInput: false });
   }
