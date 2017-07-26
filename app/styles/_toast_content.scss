@@ -1,0 +1,14 @@
+@import "colors";
+
+.custom-toast-content {
+  height: 100%;
+  width: 100%;
+  line-height: 50px;
+  vertical-align: middle;
+  font-size: 14px;
+  padding-left: 20px;
+  span {
+    margin-right: 4px;
+    color: $cyan-1;
+  }
+}

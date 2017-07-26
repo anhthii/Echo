@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Nav, Analyzer } from '../components';
+import { ToastContainer } from 'react-toastify';
 import * as Containers from './';
 
 class App extends React.Component {
@@ -18,6 +19,10 @@ class App extends React.Component {
         <Containers.Queue show={showQueue}/>
         { showPlayer ? <Containers.Player /> : null }
         <Containers.Modal />
+        <ToastContainer
+          position="top-right"
+          autoClose={3000}
+        />
       </div>
     );
   }

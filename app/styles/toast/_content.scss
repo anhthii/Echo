@@ -1,0 +1,34 @@
+
+.toastify-content {
+  position: relative;
+  width: 100%;
+  min-height: 50px;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: $toast-background;
+  border-radius: 1px;
+  box-shadow: 0 1px 10px 0 rgba(0, 0, 0, .1), 0 2px 15px 0 rgba(0, 0, 0, .05);
+
+  &--default {
+
+  }
+  &--info {
+    border-left: 6px solid $color-info;
+  }
+  &--success {
+    border-left: 6px solid $color-success;
+  }
+  &--warning {
+    border-left: 6px solid $color-warning;
+  }
+  &--error {
+    border-left: 6px solid $color-error;
+  }
+}
+
+.toastify__body {
+  font-size: $font-size;
+  height: 50px;
+  line-height: 150px;
+  vertical-align: middle;
+}

@@ -89,7 +89,7 @@ router.put('/:username/:playlistTitle', (req, res, next) => {
     );
 
     if (isSongExisting) {
-      const error = new Error(`${req.body.title} songs already exists in ${playlistTitle} playlist`);
+      const error = new Error(`<span>${req.body.name}</span> song already exists in <span>${playlistTitle}</span> playlist`);
       error.status = 400;
       throw error;
     }

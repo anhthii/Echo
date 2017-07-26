@@ -1,4 +1,6 @@
 import axios from 'axios';
+import React from 'react';
+import { toast } from 'react-toastify';
 import * as types from '../constant/action_constant';
 import { PLAYLIST_ENDPOINT } from '../constant/endpoint_constant';
 import { loadUserData } from '../localStorage';
@@ -31,19 +33,37 @@ export function createPlaylist(title) {
         type: types.CREATE_PLAYLIST,
         title,
       }))
-      .catch(err => alert(err.response.data));
+      .catch(err => toast(<div>cc}</div>));
   };
 }
 
 export function addSongToPlaylist(playlistTitle, songObj) {
   return dispatch => {
     axios.put(`${PLAYLIST_ENDPOINT}/${getUserName()}/${playlistTitle}`, songObj)
-      .then(() => dispatch({
-        type: types.ADD_SONG_TO_PLAYLIST,
-        song: songObj,
-        title: playlistTitle,
-      }))
-      .catch(err => { throw err; });
+      .then(() => {
+        dispatch({
+          type: types.ADD_SONG_TO_PLAYLIST,
+          song: songObj,
+          title: playlistTitle,
+        });
+
+        toast(
+          <div
+            className='custom-toast-content ellipsis'
+            title={`${songObj.name} was added to ${playlistTitle} playlist`}
+          >
+            <span>{songObj.name}</span>
+            was added to <span>{playlistTitle}</span> playlist
+          </div>
+        );
+      })
+      .catch(err => toast.error(
+        <div
+          className='custom-toast-content ellipsis'
+          title={`${songObj.name} already exists in ${playlistTitle} playlist`}
+          dangerouslySetInnerHTML={{ __html: err.response.data }}>
+        </div>
+      ));
   };
 }
 
