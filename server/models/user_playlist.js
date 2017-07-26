@@ -4,8 +4,9 @@ const Schema = mongoose.Schema;
 
 const SongSchema = new Schema({
   id: { type: String, required: true },
-  title: { type: String, required: true },
+  name: { type: String, required: true },
   artists: { type: Schema.Types.Mixed, required: true }, // string or array
+  thumbnail: String,
   url_alias: String,
 }, { _id: false });
 

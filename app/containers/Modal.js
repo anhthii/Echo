@@ -11,10 +11,14 @@ class ModalContainer extends Component {
   }
 
   render() {
-    const { dispatch, playlists } = this.props;
+    const { dispatch, playlists, song } = this.props;
 
     return this.props.showModal
-      ? <Modal dispatch={dispatch} playlists={playlists}/>
+      ? <Modal
+        dispatch={dispatch}
+        playlists={playlists}
+        song={song}
+      />
       : null;
   }
 }
@@ -27,6 +31,7 @@ function mapStateToProps({ UIState, playlistState }) {
   return {
     showModal: UIState.showModal,
     playlists,
+    song: playlistState.tmpSong,
   };
 }
 

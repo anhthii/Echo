@@ -5,11 +5,12 @@ import { changeActiveChart } from '../actions/chart';
 import { addSongToQueue } from '../actions/queue';
 import { toggleTrackDropDown, toggleModal } from '../actions/ui';
 import { download, fetchTracks } from '../actions/home';
+import { addSongToStoreTemporarily } from '../actions/user_playlist';
 
 class HomePageContainer extends Component {
   render() {
     return (
-      <HomePage {...this.props}/>
+      <HomePage {...this.props} />
     );
   }
 }
@@ -38,5 +39,6 @@ export default connect(mapStateToProps,
     download,
     fetchTracks,
     toggleModal,
+    addSongToStoreTemporarily,
   })(HomePageContainer);
 

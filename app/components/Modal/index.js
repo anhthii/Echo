@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import { toggleModal } from '../../actions/ui';
-import { createPlaylist } from '../../actions/user_playlist';
+import { createPlaylist, addSongToPlaylist } from '../../actions/user_playlist';
 import './index.sass';
 
 class Modal extends Component {
@@ -54,6 +54,12 @@ class Modal extends Component {
       </form>;
   }
 
+  handleAddSongToPlaylist(playlist) {
+    const { song, dispatch } = this.props;
+    dispatch(addSongToPlaylist(playlist, song));
+    this.handleCloseModal();
+  }
+
   renderModal() {
     const { animate, leave } = this.state;
     const className = `modal animated ${animate &&
@@ -80,7 +86,11 @@ class Modal extends Component {
         {this.renderInputField()}
         <div className="modal-playlists">
           {this.props.playlists.map(playlist =>
-            <div className="modal-playlist" key={`modal-${playlist}`}>
+            <div
+              className="modal-playlist"
+              key={`modal-${playlist}`}
+              onClick={this.handleAddSongToPlaylist.bind(this, playlist)}
+            >
               {playlist}
             </div>
           )}
@@ -101,6 +111,7 @@ class Modal extends Component {
 Modal.propTypes = {
   dispatch: PropTypes.func.isRequired,
   playlists: PropTypes.array.isRequired,
+  song: PropTypes.object.isRequired,
 };
 
 export default onClickOutside(Modal);

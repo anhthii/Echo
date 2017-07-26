@@ -19,9 +19,15 @@ class DropDown extends React.Component {
   }
 
   handleDropdownAdd() {
-    const { id, toggleTrackDropDown, toggleModal } = this.props;
+    const { id, toggleTrackDropDown, name, artists, toggleModal, thumbnail } = this.props;
     toggleTrackDropDown(id);
     toggleModal();
+    this.props.addSongToStoreTemporarily({
+      name,
+      artists,
+      id,
+      thumbnail,
+    });
   }
 
   handleDropdownNextUp() {
@@ -79,6 +85,7 @@ DropDown.propTypes = {
   addSongToQueue: PropTypes.func.isRequired,
   toggleTrackDropDown: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  addSongToStoreTemporarily: PropTypes.func.isRequired,
 };
 
 export default onClickOutside(DropDown);

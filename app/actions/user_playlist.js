@@ -34,3 +34,23 @@ export function createPlaylist(title) {
       .catch(err => alert(err.response.data));
   };
 }
+
+export function addSongToPlaylist(playlistTitle, songObj) {
+  return dispatch => {
+    axios.put(`${PLAYLIST_ENDPOINT}/${getUserName()}/${playlistTitle}`, songObj)
+      .then(() => dispatch({
+        type: types.ADD_SONG_TO_PLAYLIST,
+        song: songObj,
+        title: playlistTitle,
+      }))
+      .catch(err => { throw err; });
+  };
+}
+
+
+export function addSongToStoreTemporarily(song) {
+  return {
+    type: types.ADD_SONG_TO_STORE_TEMPORARILY,
+    song,
+  };
+}

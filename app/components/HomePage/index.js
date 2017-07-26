@@ -32,6 +32,7 @@ HomePage.propTypes = {
   downloadProgress: PropTypes.object.isRequired,
   fetchTracks: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
+  addSongToStoreTemporarily: PropTypes.func.isRequired,
 };
 
 export default HomePage;

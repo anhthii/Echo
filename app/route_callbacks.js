@@ -43,5 +43,9 @@ export function getCharts() {
 }
 
 export function getPlaylistOnEnter() {
-  store.dispatch(getPlaylistCollection());
+  const userPlaylistCollection = store.getState().playlistState.playlists;
+
+  if (!userPlaylistCollection.length) {
+    store.dispatch(getPlaylistCollection());
+  }
 }

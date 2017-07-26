@@ -31,7 +31,7 @@ class Choices extends Component {
   render() {
     return (
       <div
-        className={`choice ${this.state.showMenu && 'choice-active'}`}
+        className={`choice ${this.state.showMenu ? 'choice-active' : null}`}
         onClick={this.toggle.bind(this)}
       >
         Popular songs

@@ -70,7 +70,7 @@ const Playlist = ({ playlist }) => {
   return (
     <div className="user-playlist">
       <div className="user-playlist-header">
-        <div className="user-playlist-title">{ title }</div>
+        <div className="user-playlist-title">{title}</div>
         <b>{songs.length}</b> songs
         <i className="ion-arrow-down-b"></i>
       </div>
@@ -94,7 +94,7 @@ const List = ({ songs }) => {
       {songs.map(song => (
         <li className="playlist-song" key={`playlist-song${song.id}`}>
           <div className="playlist-song-title">
-            <a href="#">{song.title}</a>
+            <a href="#">{song.name}</a>
           </div>
           <div className="playlist-song-artists">
             Justin Bieber
