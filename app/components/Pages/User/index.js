@@ -1,7 +1,11 @@
 import React from 'react';
+import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-import { createPlaylist } from '../../../actions/user_playlist';
+import { getSongUrl } from '../../../utils/func';
+import { createPlaylist, deleteSong } from '../../../actions/user_playlist';
+import LinksByComma from '../../LinksByComma';
+
 import './index.sass';
 
 class UserPage extends React.Component {
@@ -51,7 +55,7 @@ class UserPage extends React.Component {
           </button>
           {this.renderInputField()}
           {playlists.map(playlist =>
-            <Playlist playlist={playlist} key={`playlist${playlist.title}`}/>
+            <Playlist playlist={playlist} key={`playlist${playlist.title}`} dispatch={dispatch}/>
           )}
         </div>
       </div>
@@ -64,43 +68,72 @@ UserPage.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-const Playlist = ({ playlist }) => {
-  const { songs, title } = playlist;
+class Playlist extends React.Component {
+  expand(e) {
+    e.stopPropagation();
+    const $list = e.target.closest('.user-playlist-header').nextSibling;
+    if ($list.style.maxHeight) {
+      $list.style.maxHeight = null;
+    } else {
+      $list.style.maxHeight = `${$list.scrollHeight}px`;
+    }
+  }
 
-  return (
-    <div className="user-playlist">
-      <div className="user-playlist-header">
-        <div className="user-playlist-title">{title}</div>
-        <b>{songs.length}</b> songs
-        <i className="ion-arrow-down-b"></i>
+  render() {
+    const { songs, title } = this.props.playlist;
+    const { dispatch, playlist } = this.props;
+
+    return (
+      <div className="user-playlist">
+        <div
+          className="user-playlist-header"
+          onClick={this.expand.bind(this)}
+        >
+          <div className="user-playlist-title">{title}</div>
+          <b>{songs.length}</b> songs
+          <i className="ion-arrow-down-b"></i>
+        </div>
+        {/* <div className="user-playlist-play-btn">
+          <button className="sc-ir">
+            <i className="ion-play"></i>
+          </button>
+        </div> */}
+        <List songs={songs} dispatch={dispatch} playlistTitle={playlist.title}/>
       </div>
-      <div className="user-playlist-play-btn">
-        <button className="sc-ir">
-          <i className="ion-play"></i>
-        </button>
-      </div>
-      <List songs={songs}/>
-    </div>
-  );
-};
+    );
+  }
+}
 
 Playlist.propTypes = {
   playlist: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-const List = ({ songs }) => {
+const List = ({ songs, dispatch, playlistTitle }) => {
   return (
     <ul className="user-playlist-inside">
       {songs.map(song => (
         <li className="playlist-song" key={`playlist-song${song.id}`}>
-          <div className="playlist-song-title">
-            <a href="#">{song.name}</a>
+        <div className="playlist-song-thumbnail">
+          <img src={song.thumbnail} />
+        </div>
+          <div className="playlist-song-title ellipsis">
+            <Link to={getSongUrl(song.name, song.id)}>{song.name}</Link>
           </div>
           <div className="playlist-song-artists">
-            Justin Bieber
+            <LinksByComma
+              data={song.artists}
+              titleEntry="name"
+              pathEntry="link"
+              definePath={(link) => link.replace('/nghe-si/', '/artist/')}
+              defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
+            />
           </div>
           <div className="playlist-song-remove-btn">
-            <button className="sc-ir">
+            <button
+              className="sc-ir"
+              onClick={() => dispatch(deleteSong(playlistTitle, song.id))}
+            >
               <i className="ion-android-close"></i>
             </button>
           </div>
@@ -112,6 +145,8 @@ const List = ({ songs }) => {
 
 List.propTypes = {
   songs: PropTypes.array.isRequired,
+  playlistTitle: PropTypes.string,
+  dispatch: PropTypes.func.isRequired,
 };
 
 export default onClickOutside(UserPage);

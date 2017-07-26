@@ -74,3 +74,14 @@ export function addSongToStoreTemporarily(song) {
     song,
   };
 }
+
+export function deleteSong(playlistTitle, id) {
+  return dispatch => {
+    axios.delete(`${PLAYLIST_ENDPOINT}/${getUserName()}/${playlistTitle}/${id}`)
+      .then(({ data }) => dispatch({
+        type: types.DELETE_SONG_FROM_PLAYLIST,
+        playlists: data,
+      }))
+      .catch(err => { throw err; });
+  };
+}

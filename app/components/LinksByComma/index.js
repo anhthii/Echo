@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import './index.sass';
 
 const LinksByComma = ({ data, definePath, pathEntry, titleEntry, defineTitle, className }) =>
-  <div className={`comma ${className}`}>
+  <div className={`comma ${className || ''}`}>
     {
       data.map((element, index) =>
         <Link

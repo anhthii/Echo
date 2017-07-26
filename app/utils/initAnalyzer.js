@@ -28,9 +28,9 @@ function frameLooper() {
   analyser.getByteFrequencyData(fbcArray);
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
   const gradient = ctx.createLinearGradient(0, 0, 0, 512);
-  gradient.addColorStop(0.3, '#A569BD');
-  gradient.addColorStop(0.2, '#5DADE2');
-  gradient.addColorStop(0.1, '#239B56');
+  // gradient.addColorStop(0.3, '#A569BD');
+  gradient.addColorStop(0.3, '#5DADE2');
+  gradient.addColorStop(0.15, '#239B56');
   ctx.fillStyle = gradient;
   bars = 150;
   for (let i = 0; i < bars; i++) {

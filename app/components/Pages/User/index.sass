@@ -5,7 +5,7 @@
   margin-top: 20px
 
   &-left
-    width: 40%
+    width: 60%
     float: left
 
     form
@@ -66,8 +66,10 @@
         color: #85C1E9
 
 .user-playlist-inside
-  overflow: hidden
   margin-left: 20px
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s ease-in-out;
 
 .playlist-song
   border: 1px solid #f2f2f2
@@ -85,14 +87,16 @@
         text-decoration: underline
 
   &-title
-    width: 50%
+    width: calc(50% - 25px)
     padding-left: 20px
 
   &-artists
-    width: 40%
+    width: calc(45% - 25px)
+    a
+      color: #3eb4bf !important
 
   &-remove-btn
-    width: 10%
+    width: 5%
     height: 50px
     display: flex
     align-items: center
@@ -102,3 +106,11 @@
     i
       font-size: 20px
       color: #E74C3C
+
+  &-thumbnail
+    width: 50px
+    height: 50px
+    padding-left: 3px
+    img
+      width: 100%
+      height: 100%

@@ -66,7 +66,7 @@ router.post('/:username', (req, res, next) => {
 
     return New;
   })
-  .then(playlists => res.json(playlists))
+  .then(doc => res.json(doc))
   .catch(err => next(err));
 });
 
@@ -103,7 +103,7 @@ router.put('/:username/:playlistTitle', (req, res, next) => {
 
     return New;
   })
-  .then(playlists => res.json(playlists))
+  .then(doc => res.json(doc))
   .catch(err => next(err));
 });
 
@@ -113,9 +113,9 @@ router.delete('/:username/:playlistTitle/:songId', (req, res, next) => {
   Playlist.findOneAndUpdate(
     { _username: username, 'playlists.title': playlistTitle },
     { $pull: { 'playlists.$.songs': { id: songId } } },
-    { new: true }
+    { new: true, projection: { 'playlists._id': false } }
   )
-  .then(playlist => res.json(playlist))
+  .then(doc => res.json(doc.playlists))
   .catch(err => next(err));
 });
 

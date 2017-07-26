@@ -21,7 +21,7 @@ class App extends React.Component {
         <Containers.Modal />
         <ToastContainer
           position="top-right"
-          autoClose={3000}
+          autoClose={2000}
         />
       </div>
     );

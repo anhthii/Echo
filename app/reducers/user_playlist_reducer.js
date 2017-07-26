@@ -26,6 +26,9 @@ export default function (state = initialState, action) {
   case types.ADD_SONG_TO_STORE_TEMPORARILY:
     return { ...state, tmpSong: action.song };
 
+  case types.DELETE_SONG_FROM_PLAYLIST:
+    return { ...state, playlists: action.playlists };
+
   default:
     return state;
   }
