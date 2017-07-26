@@ -1,5 +1,5 @@
-import fetchOnScroll from './fetchOnScroll';
+import FetchOnScroll from './FetchOnScroll';
 
 export {
-  fetchOnScroll,
+  FetchOnScroll,
 };
