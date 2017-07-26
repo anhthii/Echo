@@ -23,6 +23,9 @@ export default function (state = initialState, action) {
   case types.REMOVE_SONG_FROM_QUEUE:
     return { ...state, queue: action.queue, ids: action.ids };
 
+  case types.PLAY_USER_PLAYLIST:
+    return { ...state, queue: action.queue, ids: action.ids };
+
   default:
     return state;
   }

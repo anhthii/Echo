@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import { getSongUrl, changeAlias } from '../../../utils/func';
 import { createPlaylist, deleteSong } from '../../../actions/user_playlist';
+import { playUserPlaylist } from '../../../actions/queue';
+import { fetchSong, fetchSuggestedSongs } from '../../../actions/song';
 import LinksByComma from '../../LinksByComma';
 
 import './index.sass';
@@ -42,7 +44,7 @@ class UserPage extends React.Component {
   }
 
   render() {
-    const { playlists, dispatch } = this.props;
+    const { playlists } = this.props;
 
     return (
       <div className="user-page">
@@ -55,7 +57,10 @@ class UserPage extends React.Component {
           </button>
           {this.renderInputField()}
           {playlists.map(playlist =>
-            <Playlist playlist={playlist} key={`playlist${playlist.title}`} dispatch={dispatch}/>
+            <Playlist playlist={playlist}
+              key={`playlist${playlist.title}`}
+              {...this.props}
+            />
           )}
         </div>
       </div>
@@ -66,6 +71,7 @@ class UserPage extends React.Component {
 UserPage.propTypes = {
   playlists: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
+  queueIds: PropTypes.array.isRequired,
 };
 
 class Playlist extends React.Component {
@@ -79,6 +85,20 @@ class Playlist extends React.Component {
     }
   }
 
+  play() {
+    const { dispatch, queueIds } = this.props;
+    const firstSong = this.props.playlist.songs[0];
+    const { name, id } = firstSong;
+
+    // play the first song if there is no song in the queue
+    if (!queueIds.length) {
+      dispatch(fetchSong(changeAlias(name), id));
+      dispatch(fetchSuggestedSongs(id));
+    }
+
+    dispatch(playUserPlaylist(this.props.playlist.songs));
+  }
+
   render() {
     const { songs, title } = this.props.playlist;
     const { dispatch, playlist } = this.props;
@@ -90,14 +110,17 @@ class Playlist extends React.Component {
           onClick={this.expand.bind(this)}
         >
           <div className="user-playlist-title">{title}</div>
+          <div
+            className="user-playlist-play-btn"
+            onClick={this.play.bind(this)}
+          >
+            <button className="sc-ir">
+              <i className="ion-play"></i>
+            </button>
+          </div>
           <b>{songs.length}</b> songs
           <i className="ion-arrow-down-b"></i>
         </div>
-        {/* <div className="user-playlist-play-btn">
-          <button className="sc-ir">
-            <i className="ion-play"></i>
-          </button>
-        </div> */}
         <List songs={songs} dispatch={dispatch} playlistTitle={playlist.title}/>
       </div>
     );
@@ -107,6 +130,7 @@ class Playlist extends React.Component {
 Playlist.propTypes = {
   playlist: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
+  queueIds: PropTypes.array.isRequired,
 };
 
 const List = ({ songs, dispatch, playlistTitle }) => {

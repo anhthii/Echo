@@ -1,6 +1,6 @@
 import * as types from '../constant/action_constant';
 import { fetchSong, fetchSuggestedSongs } from './song';
-import { removeById } from '../utils/func';
+import { removeById, changeAlias } from '../utils/func';
 
 export function addSongToQueue(song) {
   const { name, id } = song;
@@ -56,9 +56,9 @@ export function replaceQueue(songs) {
     const queueIds = getState().queueState.ids;
     if (!queueIds.length) {
       dispatch({ type: types.REPLACE_QUEUE, ...tweakSongs(songs) });
-      const { alias, id } = songs[0];
+      const { alias, id, name } = songs[0];
 
-      dispatch(fetchSong(alias, id));
+      dispatch(fetchSong(alias || changeAlias(name), id));
       dispatch(fetchSuggestedSongs(id));
     } else {
       dispatch({ type: types.REPLACE_QUEUE, ...tweakSongs(songs) });
@@ -75,5 +75,13 @@ export function clearQueue() {
     const newQueueIds = queueState.ids.filter(id => id === playingSongId);
 
     dispatch({ type: types.CLEAR_QUEUE, queue: clearedQueue, ids: newQueueIds });
+  };
+}
+
+export function playUserPlaylist(songs) {
+  return {
+    type: types.PLAY_USER_PLAYLIST,
+    ids: songs.map(song => song.id),
+    queue: songs,
   };
 }

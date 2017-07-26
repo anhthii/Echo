@@ -9,7 +9,7 @@ let cachedUsername = '';
 
 function getUserName() {
   if (cachedUsername.length) { return cachedUsername; }
-  if (loadUserData().username) {
+  if (loadUserData() && loadUserData().username) {
     cachedUsername = loadUserData().username;
   }
   return cachedUsername;

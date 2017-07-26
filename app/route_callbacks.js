@@ -4,6 +4,7 @@ import { fetchTracks } from './actions/home';
 import { fetchSong, fetchSuggestedSongs } from './actions/song';
 import { getChart, changeActiveChart } from './actions/chart';
 import { getPlaylistCollection } from './actions/user_playlist';
+import { loadUserData } from './localStorage';
 
 export function fetchDataForHomePage() {
   const state = store.getState();
@@ -45,7 +46,7 @@ export function getCharts() {
 export function getPlaylistOnEnter() {
   const userPlaylistCollection = store.getState().playlistState.playlists;
 
-  if (!userPlaylistCollection.length) {
+  if (loadUserData() && !userPlaylistCollection.length) {
     store.dispatch(getPlaylistCollection());
   }
 }

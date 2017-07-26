@@ -4,7 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { getSongUrl } from '../../utils/func';
 import LazyloadImage from '../LazyloadImage';
 
-const Li = ({ name, id, thumbnail, alias, artist, removeSongFromQueue }) => {
+const Li = ({ name, id, thumbnail, alias, artist, artists, removeSongFromQueue }) => {
   return (
     <li>
       <LazyloadImage
@@ -16,7 +16,7 @@ const Li = ({ name, id, thumbnail, alias, artist, removeSongFromQueue }) => {
           <Link to={getSongUrl(alias || name, id)}>{name}</Link>
         </div>
         <div className="queue-track-artist ellipsis">
-          {artist}
+          {artist || artists.map(artist => artist.name).join(', ')}
         </div>
       </div>
       <div className="queue-track-actions">

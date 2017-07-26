@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from '../components';
 import { getPlaylistCollection } from '../actions/user_playlist';
+import { loadUserData } from '../localStorage';
 
 class ModalContainer extends Component {
   componentDidMount() {
-    if (!this.props.playlists.length) {
+    if (loadUserData() && !this.props.playlists.length) {
       this.props.dispatch(getPlaylistCollection());
     }
   }
