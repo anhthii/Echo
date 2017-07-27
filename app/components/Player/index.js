@@ -194,7 +194,7 @@ class Player extends React.Component {
   }
 
   render() {
-    const { songData } = this.props;
+    const { songData, queue } = this.props;
     const { name, id } = songData;
     const artists = songData.artist.split(/\s*,\s*/);
 
@@ -206,7 +206,7 @@ class Player extends React.Component {
           crossOrigin='anonymous'
           ref='audio'
           loop={this.state.loop}
-          muted
+
         />
         <div className="player-info">
           <Link
@@ -242,9 +242,10 @@ class Player extends React.Component {
             <i className="ion-ios-fastforward"></i>
           </button>
           <button
-            className='sc-ir player-btn'
+            className='sc-ir player-btn queue-btn'
             onClick={this.props.toggleQueue}
           >
+            <span className="queue-circle">{queue.length}</span>
             <img src='/svg/playlist.svg' />
           </button>
         </div>

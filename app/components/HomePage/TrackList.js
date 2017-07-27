@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Track from './Track';
+import { haveDropDown } from '../../HOC';
 
 class TrackList extends React.Component {
   static contextTypes = {
@@ -38,8 +39,8 @@ TrackList.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
   downloadProgress: PropTypes.object.isRequired,
-  addSongToStoreTemporarily: PropTypes.func.isRequired,
+  renderDropDown: PropTypes.func.isRequired,
 };
 
-export default TrackList;
+export default haveDropDown(TrackList);
 

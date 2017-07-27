@@ -1,6 +1,5 @@
 @import 'colors'
 @import 'mixins'
-@import 'tab'
 
 .hp-track-list-wrapper
   width: 60%
@@ -39,7 +38,6 @@
   float: left
   padding: 10px 0
 .homepage
-  overflow: hidden
   background-color: #fff
 
 .trackTitle
@@ -140,5 +138,25 @@ i.ion-more
 
 .choice-active-item
   color: #27DED5
+
+.chart-panel-btn-active
+  background-image: linear-gradient(to right, #02b3e4 0%, #02ccba 100%)
+  color: #fff !important
+
+.chart-panel
+  height: 50px
+  margin-bottom: 10px
+
+
+  button
+    &:not(.chart-panel-btn-active)
+      color: #5D6D7E !important
+    height: 100%
+    width: calc(100% / 3)
+    cursor: pointer
+    &:hover
+      border: 1px solid #27DED5
+
+
 
 

@@ -2,7 +2,7 @@ import * as types from '../constant/action_constant';
 
 const initialState = {
   showAnalyzer: false,
-  dropDown: { activeId: '', show: false },
+  dropDown: { activeId: '', show: false, where: '' },
   showQueue: false,
   slideInRight: false,
   showModal: false,
@@ -65,11 +65,12 @@ export default function (state = initialState, action) {
 }
 
 function toggleTrackDropDown(state, action) {
-  const { activeId } = action.dropDown;
+  const { activeId, where } = action.dropDown;
 
   return {
     ...state,
     dropDown: {
+      where: where !== state.dropDown.where ? where : '',
       activeId: activeId !== state.dropDown.activeId ? activeId : '',
       show: activeId !== state.dropDown.activeId,
     },

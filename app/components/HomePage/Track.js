@@ -1,8 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import CircularProgressbar from 'react-circular-progressbar';
 import { Link } from 'react-router';
 import { changeAlias } from '../../utils/func';
-import Dropdown from '../Dropdown';
 import LinksByComma from '../LinksByComma';
 
 const Track = (props) => {
@@ -11,18 +11,13 @@ const Track = (props) => {
     thumbnail,
     order,
     id,
-    show,
-    dropDownActiveId,
-    addSongToQueue,
-    toggleTrackDropDown,
     artists,
     downloadProgress,
-    toggleModal,
-    addSongToStoreTemporarily,
   } = props;
 
   return (
     <li>
+      { props.renderDropDown('Track', { id, name, thumbnail, artists }) }
       <div className="trackPosition">
         {order}
       </div>
@@ -55,25 +50,17 @@ const Track = (props) => {
           <button className='sc-ir'><i className="ion-android-share" title="share" /></button>
           <button
             className='sc-ir ignore-react-onclickoutside'
-            onClick={props.toggleTrackDropDown.bind(null, id)}>
+            onClick={props.toggleTrackDropDown.bind(null, id, 'Track')}>
             <i className="ion-more" />
           </button>
         </div>
       </div>
-      { show && id === dropDownActiveId &&
-        <Dropdown
-          name={name}
-          id={id}
-          thumbnail={thumbnail}
-          addSongToQueue={addSongToQueue}
-          toggleTrackDropDown={toggleTrackDropDown}
-          toggleModal={toggleModal}
-          artists={artists}
-          addSongToStoreTemporarily={addSongToStoreTemporarily}
-        />
-      }
     </li>
   );
+};
+
+Track.propTypes = {
+  renderDropDown: PropTypes.func.isRequired,
 };
 
 export default Track;

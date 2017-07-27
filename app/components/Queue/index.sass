@@ -29,7 +29,6 @@
   box-shadow: 0 0 8px rgba(0,0,0,.3)
   background: #fff
   z-index: 200
-  overflow-y: scroll
   overflow-x: hidden
   transition-property: -webkit-transform,opacity
   transition-property: transform,opacity
@@ -95,6 +94,9 @@
       cursor: pointer
 
 .queue-list
+  max-height: 390px
+  overflow-x: hidden
+  overflow-y: scroll
   li
     height: 58px
     position: relative
@@ -124,7 +126,7 @@
   justify-content: center
   height: inherit
   i
-   margin-right: 10px
+   margin-right: 15px
    color: #999
    cursor: pointer
 

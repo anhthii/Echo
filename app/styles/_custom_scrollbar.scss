@@ -1,0 +1,36 @@
+
+.modal-playlists::-webkit-scrollbar {
+  width: 6px;
+  height: 50px;
+}
+
+.modal-playlists::-webkit-scrollbar-thumb {
+  height: 150px;
+  background:#D5DBDB;
+}
+.modal-playlists::-moz-scrollbar {
+  width: 6px;
+  height: 50px;
+}
+.modal-playlists::-moz-scrollbar-thumb {
+  height: 150px;
+  background:#D5DBDB;
+}
+
+.queue-list::-webkit-scrollbar {
+  width: 6px;
+  height: 50px;
+}
+
+.queue-list::-webkit-scrollbar-thumb {
+  height: 150px;
+  background:#D5DBDB;
+}
+.queue-list::-moz-scrollbar {
+  width: 6px;
+  height: 50px;
+}
+.queue-list::-moz-scrollbar-thumb {
+  height: 150px;
+  background:#D5DBDB;
+}

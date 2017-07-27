@@ -1,11 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { changeAlias } from '../../utils/func';
 import WithBackgroundImage from '../WithBgImg';
 import LinksByComma from '../LinksByComma';
+import { haveDropDown } from '../../HOC';
 import './index.sass';
 
-const Chart = ({ chart }) => {
+const Chart = (props) => {
+  const { chart } = props;
   if (!chart.items) {
     return null;
   }
@@ -17,9 +20,9 @@ const Chart = ({ chart }) => {
         {
           chart.items.map((item, index) => {
             if (index === 0) {
-              return <ChartFirstItem key={`chart-${item.id}`} {...item} />;
+              return <ChartFirstItem key={`chart-${item.id}`} {...item} {...props}/>;
             }
-            return <ChartItem key={`chart-${item.id}`} {...item} />;
+            return <ChartItem key={`chart-${item.id}`} {...item} {...props}/>;
           })
         }
       </ul>
@@ -27,7 +30,11 @@ const Chart = ({ chart }) => {
   );
 };
 
-const ChartFirstItem = ({ name, order, id, artists }) => (
+Chart.propTypes = {
+  renderDropDown: PropTypes.func.isRequired,
+};
+
+const ChartFirstItem = ({ name, order, id, artists, thumbnail, renderDropDown, toggleTrackDropDown }) => (
   <li className="chart-item">
     <div className="chart-item-order order-first">
       { order }
@@ -48,13 +55,23 @@ const ChartFirstItem = ({ name, order, id, artists }) => (
       </div>
       <div className="chart-item-detail-right">
         <button className="sc-ir"><i className="ion-android-download" title="download the track"></i></button>
-        <button className="sc-ir"><i className="ion-more"></i></button>
+        <button
+          className="sc-ir ignore-react-onclickoutside"
+          onClick={() => toggleTrackDropDown(id, 'Chart')}
+        >
+          <i className="ion-more"></i>
+        </button>
       </div>
     </div>
+    { renderDropDown('Chart', { name, id, artists, thumbnail }) }
   </li>
 );
 
-const ChartItem = ({ name, order, id, thumbnail, artists }) => (
+ChartFirstItem.propTypes = {
+  renderDropDown: PropTypes.func.isRequired,
+};
+
+const ChartItem = ({ name, order, id, thumbnail, artists, renderDropDown, toggleTrackDropDown }) => (
   <li className="chart-item">
     <div className="chart-item-thumb">
       <img src={thumbnail} />
@@ -78,10 +95,21 @@ const ChartItem = ({ name, order, id, thumbnail, artists }) => (
       </div>
       <div className="chart-item-detail-right">
         <button className="sc-ir"><i className="ion-android-download" title="download the track"></i></button>
-        <button className="sc-ir"><i className="ion-more"></i></button>
+        <button
+          className="sc-ir ignore-react-onclickoutside"
+          onClick={() => toggleTrackDropDown(id, 'Chart')}
+        >
+          <i className="ion-more"></i>
+        </button>
       </div>
     </div>
+    { renderDropDown('Chart', { name, id, artists, thumbnail }) }
   </li>
 );
 
-export default Chart;
+ChartItem.propTypes = {
+  renderDropDown: PropTypes.func.isRequired,
+  toggleTrackDropDown: PropTypes.func.isRequired,
+};
+
+export default haveDropDown(Chart);

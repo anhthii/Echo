@@ -20,10 +20,8 @@ const Li = ({ name, id, thumbnail, alias, artist, artists, removeSongFromQueue }
         </div>
       </div>
       <div className="queue-track-actions">
-        <i className="ion-trash-b" onClick={() => removeSongFromQueue(id)}></i>
         <i className='ion-android-download'></i>
-        <i className="ion-ios-heart"></i>
-        <i className="ion-more"></i>
+        <i className="ion-trash-b" onClick={() => removeSongFromQueue(id)}></i>
       </div>
     </li>
   );

@@ -40,8 +40,8 @@ class DropDown extends React.Component {
   }
 
   handleDropdownNextUp() {
-    const { name, id, thumbnail, toggleTrackDropDown, addSongToQueue } = this.props;
-    const songObj = { name, id, thumbnail };
+    const { name, id, thumbnail, toggleTrackDropDown, addSongToQueue, artists } = this.props;
+    const songObj = { name, id, thumbnail, artists };
     addSongToQueue(songObj);
     toggleTrackDropDown(id);
   }
