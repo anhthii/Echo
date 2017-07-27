@@ -1,5 +1,7 @@
-import FetchOnScroll from './FetchOnScroll';
+import fetchOnScroll from './FetchOnScroll';
+import isAuthenticated from './IsAuthenticated';
 
 export {
-  FetchOnScroll,
+  fetchOnScroll,
+  isAuthenticated,
 };
