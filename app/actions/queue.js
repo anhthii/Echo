@@ -1,6 +1,6 @@
 import * as types from '../constant/action_constant';
 import { fetchSong, fetchSuggestedSongs } from './song';
-import { removeById, changeAlias } from '../utils/func';
+import { removeById, changeAlias, isEmpty } from '../utils/func';
 
 export function addSongToQueue(song) {
   const { name, id } = song;
@@ -53,8 +53,9 @@ function tweakSongs(songs) {
 
 export function replaceQueue(songs) {
   return (dispatch, getState) => {
-    const queueIds = getState().queueState.ids;
-    if (!queueIds.length) {
+    const songData = getState().songData.data;
+    // play the first song in the queue if there is no song playing
+    if (isEmpty(songData)) {
       dispatch({ type: types.REPLACE_QUEUE, ...tweakSongs(songs) });
       const { alias, id, name } = songs[0];
 

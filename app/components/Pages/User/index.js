@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
-import { getSongUrl, changeAlias } from '../../../utils/func';
+import { getSongUrl, changeAlias, isEmpty } from '../../../utils/func';
 import { createPlaylist, deleteSong } from '../../../actions/user_playlist';
 import { playUserPlaylist } from '../../../actions/queue';
 import { fetchSong, fetchSuggestedSongs } from '../../../actions/song';
@@ -71,13 +71,21 @@ class UserPage extends React.Component {
 UserPage.propTypes = {
   playlists: PropTypes.array.isRequired,
   dispatch: PropTypes.func.isRequired,
-  queueIds: PropTypes.array.isRequired,
+  songData: PropTypes.object.isRequired,
 };
 
 class Playlist extends React.Component {
-  expand(e) {
-    e.stopPropagation();
+  state = {
+    expand: false,
+  };
+
+  toggleExpand(e) {
+    // do nothing if the playlist has no songs
+    if (!this.props.playlist.songs.length) { return; }
+
     const $list = e.target.closest('.user-playlist-header').nextSibling;
+    this.setState({ expand: !this.state.expand });
+
     if ($list.style.maxHeight) {
       $list.style.maxHeight = null;
     } else {
@@ -86,12 +94,14 @@ class Playlist extends React.Component {
   }
 
   play() {
-    const { dispatch, queueIds } = this.props;
+    if (!this.props.playlist.songs.length) { return; }
+
+
+    const { dispatch, songData } = this.props;
     const firstSong = this.props.playlist.songs[0];
     const { name, id } = firstSong;
-
     // play the first song if there is no song in the queue
-    if (!queueIds.length) {
+    if (isEmpty(songData)) {
       dispatch(fetchSong(changeAlias(name), id));
       dispatch(fetchSuggestedSongs(id));
     }
@@ -102,24 +112,23 @@ class Playlist extends React.Component {
   render() {
     const { songs, title } = this.props.playlist;
     const { dispatch, playlist } = this.props;
+    const whichIcon = this.state.expand ? 'down' : 'right';
+    const iconCLassName = `ion-arrow-${whichIcon}-b`;
 
     return (
       <div className="user-playlist">
         <div
           className="user-playlist-header"
-          onClick={this.expand.bind(this)}
+          onClick={this.toggleExpand.bind(this)}
         >
           <div className="user-playlist-title">{title}</div>
-          <div
-            className="user-playlist-play-btn"
-            onClick={this.play.bind(this)}
-          >
-            <button className="sc-ir">
+          <div className="user-playlist-play-btn">
+            <button className="sc-ir" onClick={this.play.bind(this)}>
               <i className="ion-play"></i>
             </button>
           </div>
           <b>{songs.length}</b> songs
-          <i className="ion-arrow-down-b"></i>
+          <i className={iconCLassName}></i>
         </div>
         <List songs={songs} dispatch={dispatch} playlistTitle={playlist.title}/>
       </div>
@@ -130,7 +139,7 @@ class Playlist extends React.Component {
 Playlist.propTypes = {
   playlist: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  queueIds: PropTypes.array.isRequired,
+  songData: PropTypes.object.isRequired,
 };
 
 const List = ({ songs, dispatch, playlistTitle }) => {

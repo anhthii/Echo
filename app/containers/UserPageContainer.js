@@ -8,14 +8,14 @@ class UserPageContainer extends Component {
       <Pages.UserPage
         playlists={this.props.playlists}
         dispatch={this.props.dispatch}
-        queueIds={this.props.queueIds}
+        songData={this.props.songData}
       />
     );
   }
 }
 
-function mapStateToProps({ playlistState, queueState }) {
-  return { playlists: playlistState.playlists, queueIds: queueState.ids };
+function mapStateToProps({ playlistState, songData }) {
+  return { playlists: playlistState.playlists, songData: songData.data };
 }
 
 export default connect(mapStateToProps)(UserPageContainer);
