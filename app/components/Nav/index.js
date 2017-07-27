@@ -96,7 +96,7 @@ class Nav extends React.Component {
             <Link to="/signup" className='sUpLink'>Sign Up</Link>
           </div>
           : <div className="user">
-            <Link to="/user">{user.username}</Link>
+            <Link to={`/user/${user.username}`}>{user.username}</Link>
             <a href="#" onClick={this.logOut.bind(this)}>Log out</a>
           </div>
 

@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { isAuthenticated } from '../../HOC';
 import queueAdd from '../../svg/queue-add.svg';
 import queueNext from '../../svg/queue-next.svg';
 import './index.sass';
@@ -19,7 +20,15 @@ class DropDown extends React.Component {
   }
 
   handleDropdownAdd() {
-    const { id, toggleTrackDropDown, name, artists, toggleModal, thumbnail } = this.props;
+    // redirect user to the login page if he is not authenticated
+    const { authenticated, user, redirectTo, id, toggleTrackDropDown } = this.props;
+    if (!(authenticated && user.username)) {
+      // remove the dropdown from the interface
+      toggleTrackDropDown(id);
+      return redirectTo('/login');
+    }
+
+    const { name, artists, toggleModal, thumbnail } = this.props;
     toggleTrackDropDown(id);
     toggleModal();
     this.props.addSongToStoreTemporarily({
@@ -86,6 +95,9 @@ DropDown.propTypes = {
   toggleTrackDropDown: PropTypes.func.isRequired,
   toggleModal: PropTypes.func.isRequired,
   addSongToStoreTemporarily: PropTypes.func.isRequired,
+  authenticated: PropTypes.bool.isRequired,
+  user: PropTypes.object,
+  redirectTo: PropTypes.func.isRequired,
 };
 
-export default onClickOutside(DropDown);
+export default isAuthenticated(onClickOutside(DropDown));
