@@ -115,3 +115,17 @@
     img
       width: 100%
       height: 100%
+
+.playlist-song-enter
+  opacity: 0.01
+
+.playlist-song-enter.playlist-song-enter-active
+  opacity: 1
+  transition: opacity 500ms ease-in
+
+.playlist-song-leave
+  opacity: 1
+
+.playlist-song-leave.playlist-song-leave-active
+  opacity: 0.01
+  transition: opacity 300ms ease-in

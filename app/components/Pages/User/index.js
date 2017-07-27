@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import onClickOutside from 'react-onclickoutside';
 import { getSongUrl, changeAlias, isEmpty } from '../../../utils/func';
 import { createPlaylist, deleteSong } from '../../../actions/user_playlist';
@@ -145,33 +146,38 @@ Playlist.propTypes = {
 const List = ({ songs, dispatch, playlistTitle }) => {
   return (
     <ul className="user-playlist-inside">
-      {songs.map(song => (
-        <li className="playlist-song" key={`playlist-song${song.id}`}>
-        <div className="playlist-song-thumbnail">
-          <img src={song.thumbnail} />
-        </div>
-          <div className="playlist-song-title ellipsis">
-            <Link to={getSongUrl(song.name, song.id)}>{song.name}</Link>
-          </div>
-          <div className="playlist-song-artists">
-            <LinksByComma
-              data={song.artists}
-              titleEntry="name"
-              pathEntry="link"
-              definePath={(link) => link.replace('/nghe-si/', '/artist/')}
-              defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
-            />
-          </div>
-          <div className="playlist-song-remove-btn">
-            <button
-              className="sc-ir"
-              onClick={() => dispatch(deleteSong(playlistTitle, song.id))}
-            >
-              <i className="ion-android-close"></i>
-            </button>
-          </div>
-        </li>
-      ))}
+      <ReactCSSTransitionGroup
+        transitionName="playlist-song"
+        transitionEnterTimeout={500}
+        transitionLeaveTimeout={300}>
+        {songs.map(song => (
+          <li className="playlist-song" key={`playlist-song${song.id}`}>
+            <div className="playlist-song-thumbnail">
+              <img src={song.thumbnail} />
+            </div>
+            <div className="playlist-song-title ellipsis">
+              <Link to={getSongUrl(song.name, song.id)}>{song.name}</Link>
+            </div>
+            <div className="playlist-song-artists">
+              <LinksByComma
+                data={song.artists}
+                titleEntry="name"
+                pathEntry="link"
+                definePath={(link) => link.replace('/nghe-si/', '/artist/')}
+                defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
+              />
+            </div>
+            <div className="playlist-song-remove-btn">
+              <button
+                className="sc-ir"
+                onClick={() => dispatch(deleteSong(playlistTitle, song.id))}
+              >
+                <i className="ion-android-close"></i>
+              </button>
+            </div>
+          </li>
+        ))}
+      </ReactCSSTransitionGroup>
     </ul>
   );
 };
