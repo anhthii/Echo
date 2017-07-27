@@ -29,6 +29,9 @@ export default function (state = initialState, action) {
   case types.DELETE_SONG_FROM_PLAYLIST:
     return { ...state, playlists: action.playlists };
 
+  case types.CLEAR_USER_PLAYLIST:
+    return initialState;
+
   default:
     return state;
   }

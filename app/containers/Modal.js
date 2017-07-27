@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal } from '../components';
-import { getPlaylistCollection } from '../actions/user_playlist';
-import { loadUserData } from '../localStorage';
 
 class ModalContainer extends Component {
-  componentDidMount() {
-    if (loadUserData() && !this.props.playlists.length) {
-      this.props.dispatch(getPlaylistCollection());
-    }
-  }
-
   render() {
-    const { dispatch, playlists, song } = this.props;
+    const { dispatch, playlists, song, authenticated } = this.props;
 
     return this.props.showModal
       ? <Modal
         dispatch={dispatch}
         playlists={playlists}
         song={song}
+        authenticated={authenticated}
       />
       : null;
   }
 }
 
-function mapStateToProps({ UIState, playlistState }) {
+function mapStateToProps({ UIState, playlistState, auth }) {
   const playlists = playlistState.playlists.length
     ? playlistState.playlists.map(playlist => playlist.title)
     : [];
@@ -33,6 +26,7 @@ function mapStateToProps({ UIState, playlistState }) {
     showModal: UIState.showModal,
     playlists,
     song: playlistState.tmpSong,
+    authenticated: auth.authenticated,
   };
 }
 

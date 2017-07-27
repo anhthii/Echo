@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import { toggleModal } from '../../actions/ui';
-import { createPlaylist, addSongToPlaylist } from '../../actions/user_playlist';
+import {
+  createPlaylist,
+  addSongToPlaylist,
+  getPlaylistCollection,
+} from '../../actions/user_playlist';
 import './index.sass';
 
 class Modal extends Component {
@@ -20,6 +24,10 @@ class Modal extends Component {
   }
 
   componentDidMount() {
+    if (this.props.authenticated) {
+      this.props.dispatch(getPlaylistCollection());
+    }
+
     this.setState({ animate: true });
   }
 
@@ -73,10 +81,12 @@ class Modal extends Component {
         >Create a playlist
           <i className="ion-close-round"></i>
         </button>
-
-        <div className="modal-warn">
-          You don't have any playlist yet
-        </div>
+        {
+          !this.props.playlists.length &&
+          <div className="modal-warn">
+            You don't have any playlists yet
+          </div>
+        }
         <button
           className="playlist-btn"
           onClick={this.handleOnClick.bind(this)}
@@ -112,6 +122,7 @@ Modal.propTypes = {
   dispatch: PropTypes.func.isRequired,
   playlists: PropTypes.array.isRequired,
   song: PropTypes.object.isRequired,
+  authenticated: PropTypes.bool.isRequired,
 };
 
 export default onClickOutside(Modal);

@@ -85,3 +85,10 @@ export function deleteSong(playlistTitle, id) {
       .catch(err => { throw err; });
   };
 }
+
+export function clearUserPlaylist() {
+  cachedUsername = '';
+  return {
+    type: types.CLEAR_USER_PLAYLIST,
+  };
+}

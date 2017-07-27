@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
 import SearchMenu from '../SearchMenu';
 import { logout } from '../../actions/auth';
+import { clearUserPlaylist } from '../../actions/user_playlist';
 import './nav.sass';
 
 class Nav extends React.Component {
@@ -44,6 +45,7 @@ class Nav extends React.Component {
 
   logOut(e) {
     e.preventDefault();
+    this.props.dispatch(clearUserPlaylist());
     this.props.dispatch(logout());
   }
 
