@@ -41,7 +41,10 @@ const getSongs = (name, page, res, next) => {
         .extract('text', '.info-summary > h1', 'artistName')
         .list('.group.fn-song')
         .setKey('song')
-        .extractAttrs(['href', 'href', 'text'], '._trackLink', ['id', 'alias', 'title'])
+        .extractAttrs(['href', 'href'], '._trackLink', ['id', 'alias'])
+        .extractAttr('text', '._trackLink', 'title', string => {
+          return string.replace(/\s*-\s*.+/g, '');
+        })
         .extractAttr('text', '._trackLink span', 'artist_text')
         .paginate();
       res.json(parser.get());

@@ -71,9 +71,14 @@ Page.prototype.setKey = function (key) {
  * { 'songs': [] }
 */
 
-Page.prototype.extractAttr = function (attr, selector, outputKey) {
+Page.prototype.extractAttr = function (attr, selector, outputKey, manipulateFunc) {
   this.attrs[selector] = this.attrs[selector] || [];
   const obj = { attr, outputKey };
+
+  if (typeof manipulateFunc === 'function') {
+    obj.manipulateFunc = manipulateFunc;
+  }
+
   this.attrs[selector].push(obj);
   return this;
 };
@@ -152,14 +157,14 @@ Page.prototype.get = function () {
         const arr = this.attrs[selector];
         const $el = this.$(element).find(selector);
         arr.forEach(obj => {
-          const { attr, outputKey } = obj;
+          const { attr, outputKey, manipulateFunc } = obj;
           if (outputKey === 'id' || outputKey === 'alias') {
             // get the song id and alias
             const match = /\/([0-9A-Za-z_-]+)\/(\w+)\.html$/.exec(this.attr($el, attr));
             const [, alias, id] = match;
             doc[outputKey] = outputKey === 'id' ? id : alias;
           } else {
-            doc[outputKey] = this.attr($el, attr);
+            doc[outputKey] = this.attr($el, attr, manipulateFunc);
           }
         });
       }

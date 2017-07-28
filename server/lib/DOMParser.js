@@ -51,10 +51,21 @@ DOMParser.prototype.extractList = function (attrs, selector, ouputKey) {
   });
 };
 
-DOMParser.prototype.attr = function ($el, attr) {
-  // attr is null for "artists" cuz we extract both text and link attribute by default
+/**
+ * @param {DOM | required} $el
+ * @param {String | required} arttr
+ *@param {function | optional} manipulate
+*/
+
+DOMParser.prototype.attr = function ($el, attr, manipulateFunc) {
   function extract(atrib, e) {
-    return atrib === 'text' ? e.text().trim() : e.attr(atrib);
+    function shouldManipulateResult(result) {
+      return typeof manipulateFunc === 'function' ? manipulateFunc(result) : result;
+    }
+
+    return atrib === 'text'
+    ? shouldManipulateResult(e.text().trim())
+    : shouldManipulateResult(e.attr(atrib));
   }
   // check is $el array of artist element
   if (attr === null) {
