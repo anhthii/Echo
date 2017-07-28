@@ -1,10 +1,13 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, withRouter } from 'react-router';
 import PropTypes from 'prop-types';
 import { getSongUrl } from '../../utils/func';
 import './index.sass';
 
-const Playlist = ({ songs, className, page, pathEntry }) => {
+const Playlist = (props) => {
+  const { songs, className, pathEntry } = props;
+  const page = props.location.query.page;
+
   return (
     <ul className={`${className} playlist-tracks`}>
       {songs.map((song, index) => (
@@ -16,7 +19,7 @@ const Playlist = ({ songs, className, page, pathEntry }) => {
             <Link to={getSongUrl(song[pathEntry] || song.title, song.id)}>{song.title}</Link>
           </div>
           <div className="playlist-track-artist">
-            Justin Bieber
+            {song.artist_text}
           </div>
           <div className="playlist-track-actions">
             actions
@@ -33,4 +36,4 @@ Playlist.propTypes = {
   pathEntry: PropTypes.string,
 };
 
-export default Playlist;
+export default withRouter(Playlist);
