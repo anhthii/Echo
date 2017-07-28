@@ -54,6 +54,7 @@ class SongPage extends React.Component {
   render() {
     return (
       <div>
+        <Pages.SongHeader />
         <KarokeContainer className='karaoke-song-page'/>
         <Pages.SongPageBody suggestedSongs={this.props.suggestedSongs}/>
       </div>

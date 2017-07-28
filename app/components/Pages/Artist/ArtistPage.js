@@ -19,8 +19,9 @@ const ArtistPage = (props) => {
           </div>
         </div>
       </WithBackgroundImage>
-
-      <button onClick={() => props.replaceQueue(songs)}>play</button>
+      <button onClick={() => props.replaceQueue(songs)} className="sc-ir" title="play">
+        <img src="/svg/play-button-inside-a-circle.svg" className="circle-play-icon"/>
+      </button>
 
       <Playlist className='artist-playlist' songs={songs} pathEntry="alias" />
       <Pagination

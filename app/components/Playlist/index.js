@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, withRouter } from 'react-router';
 import PropTypes from 'prop-types';
+import LinksByComma from '../LinksByComma';
 import { getSongUrl } from '../../utils/func';
 import './index.sass';
 
@@ -19,11 +20,19 @@ const Playlist = (props) => {
             <Link to={getSongUrl(song[pathEntry] || song.title, song.id)}>{song.title}</Link>
           </div>
           <div className="playlist-track-artist">
-            {song.artist_text}
+            {song.artist_text || <LinksByComma
+              data={song.artists}
+              titleEntry="name"
+              pathEntry="alias"
+              definePath={(alias) => `/artist/${alias}`}
+            />}
           </div>
-          <div className="playlist-track-actions">
-            actions
-          </div>
+          {/* <div className="playlist-track-actions">
+            <button
+              className="sc-ir"
+              title="download this song"
+            ><i className="ion-ios-download-outline"></i></button>
+          </div> */}
         </li>
       ))}
     </ul>

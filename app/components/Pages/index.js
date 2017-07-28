@@ -3,6 +3,7 @@ import ArtistPage from './Artist/ArtistPage';
 import ArtistGenrePage from './Artist/ArtistGenrePage';
 import AlbumPlaylist from './Album/AlbumPlaylist';
 import SongPageBody from './Song/SongPageBody';
+import SongHeader from './Song/SongHeader';
 import ChartPage from './Chart';
 import LogInPage from './Auth/login';
 import SignUpPage from './Auth/signup';
@@ -18,4 +19,5 @@ export {
   LogInPage,
   SignUpPage,
   UserPage,
+  SongHeader,
 };

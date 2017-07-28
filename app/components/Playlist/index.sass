@@ -27,14 +27,24 @@
       float: left
 
     &-title
-      width: 45%
+      width: calc(55% - 50px)
       text-align: left !important
       padding-left: 10px
       a
         color: $light-blue
+        &:hover
+          text-decoration: underline
 
     &-artist
-      width: 35%
+      width: 45%
+      a
+        color: $grey-text
 
-    &-actions
-      width: calc(20% - 50px)
+    /* &-actions
+      width: calc(25% - 50px)
+      button
+        cursor: pointer
+        padding: 0 10px
+      i
+        font-size: 18px
+        color: #45B39D */

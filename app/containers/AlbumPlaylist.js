@@ -19,15 +19,19 @@ class AlbumPlaylist extends React.Component {
 
   render() {
     return (
-      <Pages.AlbumPlaylist playlist={this.props.playlist} replaceQueue={this.props.replaceQueue}/>
+      <Pages.AlbumPlaylist
+        playlist={this.props.playlist}
+        replaceQueue={this.props.replaceQueue}
+        isPlaying={this.props.isPlaying}
+      />
     );
   }
 }
 
 function mapStateToProps(state) {
   const playlist = state.albumState.playlist;
-
-  return { playlist };
+  const isPlaying = !isEmpty(state.songData.data);
+  return { playlist, isPlaying };
 }
 
 export default connect(mapStateToProps,

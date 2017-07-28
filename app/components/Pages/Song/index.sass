@@ -1,13 +1,61 @@
 @import 'colors'
+@import mixins
 .song-body
   padding: 20px 20px
   background: white
   padding-bottom: 200px
 
-.comment-section
+/* .comment-section
   width: 40%
   float: left
-  height: 500px
+  height: 500px */
+
+.song-header
+  height: 80px
+  padding: 10px
+  color: white
+  position: relative
+  background: #114357;  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right,#114357, #F29492);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #114357, #F29492); /* W3C, IE 1  0+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+  > span
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translateY(-50%)
+
+  &-info
+    width: 70%
+    height: 60px
+    float: left
+    padding-left: 20px
+  &-img
+    height: 50px
+    background-size: 100%
+  &-song-title
+    font-size: 16px
+    margin-top: 5px
+  &-song-artist
+    margin-top: 10px
+    a
+      color: #73C6B6
+      &:hover
+        color: #45B39D
+  &-actions
+    width: 30%
+    float: right
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 60px
+
+    button
+      margin-left: 15px
+      cursor: pointer
+    i
+      color: #fff !important
+      font-size: 35px
 
 .comment-section-heading
   color: #343a40
@@ -96,16 +144,14 @@
 
 
 .suggested-section
-  width: 35%
-  float: right
+  width: 40%
+  float: left
   &-heading
     padding-bottom: 10px
     border-bottom: 1px solid #D5DBDB
-  h3
-    margin: 0
-    text-transform: uppercase
-    font-family: 'Open Sans', sans-serif
-    color: $gb-1
+  span
+    color: #34495E
+    font-size: 17px
 
 .suggested-song
   margin-top: 10px
@@ -116,21 +162,17 @@
     width: calc(100% - 50px)
     float: right
     height: 50px
-    padding: 8px 10px 5px 20px
+    padding: 8px 10px 0 20px
     font-family: "Roboto", sans-serif
-    a
-      &:hover
-        color: $gb-1
   &-name
     display: block
     font-size: 14px
-    color: #4dadf7
+    color: #5D6D7E
+    margin-bottom: 5px
     &:hover
-      color: #4dadf7 !important
       text-decoration: underline
   &-artist
     font-size: 12px
-    color: #888
     line-height: 15px
 
   img

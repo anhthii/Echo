@@ -67,7 +67,10 @@ class Player extends React.Component {
       const { name, id } = nextProps.queue[0];
       this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
       this.props.fetchSuggestedSongs(id);
-      browserHistory.push(`/song/${changeAlias(name)}/${id}`);
+      if (/\/song\//.test(window.location.href)) {
+        // only redirect if is on the song route
+        browserHistory.push(`/song/${changeAlias(name)}/${id}`);
+      }
     }
 
     const nextPercent = nextProps.playerState.playedPercent;
@@ -206,7 +209,7 @@ class Player extends React.Component {
           crossOrigin='anonymous'
           ref='audio'
           loop={this.state.loop}
-
+          muted
         />
         <div className="player-info">
           <Link

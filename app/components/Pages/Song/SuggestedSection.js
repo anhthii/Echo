@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { changeAlias } from '../../../utils/func';
+import LinksByComma from '../../LinksByComma';
 
 function SuggestedSection(props) {
   const songList = props.songs.map(song =>
@@ -10,8 +11,13 @@ function SuggestedSection(props) {
         <Link
           to={`/song/${changeAlias(song.songName)}/${changeAlias(song.id)}`}
           className='suggested-song-name'>{song.songName}</Link>
-       {/* <a href="#" className='suggested-song-artist'>OnlyC, </a>
-        <a href="#" className='suggested-song-artist' style={{marginLeft: '2px'}}>Lou Hoàng</a>*/}
+        <LinksByComma
+          className="trackArtist"
+          data={song.artists}
+          titleEntry="name"
+          pathEntry="alias"
+          definePath={(alias) => `/artist/${alias}`}
+        />
       </div>
     </div>
   );
@@ -19,7 +25,7 @@ function SuggestedSection(props) {
   return (
     <div className="suggested-section">
       <div className="suggested-section-heading">
-        <h3>Gợi ý</h3>
+        <span>Suggested</span>
       </div>
       <div className="suggested-section-body">
         { songList }

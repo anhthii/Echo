@@ -28,10 +28,10 @@ function frameLooper() {
   analyser.getByteFrequencyData(fbcArray);
   ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
   const gradient = ctx.createLinearGradient(0, 0, 0, 512);
-  // gradient.addColorStop(0.3, '#A569BD');
-  gradient.addColorStop(0.3, '#5DADE2');
-  gradient.addColorStop(0.15, '#239B56');
-  ctx.fillStyle = gradient;
+  gradient.addColorStop(0.15, '#114357');
+  gradient.addColorStop(0.3, '#45B39D');
+  //gradient.addColorStop(0.3, '#28B463');
+  ctx.fillStyle = '#45B39D';
   bars = 150;
   for (let i = 0; i < bars; i++) {
     barX = i * 2;

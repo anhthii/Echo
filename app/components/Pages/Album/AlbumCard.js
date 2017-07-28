@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import LazyloadImage from '../../LazyloadImage';
+import LinksByComma from '../../LinksByComma';
 import './album_card.sass';
 
 const AlbumCard = (props) => (
@@ -13,7 +14,12 @@ const AlbumCard = (props) => (
         <Link to={`/album/playlist/${props.alias}/${props.id}`}>{props.title}</Link>
       </div>
       <div className="album-artists">
-        <a href='#'>Various artist</a>
+        <LinksByComma
+          data={props.artists}
+          titleEntry="name"
+          pathEntry="alias"
+          definePath={(alias) => `/artist/${alias}`}
+        />
       </div>
     </div>
   </div>

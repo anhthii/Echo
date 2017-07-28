@@ -79,6 +79,7 @@ const ArtistView = (props) => {
   );
 };
 
+
 const Default = ({ origins, Card, chunkSize }) => (
   <div>
     { origins.map(origin =>

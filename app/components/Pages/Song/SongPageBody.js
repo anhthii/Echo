@@ -11,7 +11,7 @@ class SongPageBody extends React.Component {
   render() {
     return (
       <div className="song-body">
-        <div className="comment-section">
+        {/* <div className="comment-section">
           <div className="comment-section-heading">
             <div>
               <h3>Bình luận <span>(23)</span></h3>
@@ -77,7 +77,7 @@ class SongPageBody extends React.Component {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
         <SuggestedSection songs={this.props.suggestedSongs}/>
       </div>
     );

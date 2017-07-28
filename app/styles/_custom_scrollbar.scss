@@ -34,3 +34,21 @@
   height: 150px;
   background:#D5DBDB;
 }
+
+.genre-menu::-webkit-scrollbar {
+  width: 6px;
+  height: 50px;
+}
+
+.genre-menu::-webkit-scrollbar-thumb {
+  height: 150px;
+  background:#D5DBDB;
+}
+.genre-menu::-moz-scrollbar {
+  width: 6px;
+  height: 50px;
+}
+.genre-menu::-moz-scrollbar-thumb {
+  height: 150px;
+  background:#D5DBDB;
+}

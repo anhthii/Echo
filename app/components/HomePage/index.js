@@ -37,7 +37,7 @@ class ChartPanel extends React.Component {
 }
 
 const HomePage = (props) =>
-  <div className='homepage'>
+  <div className='homepage home-container'>
     <div className="home-nav">
       <Choices fetchTracks={props.fetchTracks} />
     </div>
