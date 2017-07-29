@@ -16,8 +16,8 @@ class ChartPanel extends React.Component {
   render() {
     const list = [
       { alias: 'pop', title: 'Top 10 Billboard' },
-      { alias: 'kpop', title: 'KPop Chart' },
-      { alias: 'vpop', title: 'VPop Chart' },
+      { alias: 'kpop', title: 'K-Pop Chart' },
+      { alias: 'vpop', title: 'V-Pop Chart' },
     ];
     const { activeChart } = this.state;
     return (
@@ -56,6 +56,7 @@ HomePage.propTypes = {
   authenticated: PropTypes.bool.isRequired,
   downloadProgress: PropTypes.object.isRequired,
   fetchTracks: PropTypes.func.isRequired,
+  isFading: PropTypes.bool.isRequired,
 };
 
 

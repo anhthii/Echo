@@ -16,9 +16,11 @@ class TrackList extends React.Component {
   }
 
   render() {
+    const { isFading } = this.props;
+
     return (
       <div className='hp-track-list-wrapper'>
-        <ul className='hp-track-list'>
+        <ul className={`hp-track-list ${isFading ? 'isFading' : ''}`}>
           { this.props.tracks.map(track =>
             <Track
               key={track.id}
@@ -37,6 +39,7 @@ class TrackList extends React.Component {
 TrackList.propTypes = {
   tracks: PropTypes.array.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  isFading: PropTypes.bool.isRequired,
   authenticated: PropTypes.bool.isRequired,
   downloadProgress: PropTypes.object.isRequired,
   renderDropDown: PropTypes.func.isRequired,

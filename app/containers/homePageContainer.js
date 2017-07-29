@@ -21,6 +21,7 @@ function mapStateToProps(state) {
   return {
     chart: state.chartState[activeChart],
     downloadProgress: state.UIState.downloadProgress,
+    isFading: state.UIState.isFading,
     isLoading,
     tracks,
     authenticated,

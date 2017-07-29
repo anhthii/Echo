@@ -7,6 +7,7 @@ const initialState = {
   slideInRight: false,
   showModal: false,
   isLoading: false,
+  isFading: false,
   downloadProgress: {
     isDownloading: false,
     id: '',
@@ -37,6 +38,12 @@ export default function (state = initialState, action) {
 
   case types.RESET_SLIDE_IN_RIGHT:
     return { ...state, slideInRight: false };
+
+  case types.START_FADING:
+    return { ...state, isFading: true };
+
+  case types.STOP_FADING:
+    return { ...state, isFading: false };
 
   case types.START_DOWNLOADING:
     return {

@@ -50,6 +50,8 @@ export const UPDATE_DOWNLOAD_PROGRESS = 'UPDATE_DOWNLOAD_PROGRESS';
 export const TOGGLE_MODAL = 'TOGGLE_MODAL';
 export const START_LOADING = 'START_LOADING';
 export const FINISH_LOADING = 'FINISH_LOADING';
+export const START_FADING = 'START_FADING';
+export const STOP_FADING = 'STOP_FADING';
 
 // actions for handling route transition
 export const TOGGLE_PUSH_ROUTE = 'TOGGLE_PUSH_ROUTE';

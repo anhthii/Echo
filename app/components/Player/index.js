@@ -252,7 +252,7 @@ class Player extends React.Component {
           </button>
         </div>
         <div className="player-seek">
-          <span>{this.audio && '0:00'}</span>
+          <span>{(this.audio && this.audio.duration) ? '0:00' : ''}</span>
           <InputRange
             maxValue={100}
             minValue={0}
