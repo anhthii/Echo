@@ -1,21 +1,32 @@
 import React from 'react';
+import { Link } from 'react-router';
+import { changeAlias } from '../../utils/func';
 
-function ArtistResult() {
+function ArtistResult(props) {
   return (
     <ul className='artist-result'>
       <div className='search-li-title'>
         Artist
       </div>
-      <li>
-        <div className='search-li-detail'>
-          <img src={'http://zmp3-photo-td.zadn.vn/thumb/94_94/covers/d/3/d3d0ac7dfb730ab090524c1df0bbdc64_1474538317.jpg'} alt='' />
-          <div className='search-li-info'>
-            <div className='search-li-artist'>
-              Artists
+      {
+        props.artists.map(artist =>
+          <li key={artist.id}>
+            <div className='search-li-detail'>
+              <img src={`http://image.mp3.zdn.vn/thumb/94_94/${artist.thumb}`} alt='' />
+              <div className='search-li-info'>
+                <div className='search-li-artist'>
+                  <Link
+                    to={`/artist/${changeAlias(artist.name)}`}
+                    onClick={() => props.clearSearchResult() }
+                  >
+                    {artist.name}
+                  </Link>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </li>
+          </li>
+        )
+      }
     </ul>
   );
 };

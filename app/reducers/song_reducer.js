@@ -17,6 +17,9 @@ export default function (state = initialState, action) {
   case types.START_FETCHING_SONG:
     return { ...state, isFetching: true };
 
+  case types.FETCH_SONG_FAILURE:
+    return { ...state, isFetching: false };
+
   default:
     return state;
   }

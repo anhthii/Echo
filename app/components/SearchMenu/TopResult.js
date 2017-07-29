@@ -19,7 +19,7 @@ function TopResult({ name, id, artist, thumb, clearSearchResult }) {
               >{name}</Link>
             </div>
             <div className='search-li-artist'>
-              Artists
+              {artist}
             </div>
           </div>
         </div>

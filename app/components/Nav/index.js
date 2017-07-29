@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router';
+import { Link, IndexLink } from 'react-router';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import debounce from 'lodash.debounce';
@@ -9,6 +9,10 @@ import { clearUserPlaylist } from '../../actions/user_playlist';
 import './nav.sass';
 
 class Nav extends React.Component {
+  static contextTypes = {
+    router: PropTypes.object,
+  }
+
   constructor() {
     super();
     this.state = { term: '', searchResult: {} };
@@ -22,7 +26,7 @@ class Nav extends React.Component {
           this.setState({ searchResult: data });
         }
       })
-      .catch(err => console.log(err));
+      .catch(err => { throw err; });
   }
 
   handleOnChange(e) {
@@ -47,6 +51,7 @@ class Nav extends React.Component {
     e.preventDefault();
     this.props.dispatch(clearUserPlaylist());
     this.props.dispatch(logout());
+    this.context.router.push('/');
   }
 
   render() {
@@ -56,11 +61,12 @@ class Nav extends React.Component {
       <nav>
         <div className="logo">
           <Link to="/">
-            <img src="https://a-v2.sndcdn.com/assets/images/header/wordmark-d95b0ac.png" alt=""/>
+            Echo
           </Link>
         </div>
         <div className="searchBar">
           <div className="search-wrapper">
+            <i className="ion-search"></i>
             <input
               type="text"
               placeholder="search for songs"
@@ -77,31 +83,47 @@ class Nav extends React.Component {
         </div>
         <div className="navRight">
           <ul className="nav-menu">
-            <Link to="/charts">
-              <li>BXH</li>
-            </Link>
-            <Link to="/albums">
-              <li>Album</li>
-            </Link>
-            <Link to="/artists">
-              <li>Artist</li>
-            </Link>
-            <a href="#">
-              <li>Top 100</li>
-            </a>
+            <li>
+              <IndexLink to="/" className="animating_link" activeClassName="nav-menu-link-active">
+                Home
+              </IndexLink>
+            </li>
+            <li>
+              <Link to="/charts" className="animating_link" activeClassName="nav-menu-link-active">
+                Charts
+              </Link>
+            </li>
+            <li>
+              <Link to="/albums" className="animating_link" activeClassName="nav-menu-link-active">
+                Albums
+              </Link>
+            </li>
+            <li>
+              <Link to="/artists" className="animating_link" activeClassName="nav-menu-link-active">
+                Artists
+              </Link>
+            </li>
           </ul>
         </div>
         {
           !authenticated
           ? <div className="auth-btns">
-            <Link to="/login" className='sInLink'>Log In</Link>
-            <Link to="/signup" className='sUpLink'>Sign Up</Link>
+            <Link to="/login" className="animating_link">
+              <img src="/svg/login.svg" />
+              Log In
+            </Link>
+            <Link to="/signup" className="animating_link">
+              Sign Up
+            </Link>
           </div>
           : <div className="user">
-            <Link to={`/user/${user.username}`}>{user.username}</Link>
-            <a href="#" onClick={this.logOut.bind(this)}>Log out</a>
+            <Link to={`/user/${user.username}`} className="animating_link ellipsis">
+              {user.username}
+            </Link>
+            <a href="#" title="Log Out" onClick={this.logOut.bind(this)} className="animating_link">
+              <img src="/svg/sign-out-option.svg" />
+            </a>
           </div>
-
         }
       </nav>
     );

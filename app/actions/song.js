@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as types from '../constant/action_constant';
+import { browserHistory } from 'react-router';
 import { togglePushRoute } from './queue';
 
 export function fetchSong(name, id) {
@@ -12,9 +13,14 @@ export function fetchSong(name, id) {
 
       dispatch(togglePushRoute(false));
 
-      dispatch({ type: types.ADD_SONG_TO_QUEUE, song: { name: data.name, id, artist: data.artist } });
+      dispatch({ type: types.ADD_SONG_TO_QUEUE,
+        song: { name: data.name, id, artist: data.artist },
+      });
     })
-    .catch(err => { throw err; });
+    .catch(err => {
+      dispatch({ type: types.FETCH_SONG_FAILURE });
+      browserHistory.push('/notfound/song');
+    });
   };
 }
 

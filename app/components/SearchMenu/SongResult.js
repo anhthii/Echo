@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { getSongUrl } from '../../utils/func';
 
-function SongResult({ songs }) {
+function SongResult({ songs, clearSearchResult }) {
   return (
     <ul className='song-result'>
       <div className='search-li-title search-song-title'>
@@ -14,10 +14,13 @@ function SongResult({ songs }) {
             <div className='search-li-detail search-song-detail'>
               <div className='search-li-info search-song'>
                 <div>
-                  <Link to={getSongUrl(song.name, song.id)}>{song.name}</Link>
+                  <Link
+                    to={getSongUrl(song.name, song.id)}
+                    onClick={() => clearSearchResult()}
+                  >{song.name}</Link>
                 </div>
                 <div className='search-li-artist'>
-                  Artists
+                  { song.artist }
                 </div>
               </div>
             </div>

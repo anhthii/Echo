@@ -26,7 +26,7 @@ const store = createStore(rootReducer, persistedData, applyMiddleware(...middlew
 
 store.subscribe(_throttle(() => {
   saveQueueState(store.getState());
-}, 1000 * 60));
+}, 1000 * 60 * 5));
 // save songs in queue to the localStorage every 1 minutes
 
 export default store;

@@ -2,9 +2,11 @@
 
 .search-menu
   position: absolute
+  padding-top: 10px
+  padding-bottom: 10px
   top: 43px
   width: calc(100% - 40px)
-  height: 500px
+  max-height: 500px
   overflow-y: scroll
   z-index: 100
   background: #fff
@@ -29,7 +31,7 @@
     border-bottom: 1px solid #ccc
   &-detail
     overflow: hidden
-    margin-top: 7px
+    margin-top: 15px
     font-size: 14px
     img
       display: block
@@ -42,29 +44,23 @@
     padding-left: 20px
     height: 50px
     padding-top: 7px
-    &:hover
-      background: #F7F9F9
     a
       color: #85C1E9
+      font-size: 14px
+      &:hover
+        text-decoration: underline
 
   &-artist
-    margin-top: 5px
+    margin-top: 10px
     font-size: 12px
     color: #ccc
 
 .search-song
   padding-left: 0
   padding-top: 0
-  height: 40px
   &-title
     margin-bottom: 5px
 
-.song-result
-  > li
-    height: 40px
-    transition: transform 0.2s ease-in-out
-    &:hover
-      transform: translateX(10px)
 .search-li-info.search-song
   &:hover
     background: #fff

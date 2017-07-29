@@ -7,6 +7,7 @@ import Queue from './Queue';
 import Dropdown from './Dropdown';
 import SearchMenu from './SearchMenu';
 import NotFound from './NotFound';
+import NotFoundSong from './NotFound/song';
 import Modal from './Modal';
 import * as Pages from './Pages';
 
@@ -22,4 +23,5 @@ export {
   NotFound,
   Pages,
   Modal,
+  NotFoundSong,
 };

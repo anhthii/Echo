@@ -52,3 +52,21 @@
   height: 150px;
   background:#D5DBDB;
 }
+
+.search-menu::-webkit-scrollbar {
+  width: 6px;
+  height: 50px;
+}
+
+.search-menu::-webkit-scrollbar-thumb {
+  height: 150px;
+  background:#D5DBDB;
+}
+.search-menu::-moz-scrollbar {
+  width: 6px;
+  height: 50px;
+}
+.search-menu::-moz-scrollbar-thumb {
+  height: 150px;
+  background:#D5DBDB;
+}

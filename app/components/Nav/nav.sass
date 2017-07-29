@@ -18,11 +18,15 @@ nav
   a
     /*background: orange*/
     height: 100%
-    line-height: 45px
     display: inline-block
-    padding: 0 20px
-    img
-      vertical-align: middle
+    color: #fff
+    line-height: 50px
+    font-size: 25px
+    font-family: 'Bowlby One SC', cursive
+    width: 100%
+    text-align: center
+    //color: #e82f62
+
 
 .searchBar
   width: 40%
@@ -45,9 +49,18 @@ nav
 .search-wrapper
   background-color: #17202A
   position: relative
+  i
+    color: #fff
+    position: absolute
+    font-size: 22px
+    top: 50%
+    transform: translateY(-50%)
+    left: 10px
+
 
 .nav-menu
   a
+    text-transform: uppercase
     display: inline-block
     height: inherit
     line-height: 50px
@@ -55,27 +68,42 @@ nav
     padding: 0 20px
     color: white
     float: left
-    font-size: 14px
-    li
-      &:hover
-        color: #22b8cf
+    font-size: 13px
+
+  &-link-active
+    &:before
+      visibility: visible !important
+      -webkit-transform: scaleX(1) !important
+      transform: scaleX(1) !important
+
 
 .auth-btns
-  padding: 12px 10px
+  width: 15%
   height: 50px
   display: inline-block
   a
+    text-transform: uppercase
     display: inline-block
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 50px
     font-size: 13px
     padding: 5px 8px
     border-radius: 3px
+    width: 50%
+    float: left
     color: white
-    &:first-child
+
+
+    img
+      width: 20px
+      height: 20px
       margin-right: 10px
-.sInLink
-  background: #fab005
-.sUpLink
-  background: $teal-1
+/* .sInLink
+  background: #fab005 */
+/* .sUpLink
+  background: $teal-1 */
 
 .navRight
   width: 30%
@@ -89,12 +117,23 @@ nav
   line-height: 50px
   vertical-align: middle
   a
-    color: #fff
+    text-transform: uppercase
+    display: inline-block
+    display: flex
+    align-items: center
+    justify-content: center
+    height: 50px
     font-size: 13px
-    font-family: "Open Sans", sans-serif
-    margin-left: 10px
-    color: #27DED5
-    &:hover
-      text-decoration: underline
+    padding: 5px 8px
+    border-radius: 3px
+    width: 50%
+    float: left
+    color: white
 
+    &:first-child
+      color: #15d2fd
+    img
+      width: 20px
+      height: 20px
+      margin-right: 10px
 
