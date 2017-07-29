@@ -4,7 +4,7 @@ import InputRange from 'react-input-range';
 import { Link, browserHistory } from 'react-router';
 import PlayerLoader from './PlayerLoader';
 import initAnalyzer from '../../utils/initAnalyzer';
-import { changeAlias, getSongUrl, isTwoObjectEqual } from '../../utils/func';
+import { changeAlias, getSongUrl, isTwoObjectEqual, formatTime } from '../../utils/func';
 
 import './index.sass';
 
@@ -209,7 +209,6 @@ class Player extends React.Component {
           crossOrigin='anonymous'
           ref='audio'
           loop={this.state.loop}
-          muted
         />
         <div className="player-info">
           <Link
@@ -253,6 +252,7 @@ class Player extends React.Component {
           </button>
         </div>
         <div className="player-seek">
+          <span>{this.audio && '0:00'}</span>
           <InputRange
             maxValue={100}
             minValue={0}
@@ -260,6 +260,11 @@ class Player extends React.Component {
             onChange={this.handleChange.bind(this)}
             onChangeComplete={this.handleChangeComplete.bind(this)}
           />
+          <span>
+            { this.audio &&
+              (!isNaN(this.audio.duration) && formatTime(this.audio.duration))
+            }
+          </span>
         </div>
         <div className="player-other">
           <button className="sc-ir" title="Loop">

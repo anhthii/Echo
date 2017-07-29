@@ -75,3 +75,13 @@ export function removeById(arr, id) {
   arr.splice(arr.indexOf(id), 1);
   return arr;
 }
+
+function padZero(number) {
+  return number < 9 ? `0${number}` : number.toString();
+}
+
+export function formatTime(s) {
+  const min = Math.floor(s / 60);
+  const second = Math.floor(s) % 60;
+  return `${min}:${padZero(second)}`;
+}
