@@ -53,7 +53,7 @@ class ArtistGenrePage extends Component {
 }
 
 function mapStateToProps(state) {
-  return state.artistState;
+  return { ...state.artistState, isLoading: state.UIState.isLoading };
 }
 
 export default connect(mapStateToProps,

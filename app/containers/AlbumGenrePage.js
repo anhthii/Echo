@@ -51,7 +51,7 @@ class AlbumGenrePage extends Component {
 }
 
 function mapStateToProps(state) {
-  return state.albumState;
+  return { ...state.albumState, isLoading: state.UIState.isLoading };
 }
 
 export default connect(mapStateToProps,

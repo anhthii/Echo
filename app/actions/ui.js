@@ -63,4 +63,14 @@ export function finishDownloading() {
   };
 }
 
+export function startLoading() {
+  return {
+    type: types.START_LOADING,
+  };
+}
 
+export function finishLoading() {
+  return {
+    type: types.FINISH_LOADING,
+  };
+}

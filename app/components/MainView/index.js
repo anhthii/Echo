@@ -5,7 +5,9 @@ import Pagination from '../Pagination';
 import './index.sass';
 
 const MainView = (props) => {
-  const { type } = props;
+  const { type, isLoading } = props;
+  if (isLoading) return <div className="loader"></div>;
+
   return (
     <div>
       {
@@ -25,6 +27,7 @@ MainView.propTypes = {
   changePageChunkIndex: PropTypes.func,
   chunkSize: PropTypes.number.isRequired,
   type: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
 };
 
 const AlbumView = (props) => {

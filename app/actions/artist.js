@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as types from '../constant/action_constant';
+import { startLoading, finishLoading } from './ui';
 
 export function setNumberOfPages(numberOfPages) {
   return {
@@ -29,17 +30,20 @@ export function changePageChunkIndex(pageChunkIndex) {
 
 export function fetchDefaultArtists() {
   return dispatch => {
+    dispatch(startLoading());
     axios.get('/api/media/artist/default')
       .then(({ data }) => {
         dispatch({ type: types.FETCH_DEFAULT_ARTISTS, defaultArtists: data.origins });
+        dispatch(finishLoading());
       })
-      .catch(err => { throw err; });
+      .catch(err => { dispatch(finishLoading()); throw err; });
   };
 }
 
 export function fetchArtists(genre, id, page) {
   const pageQuery = page ? `&page=${page}` : '';
   return dispatch => {
+    dispatch(startLoading());
     axios.get(`/api/media/artists?genre=${genre}&id=${id}${pageQuery}`)
       .then(({ data }) => {
         dispatch({
@@ -47,8 +51,9 @@ export function fetchArtists(genre, id, page) {
           artists: data.artists,
           numberOfPages: data.numberOfPages,
         });
+        dispatch(finishLoading());
       })
-      .catch(err => { throw err; });
+      .catch(err => { dispatch(finishLoading()); throw err; });
   };
 }
 

@@ -6,6 +6,7 @@ const initialState = {
   showQueue: false,
   slideInRight: false,
   showModal: false,
+  isLoading: false,
   downloadProgress: {
     isDownloading: false,
     id: '',
@@ -58,6 +59,12 @@ export default function (state = initialState, action) {
         id: '',
       },
     };
+
+  case types.START_LOADING:
+    return { ...state, isLoading: true };
+
+  case types.FINISH_LOADING:
+    return { ...state, isLoading: false };
 
   default:
     return state;
