@@ -10,6 +10,13 @@
   .input-range--disabled & {
     background: $input-range-track-disabled-background;
   }
+  &:hover {
+    .input-range__slider {
+      display: block;
+    }
+    height: 0.2rem;
+  }
+
 }
 
 .input-range__track--background {

@@ -9,7 +9,7 @@
   bottom: 0
   right: 0
   left: 0
-  padding: 0 35px
+  padding: 0 10%
   background: white
 
 .player-info
@@ -35,10 +35,13 @@
 .player-seek
   float: left
   height: inherit
-  width: 45%
+  width: 50%
   display: flex
   align-items: center
   padding-left: 20px
+  span
+    color: $grey-text
+    font-size: 13px
 
 .player-btns
   width: 18%
@@ -63,7 +66,7 @@
     opacity: 1.0
   i
 
-    color: $gb-1
+    color: #34495E
     font-size: 16px
 
 #queue
@@ -97,6 +100,7 @@
   height: 100%
   display: flex
   align-items: center
+  padding-left: 20px
   button
     padding: 15px
     cursor: pointer
@@ -111,7 +115,7 @@
   color: #fff;
   width: 15px;
   height: 15px;
-  background: #F5B041;
+  background: #bc5adc;
   border-radius: 50%;
   font-size: 10px;
   line-height: 15px;
