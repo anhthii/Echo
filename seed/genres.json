@@ -1,0 +1,216 @@
+{
+  "US Music": {
+    "name": "Au-My",
+    "id": "IWZ9Z08O",
+    "children": [
+      {
+        "title": "Pop",
+        "name": "Pop",
+        "id": "IWZ9Z097"
+      },
+      {
+        "title": "Rock",
+        "name": "Rock",
+        "id": "IWZ9Z099"
+      },
+      {
+        "title": "Rap / Hip Hop",
+        "name": "Rap-Hip-Hop",
+        "id": "IWZ9Z09B"
+      },
+      {
+        "title": "Country",
+        "name": "Country",
+        "id": "IWZ9Z096"
+      },
+      {
+        "title": "Electronic / Dance",
+        "name": "Electronic-Dance",
+        "id": "IWZ9Z09A"
+      },
+      {
+        "title": "R&B / Soul",
+        "name": "R-B-Soul",
+        "id": "IWZ9Z09D"
+      },
+      {
+        "title": "Audiophile",
+        "name": "Audiophile",
+        "id": "IWZ9Z0EO"
+      },
+      {
+        "title": "Trance / House / Techno",
+        "name": "Trance-House-Techno",
+        "id": "IWZ9Z0C7"
+      },
+      {
+        "title": "OST",
+        "name": "Nhac-Phim",
+        "id": "IWZ9Z0EC"
+      },
+      {
+        "title": "Blues / Jazz",
+        "name": "Blues-Jazz",
+        "id": "IWZ9Z09C"
+      },
+      {
+        "title": "New Age / World Music",
+        "name": "New-Age-World-Music",
+        "id": "IWZ9Z098"
+      },
+      {
+        "title": "Indie",
+        "name": "Indie",
+        "id": "IWZ9Z0CA"
+      },
+      {
+        "title": "Folk",
+        "name": "Folk",
+        "id": "IWZ9Z09E"
+      },
+      {
+        "title": "Christian & Gospel",
+        "name": "Christian-Gospel",
+        "id": "IWZ9Z0DE"
+      }
+    ]
+  },
+  "Việt Nam": {
+    "name": "Viet-Nam",
+    "id": "IWZ9Z08I",
+    "children": [
+      {
+        "title": "Nhạc Trẻ",
+        "name": "Nhac-Tre",
+        "id": "IWZ9Z088"
+      },
+      {
+        "title": "Nhạc Trữ Tình",
+        "name": "Nhac-Tru-Tinh",
+        "id": "IWZ9Z08B"
+      },
+      {
+        "title": "Nhạc Dance",
+        "name": "Nhac-Dance",
+        "id": "IWZ9Z0CW"
+      },
+      {
+        "title": "Rock Việt",
+        "name": "Rock-Viet",
+        "id": "IWZ9Z08A"
+      },
+      {
+        "title": "Rap / Hip Hop Việt",
+        "name": "Rap-Viet",
+        "id": "IWZ9Z089"
+      },
+      {
+        "title": "Nhạc Trịnh",
+        "name": "Nhac-Trinh",
+        "id": "IWZ9Z08E"
+      },
+      {
+        "title": "Nhạc Thiếu Nhi",
+        "name": "Nhac-Thieu-Nhi",
+        "id": "IWZ9Z08F"
+      },
+      {
+        "title": "Nhạc Cách Mạng",
+        "name": "Nhac-Cach-Mang",
+        "id": "IWZ9Z08C"
+      },
+      {
+        "title": "Nhạc Quê Hương",
+        "name": "Nhac-Que-Huong",
+        "id": "IWZ9Z08D"
+      },
+      {
+        "title": "Nhạc Không Lời",
+        "name": "Nhac-Khong-Loi",
+        "id": "IWZ9Z090"
+      },
+      {
+        "title": "Nhạc Phim",
+        "name": "Nhac-Phim",
+        "id": "IWZ9Z0BA"
+      },
+      {
+        "title": "Cải Lương",
+        "name": "Cai-Luong",
+        "id": "IWZ9Z0C6"
+      }
+    ]
+  },
+  "Châu Á": {
+    "name": "Han-Quoc",
+    "id": "IWZ9Z08W",
+    "children": [
+      {
+        "title": "Hàn Quốc",
+        "name": "Han-Quoc",
+        "id": "IWZ9Z08W"
+      },
+      {
+        "title": "Nhật Bản",
+        "name": "Nhat-Ban",
+        "id": "IWZ9Z08Z"
+      },
+      {
+        "title": "Hoa Ngữ",
+        "name": "Hoa-Ngu",
+        "id": "IWZ9Z08U"
+      }
+    ]
+  },
+  "Hòa Tấu": {
+    "name": "Khong-Loi",
+    "id": "IWZ9Z086",
+    "children": [
+      {
+        "title": "Classical",
+        "name": "Classical",
+        "id": "IWZ9Z0BI"
+      },
+      {
+        "title": "Piano",
+        "name": "Piano",
+        "id": "IWZ9Z0B0"
+      },
+      {
+        "title": "Guitar",
+        "name": "Guitar",
+        "id": "IWZ9Z0A9"
+      },
+      {
+        "title": "Violin",
+        "name": "Violin",
+        "id": "IWZ9Z0BU"
+      },
+      {
+        "title": "Cello",
+        "name": "Cello",
+        "id": "IWZ9Z0AD"
+      },
+      {
+        "title": "Saxophone",
+        "name": "Saxophone",
+        "id": "IWZ9Z0B7"
+      },
+      {
+        "title": "Nhạc Cụ Dân Tộc",
+        "name": "Nhac-Cu-Dan-Toc",
+        "id": "IWZ9Z0AA"
+      },
+      {
+        "title": "New Age / World Music",
+        "name": "New-Age-World-Music",
+        "id": "IWZ9Z0BO"
+      },
+      {
+        "title": "Nhạc Cụ Khác",
+        "name": "Nhac-Cu-Khac",
+        "id": "IWZ9Z0E8"
+      }
+    ]
+  }
+}
