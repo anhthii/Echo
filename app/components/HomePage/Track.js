@@ -4,6 +4,7 @@ import CircularProgressbar from 'react-circular-progressbar';
 import { Link } from 'react-router';
 import { changeAlias } from '../../utils/func';
 import LinksByComma from '../LinksByComma';
+import LazyloadImage from '../LazyloadImage';
 
 const Track = (props) => {
   const {
@@ -21,7 +22,7 @@ const Track = (props) => {
       <div className="trackPosition">
         {order}
       </div>
-      <img src={thumbnail} className='track-thumb image-wrapper' />
+      <LazyloadImage src={thumbnail} className='track-thumb image-wrapper' />
       <div className="trackDetail">
         <div className="trackTitle">
           <Link to={`song/${changeAlias(name)}/${id}`}>{name}</Link>

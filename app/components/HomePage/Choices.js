@@ -24,7 +24,7 @@ class Choices extends Component {
       return;
     }
 
-    this.props.fetchTracks(0, id);
+    this.props.fetchTracks(1, id);
     this.setState({ activeId: id });
   }
 
