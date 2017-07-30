@@ -9,7 +9,7 @@ import { changeAlias, getSongUrl, isTwoObjectEqual, formatTime } from '../../uti
 import './index.sass';
 
 
-class Player extends React.Component {
+class Player extends React.PureComponent {
   constructor() {
     super();
     this.state = {
