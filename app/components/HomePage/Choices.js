@@ -9,7 +9,7 @@ const datas = {
 };
 
 class Choices extends Component {
-  state = { showMenu: false, activeId: 'IWZ9Z097' };
+  state = { showMenu: false };
 
   handleClickOutside = () => {
     this.setState({ showMenu: false });
@@ -20,12 +20,11 @@ class Choices extends Component {
   }
 
   handleOnClick(id) {
-    if (id === this.state.activeId) {
+    if (id === this.props.activeChoiceId) {
       return;
     }
 
     this.props.fetchTracks(1, id);
-    this.setState({ activeId: id });
   }
 
   render() {
@@ -36,7 +35,7 @@ class Choices extends Component {
         className={`choice ${this.state.showMenu ? 'choice-active' : null}`}
         onClick={this.toggle.bind(this)}
       >
-        {datas[activeChoiceId] || datas[this.state.activeId]}
+        {datas[activeChoiceId] || Object.values(datas)[0]}
         <i className="ion-chevron-down"></i>
         {
           this.state.showMenu &&
