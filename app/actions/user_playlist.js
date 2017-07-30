@@ -33,7 +33,13 @@ export function createPlaylist(title) {
         type: types.CREATE_PLAYLIST,
         title,
       }))
-      .catch(err => toast(<div>cc}</div>));
+      .catch(err => toast.error(
+        <div
+          className='custom-toast-content ellipsis'
+          title={`${title} playlist already exists`}
+          dangerouslySetInnerHTML={{ __html: err.response.data }}>
+        </div>
+      ));
   };
 }
 
@@ -80,6 +86,17 @@ export function deleteSong(playlistTitle, id) {
     axios.delete(`${PLAYLIST_ENDPOINT}/${getUserName()}/${playlistTitle}/${id}`)
       .then(({ data }) => dispatch({
         type: types.DELETE_SONG_FROM_PLAYLIST,
+        playlists: data,
+      }))
+      .catch(err => { throw err; });
+  };
+}
+
+export function deletePlaylist(playlistTitle) {
+  return dispatch => {
+    axios.delete(`${PLAYLIST_ENDPOINT}/${getUserName()}/${playlistTitle}`)
+      .then(({ data }) => dispatch({
+        type: types.DELETE_PLAYLIST,
         playlists: data,
       }))
       .catch(err => { throw err; });

@@ -2,9 +2,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import onClickOutside from 'react-onclickoutside';
 import { getSongUrl, changeAlias, isEmpty } from '../../../utils/func';
-import { createPlaylist, deleteSong } from '../../../actions/user_playlist';
+import { createPlaylist, deleteSong, deletePlaylist } from '../../../actions/user_playlist';
 import { playUserPlaylist } from '../../../actions/queue';
 import { fetchSong, fetchSuggestedSongs } from '../../../actions/song';
 import LinksByComma from '../../LinksByComma';
@@ -124,11 +123,17 @@ class Playlist extends React.Component {
         >
           <div className="user-playlist-title">{title}</div>
           <div className="user-playlist-play-btn">
-            <button className="sc-ir" onClick={this.play.bind(this)}>
-              <i className="ion-play"></i>
+            <button className="sc-ir playlist-play-btn" onClick={this.play.bind(this)}>
+              <img src="/svg/play-button-inside-a-circle.svg" alt=""/>
             </button>
           </div>
           <b>{songs.length}</b> songs
+          <button
+            className="sc-ir playlist-remove-btn"
+            onClick={() => dispatch(deletePlaylist(title))}
+          >
+            <i className="ion-android-close"></i>
+          </button>
           <i className={iconCLassName}></i>
         </div>
         <List songs={songs} dispatch={dispatch} playlistTitle={playlist.title}/>
@@ -159,13 +164,18 @@ const List = ({ songs, dispatch, playlistTitle }) => {
               <Link to={getSongUrl(song.name, song.id)}>{song.name}</Link>
             </div>
             <div className="playlist-song-artists">
-              <LinksByComma
-                data={song.artists}
-                titleEntry="name"
-                pathEntry="link"
-                definePath={(link) => link.replace('/nghe-si/', '/artist/')}
-                defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
-              />
+              {
+                Array.isArray(song.artists)
+                ? <LinksByComma
+                  data={song.artists}
+                  titleEntry="name"
+                  pathEntry="link"
+                  definePath={(link) => link.replace('/nghe-si/', '/artist/')}
+                  defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
+                  />
+                : song.artists
+              }
+
             </div>
             <div className="playlist-song-remove-btn">
               <button
@@ -188,4 +198,4 @@ List.propTypes = {
   dispatch: PropTypes.func.isRequired,
 };
 
-export default onClickOutside(UserPage);
+export default UserPage;
