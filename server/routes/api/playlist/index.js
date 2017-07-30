@@ -70,6 +70,18 @@ router.post('/:username', (req, res, next) => {
   .catch(err => next(err));
 });
 
+// delete a playlist
+router.delete('/:username/:playlistTitle', (req, res, next) => {
+  const { username, playlistTitle } = req.params;
+  Playlist.findOneAndUpdate(
+    { _username: username, 'playlists.title': playlistTitle },
+    { $pull: { playlists: { title: playlistTitle } } },
+    { new: true, projection: { 'playlists._id': false } }
+  )
+  .then(doc => res.json(doc.playlists))
+  .catch(err => next(err));
+});
+
 // add a song to a playlist
 router.put('/:username/:playlistTitle', (req, res, next) => {
   const { username, playlistTitle } = req.params;
@@ -89,7 +101,7 @@ router.put('/:username/:playlistTitle', (req, res, next) => {
     );
 
     if (isSongExisting) {
-      const error = new Error(`<span>${req.body.name}</span> song already exists in <span>${playlistTitle}</span> playlist`);
+      const error = new Error(`<span>${req.body.title}</span> song already exists in <span>${playlistTitle}</span> playlist`);
       error.status = 400;
       throw error;
     }

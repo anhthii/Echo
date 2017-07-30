@@ -12,6 +12,7 @@ let app;
 
 test.before(async () => {
   await Database.init();
+  await Playlist.remove({});
   app = express();
   app.use(bodyParser.json());
   routes(app);
@@ -60,7 +61,7 @@ test('should add a song to a playlist', async t => {
     .send(song);
   t.is(res.status, 200);
   const playlist = res.body.playlists.find(playlist => playlist.title === 'rap');
-  t.deepEqual(playlist.songs[0], song);
+  t.is(playlist.songs[0].id, song.id);
 });
 
 test('shoud get a playlist', async t => {
@@ -82,14 +83,23 @@ test('should not add a song to a playlist', async t => {
     .put('/api/playlist/zayn/rap')
     .send(song);
   t.is(res.status, 400);
-  t.is(res.text, `${song.title} songs already exists in rap playlist`);
+  t.is(res.text, `<span>${song.title}</span> song already exists in <span>rap</span> playlist`);
 });
 
 test('should delete a song from a playlist', async t => {
   const res = await request(app)
     .delete('/api/playlist/zayn/rap/123456');
   t.is(res.status, 200);
-  const playlist = res.body.playlists.find(playlist => playlist.title === 'rap');
+  const playlist = res.body.find(playlist => playlist.title === 'rap');
   const song = playlist.songs.find(song => song.id === '123456');
-  t.is(song, undefined);
+  t.falsy(song);
+});
+
+test('should delete a playlist', async t => {
+  t.plan(2);
+  const res = await request(app)
+    .delete('/api/playlist/zayn/rap');
+
+  t.is(res.status, 200);
+  t.falsy(res.body.find(playlist => playlist.title === 'rap'));
 });
