@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { HomePage } from '../components';
 import { changeActiveChart } from '../actions/chart';
-
-import { download, fetchTracks } from '../actions/home';
+import { fetchTracks } from '../actions/home';
+import { download } from '../actions/song';
 
 class HomePageContainer extends Component {
   render() {

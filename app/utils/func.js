@@ -77,7 +77,7 @@ export function removeById(arr, id) {
 }
 
 function padZero(number) {
-  return number < 9 ? `0${number}` : number.toString();
+  return number <= 9 ? `0${number}` : number.toString();
 }
 
 export function formatTime(s) {

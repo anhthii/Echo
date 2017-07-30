@@ -3,9 +3,11 @@ import { browserHistory } from 'react-router';
 import { connect } from 'react-redux';
 import { Karaoke as KarokeContainer } from './';
 import { Pages } from '../components';
-import { fetchSong, fetchSuggestedSongs } from '../actions/song';
-import { showAnalyzer } from '../actions/ui';
+import { fetchSong, fetchSuggestedSongs, download } from '../actions/song';
+import { addSongToStoreTemporarily } from '../actions/user_playlist';
+import { showAnalyzer, toggleModal } from '../actions/ui';
 import { getSongUrl, isEmpty } from '../utils/func';
+
 
 const fetch = (ctx, name, id) => {
   ctx.props.fetchSong(name, id);
@@ -54,7 +56,13 @@ class SongPage extends React.Component {
   render() {
     return (
       <div>
-        <Pages.SongHeader />
+        <Pages.SongHeader
+          songData={this.props.songData}
+          download={this.props.download}
+          downloadProgress={this.props.downloadProgress}
+          toggleModal={this.props.toggleModal}
+          addSongToStoreTemporarily={this.props.addSongToStoreTemporarily}
+        />
         <KarokeContainer className='karaoke-song-page'/>
         <Pages.SongPageBody suggestedSongs={this.props.suggestedSongs}/>
       </div>
@@ -66,11 +74,19 @@ function mapStateToProps(state) {
   return {
     suggestedSongs: state.songData.suggestedSongs,
     songData: state.songData.data,
+    downloadProgress: state.UIState.downloadProgress,
     routing: state.routing,
     canPushRoute: state.queueState.pushRoute,
   };
 }
 
 export default connect(mapStateToProps,
-{ fetchSong, showAnalyzer, fetchSuggestedSongs })(SongPage);
+  {
+    fetchSong,
+    showAnalyzer,
+    fetchSuggestedSongs,
+    download,
+    addSongToStoreTemporarily,
+    toggleModal,
+  })(SongPage);
 

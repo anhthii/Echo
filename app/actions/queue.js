@@ -44,6 +44,11 @@ function tweakSongs(songs) {
     return {
       id: song.id,
       name: song.title,
+      artist: song.artist_text ||
+        (song.artists &&
+          Array.isArray(song.artists) &&
+          song.artists.map(artist => artist.name).join(', ')
+        ),
       alias: song.alias,
     };
   });

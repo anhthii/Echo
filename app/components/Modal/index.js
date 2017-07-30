@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import { toggleModal } from '../../actions/ui';
+import { changeAlias } from '../../utils/func';
 import {
   createPlaylist,
   addSongToPlaylist,
@@ -44,8 +45,8 @@ class Modal extends Component {
 
   handleOnSubmit(e) {
     e.preventDefault();
-    const playlistTitle = this.input.value;
-
+    // sanitize playlist's title before submitting to server
+    const playlistTitle = changeAlias(this.input.value);
     this.props.dispatch(createPlaylist(playlistTitle));
     this.setState({ showInput: false });
   }

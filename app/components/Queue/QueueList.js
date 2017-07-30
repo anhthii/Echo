@@ -16,7 +16,7 @@ const Li = ({ name, id, thumbnail, alias, artist, artists, removeSongFromQueue }
           <Link to={getSongUrl(alias || name, id)}>{name}</Link>
         </div>
         <div className="queue-track-artist ellipsis">
-          {artist || (artists && artists.map(artist => artist.name).join(', '))}
+          {artist || (artists && (Array.isArray(artists) ? artists.map(artist => artist.name).join(', ') : artists))}
         </div>
       </div>
       <div className="queue-track-actions">

@@ -243,16 +243,9 @@ class Player extends React.Component {
           >
             <i className="ion-ios-fastforward"></i>
           </button>
-          <button
-            className='sc-ir player-btn queue-btn'
-            onClick={this.props.toggleQueue}
-          >
-            <span className="queue-circle">{queue.length}</span>
-            <img src='/svg/playlist.svg' />
-          </button>
         </div>
         <div className="player-seek">
-          <span>{(this.audio && this.audio.duration) ? '0:00' : ''}</span>
+          <span>{(this.audio && this.audio.currentTime) ? formatTime(this.audio.currentTime) : '0:00'}</span>
           <InputRange
             maxValue={100}
             minValue={0}
@@ -273,6 +266,13 @@ class Player extends React.Component {
               style={{ color: this.state.loop ? '#23B89A' : '#adb5bd' }}
               onClick={() => this.setState({ loop: !this.state.loop })}
             ></i>
+          </button>
+          <button
+            className='sc-ir player-btn queue-btn'
+            onClick={this.props.toggleQueue}
+          >
+            <span className="queue-circle">{queue.length}</span>
+            <img src='/svg/playlist.svg' />
           </button>
         </div>
         { this.props.isFetching && <PlayerLoader /> }
