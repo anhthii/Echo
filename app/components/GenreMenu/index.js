@@ -2,10 +2,10 @@ import React from 'react';
 import { Link } from 'react-router';
 import PropTypes from 'prop-types';
 import { changeAlias } from '../../utils/func';
-import { AlbumGenres } from '../../../seed';
+import { Genres } from '../../../seed';
 import './index.sass';
 
-const GenreMenu = ({ genres = AlbumGenres, type }) => {
+const GenreMenu = ({ genres = Genres, type }) => {
   return (
     <div>
       <ul className='genre-menu'>

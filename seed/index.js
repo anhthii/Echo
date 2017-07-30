@@ -1,5 +1,5 @@
-import AlbumGenres from './album_genres';
+import Genres from './genres';
 
 export {
-  AlbumGenres,
+  Genres,
 };
