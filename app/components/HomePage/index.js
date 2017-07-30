@@ -39,7 +39,7 @@ class ChartPanel extends React.Component {
 const HomePage = (props) =>
   <div className='homepage home-container'>
     <div className="home-nav">
-      <Choices fetchTracks={props.fetchTracks} />
+      <Choices fetchTracks={props.fetchTracks} activeChoiceId={props.activeChoiceId} />
     </div>
     <TrackList {...props} />
     <div className='chart-wrapper'>
@@ -57,6 +57,7 @@ HomePage.propTypes = {
   downloadProgress: PropTypes.object.isRequired,
   fetchTracks: PropTypes.func.isRequired,
   isFading: PropTypes.bool.isRequired,
+  activeChoiceId: PropTypes.string,
 };
 
 

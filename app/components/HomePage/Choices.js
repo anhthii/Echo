@@ -29,12 +29,14 @@ class Choices extends Component {
   }
 
   render() {
+    const { activeChoiceId } = this.props;
+
     return (
       <div
         className={`choice ${this.state.showMenu ? 'choice-active' : null}`}
         onClick={this.toggle.bind(this)}
       >
-        Popular songs
+        {datas[activeChoiceId] || datas[this.state.activeId]}
         <i className="ion-chevron-down"></i>
         {
           this.state.showMenu &&
@@ -53,6 +55,7 @@ class Choices extends Component {
 
 Choices.propTypes = {
   fetchTracks: PropTypes.func.isRequired,
+  activeChoiceId: PropTypes.string,
 };
 
 export default onClickOutside(Choices);

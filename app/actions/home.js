@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as types from '../constant/action_constant';
 import { pageQuery } from '../utils/query';
-import { MEDIA_ENDPOINT, ROOT_URL } from '../constant/endpoint_constant';
+import { MEDIA_ENDPOINT } from '../constant/endpoint_constant';
 import { startFading, stopFading } from '../actions/ui';
 
 let cachedId = 'IWZ9Z097';

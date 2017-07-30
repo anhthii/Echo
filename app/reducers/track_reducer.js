@@ -23,8 +23,16 @@ export default function (state = initialState, action) {
   }
 }
 
+function compareTwoFirstTrack(track1, track2) {
+  return track1.id === track2.id;
+}
+
 function fetchTrackSuccess(state, action) {
-  let tracks = state.tracks.concat(action.tracks);
+  let tracks = state.tracks;
+
+  if (state.tracks.length && !compareTwoFirstTrack(state.tracks[0], action.tracks[0])) {
+    tracks = tracks.concat(action.tracks);
+  }
   let pageLoaded = action.page ? action.page : state.pageLoaded;
 
   if (action.id !== state.activeId) {
