@@ -5,10 +5,13 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build && npm run server",
-    "dev:client": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot",
+    "dev:client": "npm run clean && npm run webpack:dev",
     "dev:server": "nodemon ./server",
     "server": "cross-env NODE_ENV=production node server",
-    "build": "./node_modules/.bin/webpack --env=prod --progress --profile --colors",
+    "clean": "node rimraf",
+    "webpack:dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot",
+    "webpack:prod": "./node_modules/.bin/webpack --env=prod --progress --profile --colors",
+    "build": "npm run clean && npm run webpack:prod",
     "test": "ava --verbose"
   },
   "ava": {
@@ -32,9 +35,11 @@
     "eslint-plugin-import": "^1.14.0",
     "eslint-plugin-jsx-a11y": "^2.2.0",
     "eslint-plugin-react": "^6.2.0",
+    "globby": "^6.1.0",
     "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.2",
     "redux-logger": "^3.0.6",
+    "rimraf": "^2.6.1",
     "sass-loader": "^4.0.2",
     "style-loader": "^0.13.1",
     "supertest": "^3.0.0",
