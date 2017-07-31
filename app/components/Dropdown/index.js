@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { isAuthenticated } from '../../HOC';
-import queueAdd from '../../svg/queue-add.svg';
-import queueNext from '../../svg/queue-next.svg';
 import './index.sass';
 
 class DropDown extends React.Component {
@@ -53,7 +51,7 @@ class DropDown extends React.Component {
           className="dropdown-nextup"
           onClick={this.handleDropdownNextUp.bind(this)}
         >
-          <img src={queueAdd} alt=""/>
+          <img src="/svg/queue-add.svg" alt=""/>
           Add to next up
         </div>
         <div
@@ -61,7 +59,7 @@ class DropDown extends React.Component {
           onClick={this.handleDropdownAdd.bind(this)}
         >
           <img
-            src={queueNext}
+            src="/svg/queue-next.svg"
             style={{ height: '30px', width: '30px', marginRight: '5px' }}
             alt=""
           />
