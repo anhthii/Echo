@@ -4,6 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "start": "npm run build && npm run server",
     "dev:client": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot",
     "dev:server": "nodemon ./server",
     "server": "cross-env NODE_ENV=production node server",
