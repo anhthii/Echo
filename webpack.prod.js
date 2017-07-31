@@ -1,15 +1,24 @@
 const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const VENDOR_LIBS = [
+  'react', 'react-dom', 'redux', 'axios', 'prop-types', 'redux-thunk',
+  'react-router-redux', 'lodash.chunk', 'lodash.debounce', 'lodash.throttle',
+  'react-router', 'react-onclickoutside', 'react-input-range', 'react-toastify',
+  'react-circular-progressbar', 'react-addons-css-transition-group',
+];
 
 module.exports = {
   entry: {
-    app: './app',
+    bundle: './app',
+    vendor: VENDOR_LIBS,
   },
   output: {
     path: path.join(__dirname, '/public'),
-    filename: 'bundle.js',
-    chunkFilename: '[id].js',
+    filename: 'js/[name].js',
+    publicPath: '/',
   },
   resolve: {
     extensions: [
@@ -20,22 +29,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            hash: 'sha512',
-            digest: 'hex',
-            name: '[hash].[ext]',
-          },
-        }, {
-          loader: 'image-webpack-loader',
-          options: {
-            bypassOnDebug: true,
-          },
-        }],
-      },
-      {
         test: /\.(scss|sass)$/,
         use: ExtractTextPlugin.extract({
           fallback: 'style-loader',
@@ -43,7 +36,11 @@ module.exports = {
           use: [
             {
               loader: 'css-loader',
-            }, {
+              options: {
+                minimize: true,
+              },
+            },
+            {
               loader: 'sass-loader',
               options: {
                 includePaths: ['./app/styles'],
@@ -62,7 +59,10 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('style.css'),
+    new ExtractTextPlugin('css/style.css'),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+    }),
     new webpack
       .optimize
       .UglifyJsPlugin({
@@ -74,6 +74,9 @@ module.exports = {
       'process.env': {
         NODE_ENV: '"production"',
       },
+    }),
+    new HtmlWebpackPlugin({
+      template: './app/index.html',
     }),
   ],
 };

@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -8,6 +9,7 @@ module.exports = {
     path: path.join(__dirname, 'public'),
     filename: 'bundle.js',
     chunkFilename: '[id].js',
+    publicPath: '/',
   },
   devServer: {
     headers: {
@@ -36,22 +38,6 @@ module.exports = {
         ],
       },
       {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: [{
-          loader: 'file-loader',
-          options: {
-            hash: 'sha512',
-            digest: 'hex',
-            name: '[hash].[ext]',
-          },
-        }, {
-          loader: 'image-webpack-loader',
-          options: {
-            bypassOnDebug: true,
-          },
-        }],
-      },
-      {
         test: /\.(scss|sass)$/,
         use: [{
           loader: 'style-loader',
@@ -74,4 +60,9 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: './app/index.html',
+    }),
+  ],
 };
