@@ -5,19 +5,35 @@ import * as types from '../constant/action_constant';
 import { PLAYLIST_ENDPOINT } from '../constant/endpoint_constant';
 import { loadUserData } from '../localStorage';
 
-let cachedUsername = '';
+const instance = (accessToken) => {
+  return axios.create({
+    baseURL: PLAYLIST_ENDPOINT,
+    ...accessToken && { headers: { Authorization: accessToken } },
+  });
+};
 
-function getUserName() {
-  if (cachedUsername.length) { return cachedUsername; }
-  if (loadUserData() && loadUserData().username) {
-    cachedUsername = loadUserData().username;
+let cachedUser = {
+  username: '',
+  access_token: '',
+};
+
+function getUser() {
+  if (cachedUser.username && cachedUser.access_token) {
+    return cachedUser;
   }
-  return cachedUsername;
+
+  const user = loadUserData();
+  if (user && user.username && user.access_token) {
+    cachedUser.username = user.username;
+    cachedUser.access_token = user.access_token;
+  }
+  return cachedUser;
 }
 
 export function getPlaylistCollection() {
+  const { username, access_token } = getUser();
   return dispatch => {
-    axios.get(`${PLAYLIST_ENDPOINT}/${getUserName()}`)
+    instance(access_token).get(`/${username}`)
       .then(({ data }) => dispatch({
         type: types.GET_PLAYLIST_COLLECTION,
         playlists: data,
@@ -27,8 +43,9 @@ export function getPlaylistCollection() {
 }
 
 export function createPlaylist(title) {
+  const { username, access_token } = getUser();
   return dispatch => {
-    axios.post(`${PLAYLIST_ENDPOINT}/${getUserName()}`, { title })
+    instance(access_token).post(`/${username}`, { title })
       .then(() => dispatch({
         type: types.CREATE_PLAYLIST,
         title,
@@ -44,8 +61,9 @@ export function createPlaylist(title) {
 }
 
 export function addSongToPlaylist(playlistTitle, songObj) {
+  const { username, access_token } = getUser();
   return dispatch => {
-    axios.put(`${PLAYLIST_ENDPOINT}/${getUserName()}/${playlistTitle}`, songObj)
+    instance(access_token).put(`/${username}/${playlistTitle}`, songObj)
       .then(() => {
         dispatch({
           type: types.ADD_SONG_TO_PLAYLIST,
@@ -82,8 +100,9 @@ export function addSongToStoreTemporarily(song) {
 }
 
 export function deleteSong(playlistTitle, id) {
+  const { username, access_token } = getUser();
   return dispatch => {
-    axios.delete(`${PLAYLIST_ENDPOINT}/${getUserName()}/${playlistTitle}/${id}`)
+    instance(access_token).delete(`/${username}/${playlistTitle}/${id}`)
       .then(({ data }) => dispatch({
         type: types.DELETE_SONG_FROM_PLAYLIST,
         playlists: data,
@@ -93,8 +112,9 @@ export function deleteSong(playlistTitle, id) {
 }
 
 export function deletePlaylist(playlistTitle) {
+  const { username, access_token } = getUser();
   return dispatch => {
-    axios.delete(`${PLAYLIST_ENDPOINT}/${getUserName()}/${playlistTitle}`)
+    instance(access_token).delete(`/${username}/${playlistTitle}`)
       .then(({ data }) => dispatch({
         type: types.DELETE_PLAYLIST,
         playlists: data,
@@ -104,7 +124,12 @@ export function deletePlaylist(playlistTitle) {
 }
 
 export function clearUserPlaylist() {
-  cachedUsername = '';
+  // when user log out he will clear playlist so we also must clear cachedUser data
+  cachedUser = {
+    username: '',
+    access_token: '',
+  };
+
   return {
     type: types.CLEAR_USER_PLAYLIST,
   };
