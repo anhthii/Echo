@@ -2,23 +2,19 @@
 require('app-module-path').addPath(__dirname);
 const api = require('./routes/api');
 const download = require('./routes/download');
+const path = require('path');
 
 module.exports = function (app) {
   app.use('/api', api);
   app.use('/download', download);
 
-  // Not found route
-  app.use((req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../public/index.html'));
   });
-
   // development error handler
   // will print stacktrace
   if (app.get('env') === 'development') {
     app.use((err, req, res, next) => {
-      console.log(err);
       res.status(err.status || 500);
       if (err.errors) {
         res.json({ error: true, errors: err.errors, message: err.message });
