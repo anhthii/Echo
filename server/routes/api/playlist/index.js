@@ -1,137 +1,39 @@
 const express = require('express');
-const Playlist = require('models/user_playlist');
-const co = require('co');
+// controllers
+const getPlaylistCollection = require('./get_playlist_collection');
+const getPlaylist = require('./get_playlist');
+const createPlaylist = require('./create_playlist');
+const deletePlaylist = require('./delete_playlist');
+const addSongToPlaylist = require('./add_song_to_playlist');
+const deleteSongFromPlaylist = require('./delete_song');
 
 const router = express.Router();
 
+const isValidUser = (req, res, next) => {
+  if (req.currentUser.username !== req.params.username) {
+    return res.status(401).send('You are not allowed to access this route');
+  }
+  return next();
+};
 
 // get user playlist collection
-router.get('/:username', (req, res, next) => {
-  co(function* () {
-    const doc = yield Playlist.findOne(
-      { _username: req.params.username },
-      { 'playlists._id': false }
-    );
-    // create a new playlist collection for the user if he/she hasn't created any yet
-
-    if (doc) { return doc.playlists; }
-    const playlist = new Playlist({
-      _username: req.params.username,
-      playlists: [],
-    });
-
-    yield playlist.save();
-    return [];
-  })
-  .then(collection => res.json(collection))
-  .catch(err => next(err));
-});
+router.get('/:username', isValidUser, getPlaylistCollection);
 
 // get a specific playlist with title
-router.get('/:username/:title', (req, res, next) => {
-  const { username, title } = req.params;
-
-  Playlist.findOne(
-    { _username: username, 'playlists.title': title },
-    { _id: false, 'playlists._id': false }
-  )
-  .then(playlist => res.json(playlist))
-  .catch(err => next(err));
-});
+router.get('/:username/:title', isValidUser, getPlaylist);
 
 // create a playlist
-router.post('/:username', (req, res, next) => {
-  const { username } = req.params;
-  const title = req.body.title;
-  co(function* () {
-    const docs = yield Playlist.findOne(
-      { _username: username },
-      { playlists: { $elemMatch: { title } } }
-    );
-
-    const isPlaylistExisting = docs.playlists.length;
-
-    if (isPlaylistExisting) {
-      const error = new Error(`${title} playlist already exists`);
-      error.status = 400;
-      throw error;
-    }
-
-    const New = yield Playlist.findOneAndUpdate(
-      { _username: username },
-      { $push: { playlists: { title, songs: [] } } },
-      { safe: true, upsert: true, new: true }
-      // return the updated docs
-    );
-
-    return New;
-  })
-  .then(doc => res.json(doc))
-  .catch(err => next(err));
-});
+router.post('/:username', isValidUser, createPlaylist);
 
 // delete a playlist
-router.delete('/:username/:playlistTitle', (req, res, next) => {
-  const { username, playlistTitle } = req.params;
-  Playlist.findOneAndUpdate(
-    { _username: username, 'playlists.title': playlistTitle },
-    { $pull: { playlists: { title: playlistTitle } } },
-    { new: true, projection: { 'playlists._id': false } }
-  )
-  .then(doc => res.json(doc.playlists))
-  .catch(err => next(err));
-});
+router.delete('/:username/:playlistTitle', isValidUser, deletePlaylist);
 
 // add a song to a playlist
-router.put('/:username/:playlistTitle', (req, res, next) => {
-  const { username, playlistTitle } = req.params;
-  co(function* () {
-    const isSongExisting = yield Playlist.findOne(
-      {
-        _username: username,
-        playlists: {
-          $elemMatch: {
-            title: playlistTitle,
-            songs: {
-              $elemMatch: { id: req.body.id },
-            },
-          },
-        },
-      }
-    );
-
-    if (isSongExisting) {
-      const error = new Error(`<span>${req.body.title}</span> song already exists in <span>${playlistTitle}</span> playlist`);
-      error.status = 400;
-      throw error;
-    }
-
-    const New = yield Playlist.findOneAndUpdate(
-      { _username: username, 'playlists.title': playlistTitle },
-      { $push: { 'playlists.$.songs': req.body } },
-      // upsert add the document to the collection if no result was found
-      { safe: true, upsert: true, new: true }
-    );
-
-    return New;
-  })
-  .then(doc => res.json(doc))
-  .catch(err => next(err));
-});
+router.put('/:username/:playlistTitle', isValidUser, addSongToPlaylist);
 
 // delete a song from a playlist
-router.delete('/:username/:playlistTitle/:songId', (req, res, next) => {
-  const { username, playlistTitle, songId } = req.params;
-  Playlist.findOneAndUpdate(
-    { _username: username, 'playlists.title': playlistTitle },
-    { $pull: { 'playlists.$.songs': { id: songId } } },
-    { new: true, projection: { 'playlists._id': false } }
-  )
-  .then(doc => res.json(doc.playlists))
-  .catch(err => next(err));
-});
+router.delete('/:username/:playlistTitle/:songId', isValidUser, deleteSongFromPlaylist);
 
 // get a playlist by a specific id
-
 
 module.exports = router;
