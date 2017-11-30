@@ -2,6 +2,7 @@ import React from 'react';
 import Playlist from '../../Playlist';
 import Pagination from '../../Pagination';
 import WithBackgroundImage from '../../WithBgImg';
+import LazyloadImage from '../../LazyloadImage';
 import './index.sass';
 
 const ArtistPage = (props) => {
@@ -11,9 +12,8 @@ const ArtistPage = (props) => {
     <div className="artist-page">
       <WithBackgroundImage className="artist-page-header" src={cover}>
         <div className="artist-box">
-          <div className="artist-avatar image-wrapper">
-            <img src={avatar}/>
-          </div>
+          <LazyloadImage className="artist-avatar image-wrapper" src={avatar}>
+          </LazyloadImage>
           <div className="aritst-name">
             {artistName}
           </div>

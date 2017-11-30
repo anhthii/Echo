@@ -2,7 +2,7 @@
 const { request } = require('utils');
 
 module.exports = function getTop100(req, res, next) {
-  const [popId, kpopId, vpopId] = ['IWZ9Z097', 'IWZ9Z08W', 'IWZ9Z088'];
+  const [popId, kpopId, vpopId] = ['ZWZB96AB', 'ZWZB96DC', 'ZWZB969E'];
   let id;
 
   switch (req.params.type) {
@@ -20,12 +20,16 @@ module.exports = function getTop100(req, res, next) {
 
   const pageNum = req.query.page;
   const start = pageNum ? (pageNum - 1) * 20 : 0;
-  const uri = `http://mp3.zing.vn/json/song/get-top-100?start=${start}&length=20&id=${id}`;
-
+  const uri = `https://mp3.zing.vn/xhr/media/get-list?op=top100&start=${start}&length=20&id=${id}`;
   request(uri)
-    .then(data => {
+    .then(response => {
+      response = JSON.parse(response);
+      if (start === 0) {
+        // this will fetch all of the 100 songs so we have to truncate it down to 20
+        response.data.items.length = 20; // this won't casue any memory leaks
+      }
       // redisClient.set(getRedisKey(req), data, 'EX', 60 * 60 * 24 * 5); // cache the data for 5 days
-      res.send(JSON.parse(data));
+      res.send(response);
     })
     .catch(err => next(err));
 };

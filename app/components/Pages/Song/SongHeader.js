@@ -13,7 +13,7 @@ const SongHeader = (props) => {
     redirectTo,
     user,
   } = props;
-  const artists = songData.artist && songData.artist.split(/\s*,\s*/);
+  const artists = songData.artists_names && songData.artists_names.split(/\s*,\s*/);
 
   return (
     <div className="song-header">

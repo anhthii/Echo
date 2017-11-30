@@ -1,5 +1,5 @@
 import * as types from '../constant/action_constant';
-import { fetchSong, fetchSuggestedSongs } from './song';
+import { fetchSong } from './song';
 import { removeById, changeAlias, isEmpty } from '../utils/func';
 
 export function addSongToQueue(song) {
@@ -11,7 +11,6 @@ export function addSongToQueue(song) {
       // if the queue doesn't have any songs, fetch this song and play it
 
       dispatch(fetchSong(name, id));
-      dispatch(fetchSuggestedSongs(id));
     } else {
       dispatch({ type: types.ADD_SONG_TO_QUEUE, song });
     }
@@ -50,6 +49,7 @@ function tweakSongs(songs) {
           song.artists.map(artist => artist.name).join(', ')
         ),
       alias: song.alias,
+      ...song.thumbnail && { thumbnail: song.thumbnail },
     };
   });
 
@@ -65,7 +65,7 @@ export function replaceQueue(songs) {
       const { alias, id, name } = songs[0];
 
       dispatch(fetchSong(alias || changeAlias(name), id));
-      dispatch(fetchSuggestedSongs(id));
+      // dispatch(fetchSuggestedSongs(id));
     } else {
       dispatch({ type: types.REPLACE_QUEUE, ...tweakSongs(songs) });
     }

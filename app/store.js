@@ -10,7 +10,7 @@ let middleware = [thunk];
 if (process.env.NODE_ENV !== 'production') {
   const logger = require('./logger').default;
 
-  middleware = [...middleware, logger];
+  middleware = [...middleware/* , logger */];
 }
 
 const queueFromLocalStorage = loadQueueState();

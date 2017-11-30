@@ -19,8 +19,8 @@ class SearchMenu extends Component {
       <ul className='search-menu'>
         { top && <TopResult {...top} clearSearchResult={this.props.clearSearchResult}/> }
         <SongResult songs={data.song || []} clearSearchResult={this.props.clearSearchResult} />
-        <ArtistResult artists={data.artist} clearSearchResult={this.props.clearSearchResult} />
-        <AlbumResult albums={data.album} clearSearchResult={this.props.clearSearchResult} />
+        <ArtistResult artists={data.artist || []} clearSearchResult={this.props.clearSearchResult} />
+        <AlbumResult albums={data.album || []} clearSearchResult={this.props.clearSearchResult} />
       </ul>
     );
   }

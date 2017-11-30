@@ -4,6 +4,7 @@ import InputRange from 'react-input-range';
 import { Link, browserHistory } from 'react-router';
 import PlayerLoader from './PlayerLoader';
 import initAnalyzer from '../../utils/initAnalyzer';
+import LinksByComma from '../LinksByComma';
 import { changeAlias, getSongUrl, isTwoObjectEqual, formatTime } from '../../utils/func';
 
 import './index.sass';
@@ -66,7 +67,6 @@ class Player extends React.PureComponent {
       ) {
       const { name, id } = nextProps.queue[0];
       this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
-      this.props.fetchSuggestedSongs(id);
       if (/\/song\//.test(window.location.href)) {
         // only redirect if is on the song route
         browserHistory.push(`/song/${changeAlias(name)}/${id}`);
@@ -121,8 +121,6 @@ class Player extends React.PureComponent {
     } else {
       this.props.fetchSong(changeAlias(name), id); // changeAlias {func}: escape ut8 character
     }
-
-    this.props.fetchSuggestedSongs(id);
   }
 
   togglePlayBtn() {
@@ -199,30 +197,41 @@ class Player extends React.PureComponent {
   render() {
     const { songData, queue } = this.props;
     const { name, id } = songData;
-    const artists = songData.artist.split(/\s*,\s*/);
-
     return (
       <div className='player'>
         <audio
           autoPlay
-          src={songData.source_list && songData.source_list[0]}
+          src={songData.source && songData.source['128']}
           crossOrigin='anonymous'
           ref='audio'
           loop={this.state.loop}
         />
+        <img
+          src={songData.thumbnail}
+          className="player-song-thumbnail"
+          alt=""
+        />
         <div className="player-info">
           <Link
             to={getSongUrl(name, id)}
-            className='ellipsis'
+            className='ellipsis player-song-title'
             title={songData.name}
           >{songData.name}
           </Link>
-          <Link
+          <LinksByComma
+            className="ellipsis player-info-artists comma"
+            data={songData.artists}
+            titleEntry="name"
+            pathEntry="link"
+            definePath={(link) => link.replace('/nghe-si/', '/artist/')}
+            defineTitle={(title) => title.replace('Nhiều nghệ sĩ', 'Various artists')}
+          />
+         {/*  <Link
             to={`/artist/${changeAlias(artists[0])}`}
             className='ellipsis'
             title={songData.artist}
           >{songData.artist}
-          </Link>
+          </Link> */}
         </div>
         <div className="player-btns">
           <button

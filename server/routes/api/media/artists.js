@@ -8,10 +8,10 @@ module.exports = function getAlbums(req, res, next) {
       const parser = new PageParser(html);
 
       parser
-        .list('.row .pone-of-five .item')
+        .list('.pone-of-five .item')
         .setKey('artist')
         .extractAttr('src', 'img', 'thumb')
-        .extractAttr('text', '.title-item .txt-primary', 'name')
+        .extractAttr('text', 'a.txt-primary', 'name')
         .paginate();
 
       res.json(parser.get());

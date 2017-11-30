@@ -23,6 +23,7 @@ export default function (ComposedComponent) {
 
     onScroll() {
       // delay the scroll event
+
       _throttle(() => {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 200) {
           if (this.props.pageLoaded < NUMBER_OF_PAGES && !this.props.isLoading) {

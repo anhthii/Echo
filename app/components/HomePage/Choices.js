@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import onClickOutside from 'react-onclickoutside';
 
 const datas = {
-  'IWZ9Z097': 'Popular songs',
-  'IWZ9Z08W': 'Popular Korean songs',
-  'IWZ9Z088': 'Popular Vietnamese songs',
+  'ZWZB96AB': 'Popular songs',
+  'ZWZB96DC': 'Popular Korean songs',
+  'ZWZB969E': 'Popular Vietnamese songs',
 };
 
 class Choices extends Component {

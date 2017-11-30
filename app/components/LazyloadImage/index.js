@@ -23,6 +23,7 @@ class LazyloadImage extends React.Component {
           src={this.props.src}
           onLoad={this.handleImageLoaded.bind(this)}
           ref='img'
+          alt=""
         />
       </div>
     );

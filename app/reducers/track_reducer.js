@@ -29,7 +29,6 @@ function compareTwoFirstTrack(track1, track2) {
 
 function fetchTrackSuccess(state, action) {
   let tracks = state.tracks;
-
   if (state.tracks.length && !compareTwoFirstTrack(state.tracks[0], action.tracks[0])) {
     tracks = tracks.concat(action.tracks);
   }

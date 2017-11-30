@@ -16,7 +16,7 @@ function ArtistResult(props) {
               <div className='search-li-info'>
                 <div className='search-li-artist'>
                   <Link
-                    to={`/artist/${changeAlias(artist.name)}`}
+                    to={`/artist/${artist.aliasName}`}
                     onClick={() => props.clearSearchResult() }
                   >
                     {artist.name}

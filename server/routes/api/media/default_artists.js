@@ -19,11 +19,11 @@ module.exports = function getDefaultArtists(req, res, next) {
       result.origins = result.origins.map((origin, index) => {
         const innerParser = new PageParser(html);
         // rewrite the parser elements
-        innerParser.elements = parser.list('.tab-pane').elements.eq(index).find('.pone-of-five');
+        innerParser.elements = parser.list('.row.fn-list').elements.eq(index).find('.artist-item');
         innerParser
           .setKey('artist') // the key will be artists
-          .extractAttr('src', '.thumb img', 'thumb')
-          .extractAttrs(['href', 'text'], '.title-item a', ['link', 'name']);
+          .extractAttr('src', 'img', 'thumb')
+          .extractAttrs(['href', 'text'], 'a.txt-primary', ['link', 'name']);
 
         return Object.assign(origin, innerParser.get());
       });

@@ -6,36 +6,50 @@
   position: fixed
   z-index: 300
   min-width: 1120px
+  display: flex
+  align-items: center
   bottom: 0
   right: 0
   left: 0
   padding: 0 5%
   background: white
 
+img.player-song-thumbnail
+    height: 90%
+    width: 3.5%
+    display: block
+    float: left
 .player-info
   height: inherit
   float: left
   font-size: 13px
-  padding-top: 8px
-  width: 14%
+  width: 20%
+  padding: 5px 20px
   span
     display: block
     font-weight: 600
     color: #2E4053
-  a
-    font-size: 12px
-    color: #1ABC9C
-    display: block
-    &:hover
-      text-decoration: underline
-    &:last-child
-      color: $grey-text
-      margin-top: 3px
+  .player-info-artists
+    margin-top: 5px
+    a
+      font-size: 13px
+      color: #1ABC9C
+      // display: block
+      &:hover
+        text-decoration: underline
+      &:last-child
+        // color: $grey-text
+        margin-top: 3px
 
+.player-song-title
+  font-size: 15px
+  color: #70777d
+  &:hover
+    color: #a8adb1
 .player-seek
   float: left
   height: inherit
-  width: 50%
+  width: 45%
   display: flex
   align-items: center
   padding-left: 20px

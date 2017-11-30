@@ -16,7 +16,7 @@ const router = express.Router();
 
 router.get('/song', getSong);
 
-router.get('/suggested-song/:id', getSuggestedSongs);
+router.get('/suggested-song', getSuggestedSongs);
 
 router.get('/top100/:type', getTop100);
 

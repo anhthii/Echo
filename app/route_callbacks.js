@@ -25,7 +25,7 @@ export function fetchDataForHomePage() {
   if (queueState.queue.length && isEmpty(state.songData.data)) {
     const { name, id, alias } = queueState.queue[0];
     store.dispatch(fetchSong(alias || changeAlias(name), id));
-    store.dispatch(fetchSuggestedSongs(id));
+    // store.dispatch(fetchSuggestedSongs(id));
   }
 }
 

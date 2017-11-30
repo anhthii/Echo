@@ -2,7 +2,7 @@ const { request, spliceOne } = require('utils');
 
 module.exports = function (req, res, next) {
   const { term } = req.query;
-  const url = `http://ac.mp3.zing.vn/complete/desktop?type=artist,album,video,song&num=3&query=${term}`;
+  const url = `https://ac.mm.mp3.zing.vn/complete/desktop?type=artist,album,video,song&num=3&query=${term}`;
   request(url)
     .then(data => {
       data = JSON.parse(data);

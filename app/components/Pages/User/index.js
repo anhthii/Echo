@@ -103,7 +103,7 @@ class Playlist extends React.Component {
     // play the first song if there is no song in the queue
     if (isEmpty(songData)) {
       dispatch(fetchSong(changeAlias(name), id));
-      dispatch(fetchSuggestedSongs(id));
+      // dispatch(fetchSuggestedSongs(id));
     }
 
     dispatch(playUserPlaylist(this.props.playlist.songs));

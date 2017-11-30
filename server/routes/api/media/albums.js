@@ -8,13 +8,12 @@ module.exports = function getAlbums(req, res, next) {
       const parser = new PageParser(html);
 
       parser
-        .list('.row .pone-of-four .item')
+        .list('.row.fn-list .album-item')
         .setKey('album')
         .extractAttr('src', 'img', 'cover')
-        .extractAttrs(['text', 'href', 'href'], '.title-item .txt-primary', ['title', 'id', 'alias'])
-        .artist('.title-sd-item .txt-info')
+        .extractAttrs(['text', 'href', 'href'], '.fn-name.fn-link', ['title', 'id', 'alias'])
+        .artist('.txt-info.fn-artist a')
         .paginate();
-
       res.json(parser.get());
     })
     .catch(err => next(err));

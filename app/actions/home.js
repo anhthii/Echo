@@ -4,9 +4,10 @@ import { pageQuery } from '../utils/query';
 import { MEDIA_ENDPOINT } from '../constant/endpoint_constant';
 import { startFading, stopFading } from '../actions/ui';
 
-let cachedId = 'IWZ9Z097';
+// the POP music type id
+let cachedId = 'ZWZB96AB';
 
-export function fetchTracks(page, id = 'IWZ9Z097') {
+export function fetchTracks(page, id = 'ZWZB96AB') {
   return dispatch => {
     dispatch({ type: types.START_FETCHING_TRACKS });
     if (id !== cachedId) {
@@ -16,7 +17,7 @@ export function fetchTracks(page, id = 'IWZ9Z097') {
 
     axios.get(`${MEDIA_ENDPOINT}/top100/${id}${pageQuery(page)}`)
       .then(({ data }) => {
-        dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.data.songs, page, id });
+        dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.data.items, page, id });
         dispatch(stopFading());
       })
       .catch(() => {

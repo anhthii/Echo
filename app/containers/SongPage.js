@@ -8,12 +8,6 @@ import { addSongToStoreTemporarily } from '../actions/user_playlist';
 import { showAnalyzer, toggleModal } from '../actions/ui';
 import { getSongUrl, isEmpty } from '../utils/func';
 
-
-const fetch = (ctx, name, id) => {
-  ctx.props.fetchSong(name, id);
-  ctx.props.fetchSuggestedSongs(id);
-};
-
 class SongPage extends React.Component {
   componentDidMount() {
     this.props.showAnalyzer();
@@ -23,7 +17,7 @@ class SongPage extends React.Component {
     // or the url params.id is different from the playing song id
 
     if (isEmpty(this.props.songData) || id !== this.props.songData.id) {
-      fetch(this, name, id);
+      this.props.fetchSong(name, id);
     }
   }
 
@@ -49,7 +43,7 @@ class SongPage extends React.Component {
       }
 
       const { name, id } = nextProps.params;
-      fetch(this, name, id);
+      this.props.fetchSong(name, id);
     }
   }
 
