@@ -1,7 +1,7 @@
 const co = require('co');
 const { request } = require('utils');
 const rp = require('request-promise');
-const convertLrcToJSON = require('lib/convertLrcToJSON');
+const lrcParser = require('lrc-parser');
 
 module.exports = function getSong(req, res, next) {
   const { name, id } = req.query;
@@ -23,7 +23,7 @@ module.exports = function getSong(req, res, next) {
     }
 
     const lrcFile = yield request(data.lyric);
-    data.lyric = convertLrcToJSON(lrcFile);
+    data.lyric = lrcParser(lrcFile).scripts;
     return data;
   })
   .then(data => res.json(data))

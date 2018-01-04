@@ -63,6 +63,7 @@
     "lodash.chunk": "^4.2.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
+    "lrc-parser": "^1.0.0",
     "mongoose": "^4.11.1",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",

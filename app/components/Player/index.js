@@ -45,7 +45,7 @@ class Player extends React.PureComponent {
     };
 
     // initialize the audio analyzer
-    initAnalyzer(this.audio);
+    // initAnalyzer(this.audio);
   }
 
   componentWillUnmount() {
