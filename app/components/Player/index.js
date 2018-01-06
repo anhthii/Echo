@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import InputRange from 'react-input-range';
 import { Link, browserHistory } from 'react-router';
 import PlayerLoader from './PlayerLoader';
-import initAnalyzer from '../../utils/initAnalyzer';
+// import initAnalyzer from '../../utils/initAnalyzer';
 import LinksByComma from '../LinksByComma';
+import { requestInterval, clearRequestInterval } from '../../requestInterval';
 import { changeAlias, getSongUrl, isTwoObjectEqual, formatTime } from '../../utils/func';
 
 import './index.sass';
@@ -17,40 +18,53 @@ class Player extends React.PureComponent {
       progress: 0,
       isSeeking: false,
       isPlaying: false,
-      audioState: 0,
       loop: false,
     };
   }
 
   componentDidMount() {
+    window.addEventListener('blur', this.windowBlur.bind(this));
     this.audio = this.refs.audio;
-
-    this.audio.addEventListener('loadeddata', () => {
-      if (this.audio.readyState >= 2) {
-        this.audio.play();
-      }
-      this.setState({ audioState: this.audio.readyState });
-    });
-
-    this.audio.onplay = () => {
-      this.timer = setInterval(() => this.updateProgress(this.audio), 50);
-      this.setState({ isPlaying: true });
-    };
-
-    this.audio.onended = () => this.playPrevOrNextSong('next');
-
-    this.audio.onpause = () => {
-      clearInterval(this.timer);
-      this.setState({ isPlaying: false });
-    };
+    this.audio.addEventListener('loadeddata', this.onLoadedData.bind(this));
+    this.audio.addEventListener('play', this.onPlay.bind(this));
+    this.audio.addEventListener('pause', this.onPause.bind(this));
+    this.audio.addEventListener('ended', this.onEnded.bind(this));
 
     // initialize the audio analyzer
     // initAnalyzer(this.audio);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.timer);
+  windowBlur() {
+    if (this.state.isPlaying) {
+      clearInterval(this.timer);
+    }
   }
+
+  componentWillUnmount() {
+    clearRequestInterval(this.timer);
+  }
+
+  onLoadedData() {
+    if (this.audio.readyState >= 2) {
+      this.audio.play();
+    }
+  }
+
+  onPlay() {
+    this.timer = requestInterval(this.updateProgress.bind(this), 50);
+    this.setState({ isPlaying: true });
+  }
+
+  onPause() {
+    clearRequestInterval(this.timer);
+    this.setState({ isPlaying: false });
+  }
+
+  onEnded() {
+    this.playPrevOrNextSong('next');
+    clearRequestInterval(this.timer);
+  }
+
 
   componentWillUpdate(nextProps, nextState) {
     if (nextState.isPlaying !== this.state.isPlaying) {
@@ -127,13 +141,13 @@ class Player extends React.PureComponent {
     this.setState({ isPlaying: !this.state.isPlaying });
   }
 
-  updateProgress(audio) {
-    const lyric = this.props.songData.lyric;
 
+  updateProgress() {
+    const lyric = this.props.songData.lyric;
     // update progress bar
     let val = 0;
-    if (audio.currentTime > 0) {
-      val = (audio.currentTime / audio.duration * 100).toFixed(2);
+    if (this.audio.currentTime > 0) {
+      val = (this.audio.currentTime / this.audio.duration * 100).toFixed(2);
     }
     if (!this.state.isSeeking) {
       this.setState({ progress: val });
@@ -148,28 +162,28 @@ class Player extends React.PureComponent {
     } = this.props;
 
 
-    if (audio.currentTime > lyric[lyric.length - 1].end || audio.currentTime) {
+    if (this.audio.currentTime > lyric[lyric.length - 1].end || this.audio.currentTime) {
 
-      // clear lyric when the audio is playing with beat only
+      // clear lyric when the this.audio is playing with beat only
       updateLyric([], []);
     }
 
     for (let i = 0; i < lyric.length; i++) {
       if (i < lyric.length - 1 &&
         i % 2 == 0 &&
-        audio.currentTime >= lyric[i].start &&
-        audio.currentTime <= lyric[i + 1].end) {
+        this.audio.currentTime >= lyric[i].start &&
+        this.audio.currentTime <= lyric[i + 1].end) {
         updateLyric(lyric[i], lyric[i + 1]);
       }
     }
 
-    if (audio.currentTime <= lyric1.end) {
-      let width = (audio.currentTime - lyric1.start) / (lyric1.end - lyric1.start) * 100;
+    if (this.audio.currentTime <= lyric1.end) {
+      let width = (this.audio.currentTime - lyric1.start) / (lyric1.end - lyric1.start) * 100;
       width = Math.ceil(width);
       updateLyricPercent(width, 0);
-    } else if (audio.currentTime <= lyric2.end) {
+    } else if (this.audio.currentTime <= lyric2.end) {
       updateLyricPercent(null, 0);
-      let width = (audio.currentTime - lyric2.start) / (lyric2.end - lyric2.start) * 100;
+      let width = (this.audio.currentTime - lyric2.start) / (lyric2.end - lyric2.start) * 100;
       width = Math.ceil(width);
       width = width <=  0 ? 0 : (width > 96 ? 100 : width); // fill the karaoke text
       updateLyricPercent(100, width);
