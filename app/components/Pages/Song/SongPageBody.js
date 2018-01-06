@@ -9,7 +9,6 @@ const propTypes = {
 
 class SongPageBody extends React.Component {
   render() {
-    console.log(this.props.suggestedSongs);
     return (
       <div className="song-body">
         {/* <div className="comment-section">

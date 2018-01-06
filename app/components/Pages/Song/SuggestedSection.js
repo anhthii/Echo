@@ -4,7 +4,6 @@ import { changeAlias } from '../../../utils/func';
 import LinksByComma from '../../LinksByComma';
 
 const songList = (songList) => {
-  console.log(songList);
   return songList.map(song =>
     <div className="suggested-song" key={song.id}>
       <img src={song.thumbnail} alt=""/>
