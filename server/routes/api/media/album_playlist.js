@@ -1,5 +1,5 @@
 const { request } = require('utils');
-const PageParser = require('lib/Page');
+const Scraper = require('lib/PageScraper');
 const co = require('co');
 
 module.exports = function getAlbumPlaylist(req, res, next) {
@@ -10,7 +10,7 @@ module.exports = function getAlbumPlaylist(req, res, next) {
     const match = html.match(regex);
     if (!match) throw new Error("can't find the resource URL");
     const [playlistUrl] = match;
-    const parser = new PageParser(html);
+    const parser = new Scraper(html);
 
     return yield Promise.all([
       request(`https://mp3.zing.vn/xhr/${playlistUrl}`),

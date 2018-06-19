@@ -17,7 +17,7 @@ const queueFromLocalStorage = loadQueueState();
 const persistedData = {
   queueState: queueFromLocalStorage,
   auth: {
-    authenticated: loadUserData() ? true : false,
+    authenticated: Boolean(loadUserData()),
     user: loadUserData(),
     errors: {},
   },

@@ -1,4 +1,4 @@
-const PageParser = require('lib/Page');
+const PageScraper = require('lib/PageScraper');
 const { request } = require('utils');
 const cheerio = require('cheerio');
 
@@ -34,7 +34,7 @@ module.exports = function getArtist(req, res, next) {
 const getSongs = (name, page, res, next) => {
   rq('bai-hat', name, page)
     .then(html => {
-      const parser = new PageParser(html);
+      const parser = new PageScraper(html);
       parser
         .extract('src', '.box-info-artist img', 'avatar')
         .extract('src', '.container > img', 'cover')
@@ -55,7 +55,7 @@ const getSongs = (name, page, res, next) => {
 const getAlbums = (name, res, next) => {
   rq('album', name)
     .then(html => {
-      const parser = new PageParser(html);
+      const parser = new PageScraper(html);
 
       parser
         .extract('src', '.box-info-artist img', 'avatar')

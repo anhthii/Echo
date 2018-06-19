@@ -51,7 +51,7 @@ class Player extends React.PureComponent {
   }
 
   onPlay() {
-    this.timer = requestInterval(this.updateProgress.bind(this), 50);
+    this.timer = requestInterval(this.update.bind(this), 50);
     this.setState({ isPlaying: true });
   }
 
@@ -141,10 +141,7 @@ class Player extends React.PureComponent {
     this.setState({ isPlaying: !this.state.isPlaying });
   }
 
-
-  updateProgress() {
-    const lyric = this.props.songData.lyric;
-    // update progress bar
+  updateProgressbar() {
     let val = 0;
     if (this.audio.currentTime > 0) {
       val = (this.audio.currentTime / this.audio.duration * 100).toFixed(2);
@@ -152,8 +149,16 @@ class Player extends React.PureComponent {
     if (!this.state.isSeeking) {
       this.setState({ progress: val });
     }
+  }
 
-    if (!lyric.length) return;
+  update() {
+    const lyric = this.props.songData.lyric;
+    if (!lyric.length) {
+      clearInterval(this.timer);
+      return;
+    }
+
+    this.updateProgressbar();
 
     const {
       playerState: { lyric1, lyric2 },
@@ -162,8 +167,8 @@ class Player extends React.PureComponent {
     } = this.props;
 
 
+    // reset lyric state
     if (this.audio.currentTime > lyric[lyric.length - 1].end || this.audio.currentTime) {
-
       // clear lyric when the this.audio is playing with beat only
       updateLyric([], []);
     }

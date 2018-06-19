@@ -1,10 +1,10 @@
-const PageParser = require('lib/Page');
+const Scraper = require('lib/PageScraper');
 const request = require('utils').request;
 
 module.exports = function getDefaultAlbums(req, res, next) {
   request('http://mp3.zing.vn/the-loai-album.html')
     .then(html => {
-      const parser = new PageParser(html);
+      const parser = new Scraper(html);
       const result =
         parser
           .list('.zcontent .title-section')
@@ -16,7 +16,7 @@ module.exports = function getDefaultAlbums(req, res, next) {
       html = parser.$('.zcontent').html();
 
       result.origins = result.origins.map((origin, index) => {
-        const innerParser = new PageParser(html);
+        const innerParser = new Scraper(html);
         // rewrite the parser elements
         innerParser.elements = parser.list('.row.fn-list').elements.eq(index).find('.album-item.fn-item');
         innerParser

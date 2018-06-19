@@ -1,8 +1,7 @@
-const DOMParser = require('./DOMParser');
+const BaseScraper = require('./BaseScraper');
 const util = require('util');
 
 /**
- * @author anhthi
  * @description model
  *  {
       "songs": [
@@ -20,17 +19,17 @@ const util = require('util');
     }
  */
 
-function Page(...args) {
-  DOMParser.apply(this, args);
+function PageScraper(...args) {
+  BaseScraper.apply(this, args);
   this.key = ''; // key can be a noun for a list of result  such as <songs, videos, albums>
   this.attrs = {}; //  attributes that will be extracted from the element
   this.elements = []; // dom array
 }
 
-util.inherits(Page, DOMParser);
+util.inherits(PageScraper, BaseScraper);
 
 // static methods
-Page.pluralize = function (string) {
+PageScraper.pluralize = function (string) {
   return `${string}s`;
 };
 
@@ -39,7 +38,7 @@ Page.pluralize = function (string) {
  * @param <string> selector
 */
 
-Page.prototype.list = function (selector) {
+PageScraper.prototype.list = function (selector) {
   // test the validation of the passed selector see if it has the prefix '.' or '#'
   this.testSelector(selector);
   this.elements = this.$(selector);
@@ -53,11 +52,11 @@ Page.prototype.list = function (selector) {
  * { 'songs': [] }
 */
 
-Page.prototype.setKey = function (key) {
+PageScraper.prototype.setKey = function (key) {
   if (/s$/.test(key)) {
     this.key = key;
   } else {
-    this.key = Page.pluralize(key);
+    this.key = PageScraper.pluralize(key);
   }
   return this;
 };
@@ -71,7 +70,7 @@ Page.prototype.setKey = function (key) {
  * { 'songs': [] }
 */
 
-Page.prototype.extractAttr = function (attr, selector, outputKey, manipulateFunc) {
+PageScraper.prototype.extractAttr = function (attr, selector, outputKey, manipulateFunc) {
   this.attrs[selector] = this.attrs[selector] || [];
   const obj = { attr, outputKey };
 
@@ -107,7 +106,7 @@ Page.prototype.extractAttr = function (attr, selector, outputKey, manipulateFunc
  * @param <Array> outputKeys in order of attrs that will be extracted
  */
 
-Page.prototype.extractAttrs = function (attrs, selector, outputKeys) {
+PageScraper.prototype.extractAttrs = function (attrs, selector, outputKeys) {
   this.attrs[selector] = [];
   attrs.forEach((attr, index) => {
     this.attrs[selector].push({
@@ -118,21 +117,21 @@ Page.prototype.extractAttrs = function (attrs, selector, outputKeys) {
   return this;
 };
 
-// special function for extracting artists, see the DOMParser lib for more details
-Page.prototype.artist = function (selector) {
+// special function for extracting artists, see the BaseScraper lib for more details
+PageScraper.prototype.artist = function (selector) {
   this.extractAttr(null, selector, 'artists');
   return this;
 };
 
 
-Page.prototype.getAttrs = function () {
+PageScraper.prototype.getAttrs = function () {
   return this.attrs;
 };
 
 // get page number of the document incase the page has a pagination
 // only for scraping http://mp3.zing.vn purpose
 
-Page.prototype.paginate = function () {
+PageScraper.prototype.paginate = function () {
   const lastPage = this.$('.pagination ul li').last().children()[0];
   if (lastPage) {
     const lastPageHref = lastPage.attribs.href;
@@ -147,7 +146,7 @@ function hasOwnProperty(obj, prop) {
   return Object.prototype.hasOwnProperty.call(obj, prop);
 }
 
-Page.prototype.get = function () {
+PageScraper.prototype.get = function () {
   this.result[this.key] = [];
   this.elements.each((index, element) => {
     const doc = {};
@@ -174,4 +173,4 @@ Page.prototype.get = function () {
   return this.result;
 };
 
-module.exports = Page;
+module.exports = PageScraper;

@@ -22,6 +22,7 @@
     "indent": ["error", 2],
     "react/jsx-indent": [2, 2],
     "react/jsx-indent-props": [2, 2],
+    "default-case": "off",
     "eol-last": "off",
     "func-names": "off",
     "new-cap": "off",

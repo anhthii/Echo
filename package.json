@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build && npm run server",
-    "dev:client": "npm run clean && npm run webpack:dev",
-    "dev:server": "nodemon ./server",
+    "dev:client": "npm run webpack:dev",
+    "dev:server": "cross-env DEBUG=server:* nodemon ./server",
     "server": "cross-env NODE_ENV=production node server",
     "clean": "node rimraf",
     "webpack:dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot",
@@ -55,6 +55,7 @@
     "co": "^4.6.0",
     "compression": "^1.7.0",
     "cross-env": "^4.0.0",
+    "debug": "^3.1.0",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.6",
     "express": "^4.15.2",
@@ -65,6 +66,8 @@
     "lodash.throttle": "^4.1.1",
     "lrc-parser": "^1.0.0",
     "mongoose": "^4.11.1",
+    "morgan": "^1.9.0",
+    "on-change": "^0.1.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.6.0",
@@ -80,6 +83,7 @@
     "redux-thunk": "^2.2.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "validator": "^8.0.0"
+    "validator": "^8.0.0",
+    "ws": "^4.0.0"
   }
 }

@@ -5,25 +5,25 @@
 
 const cheerio = require('cheerio');
 
-function DOMParser(...args) {
+function BaseScraper(...args) {
   const [html, opt] = args;
   this.$ = opt ? cheerio.load(html, opt) : cheerio.load(html);
   this.result = {};
   this.$root = this.$('body');
 }
 
-DOMParser.prototype.setRoot = function (rootSelector) {
+BaseScraper.prototype.setRoot = function (rootSelector) {
   this.$root = this.$(rootSelector);
   return this;
 };
 
-DOMParser.prototype.testSelector = function (attr) {
+BaseScraper.prototype.testSelector = function (attr) {
   if (!/^(#||\.)/.test(attr)) {
     throw new TypeError('you missed # or .');
   }
 };
 
-DOMParser.prototype.extract = function (attr, selector, outputKey) {
+BaseScraper.prototype.extract = function (attr, selector, outputKey) {
   this.testSelector(selector); // test the attr to see if it is valid
   const $el = this.$root.find(selector);
   const data = this.attr($el, attr);
@@ -36,7 +36,7 @@ DOMParser.prototype.extract = function (attr, selector, outputKey) {
  *@param {array} or {string} attrs Ex: ['text', 'href'] or 'text'
 */
 
-DOMParser.prototype.extractList = function (attrs, selector, ouputKey) {
+BaseScraper.prototype.extractList = function (attrs, selector, ouputKey) {
   this.result[ouputKey] = [];
   this.$(selector).each((index, e) => {
     if (!Array.isArray(attrs)) {
@@ -57,7 +57,7 @@ DOMParser.prototype.extractList = function (attrs, selector, ouputKey) {
  *@param {function | optional} manipulate
 */
 
-DOMParser.prototype.attr = function ($el, attr, manipulateFunc) {
+BaseScraper.prototype.attr = function ($el, attr, manipulateFunc) {
   function extract(atrib, e) {
     function shouldManipulateResult(result) {
       return typeof manipulateFunc === 'function' ? manipulateFunc(result) : result;
@@ -82,9 +82,9 @@ DOMParser.prototype.attr = function ($el, attr, manipulateFunc) {
   return extract(attr, $el);
 };
 
-DOMParser.prototype.get = function () {
+BaseScraper.prototype.get = function () {
   return this.result;
 };
 
-module.exports = DOMParser;
+module.exports = BaseScraper;
 
