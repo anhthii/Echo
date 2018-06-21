@@ -1,5 +1,11 @@
 # :musical_note: Echo
+
+[![Build Status](https://travis-ci.org/dkakashi69/Echo.svg?branch=master)](https://travis-ci.org/dkakashi69/Echo)
+
 A music app made with React + Redux + Nodejs
+
+![capture](https://user-images.githubusercontent.com/20469909/41727103-c2f4d2b4-759d-11e8-8fb4-d044ccc51198.JPG)
+
 
 ## Features
 * login to create and listen to your playlists
@@ -21,21 +27,26 @@ Open .env and adjust the `MONGODB_URI` to your MongoDB server name (localhost no
 1. Run `npm install`.
 
 2. Run `npm run dev:client` to start the frontend server
+
 Wait for the build process to complete
 
-![carbon.png](https://postimg.cc/image/xlz0byaxt/)
+![carbon](https://user-images.githubusercontent.com/20469909/41726824-29385c4a-759d-11e8-9c5c-15a48452ad6e.png)
 
 3. Run `npm run dev:server` to start the api server
 
 Navigate to http://localhost:8000 in your browser to explore the app
 
 ## Build the app
-`npm start`
+* Build manually
+```
+ $ npm start
+```
+Or
+* Build with Docker Compose
 
-## Build with Docker Compose
-
-1. Run `docker-compose build`
-
-2. Run `docker-compose up`
+```
+$ docker-compose build
+$ docker-compose up
+```
 
 After building the app, frontend and backend servers will be merged into a single server and be available at http://localhost:3000
