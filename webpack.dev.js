@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ProgressBarPlugin = require('progress-bar-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -19,6 +20,7 @@ module.exports = {
     hot: true,
     inline: true,
     historyApiFallback: true,
+    port: 8000,
     proxy: {
       '/api': 'http://localhost:3000',
     },
@@ -64,5 +66,6 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './app/index.html',
     }),
+    new ProgressBarPlugin(),
   ],
 };

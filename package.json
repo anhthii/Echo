@@ -9,7 +9,7 @@
     "dev:server": "cross-env DEBUG=server:* nodemon ./server",
     "server": "cross-env NODE_ENV=production node server",
     "clean": "node rimraf",
-    "webpack:dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot",
+    "webpack:dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot --progress",
     "webpack:prod": "./node_modules/.bin/webpack --env=prod --progress --profile --colors",
     "build": "npm run clean && npm run webpack:prod",
     "test": "ava --verbose"
@@ -38,6 +38,7 @@
     "globby": "^6.1.0",
     "html-webpack-plugin": "^2.29.0",
     "node-sass": "^4.5.2",
+    "progress-bar-webpack-plugin": "^1.11.0",
     "redux-logger": "^3.0.6",
     "rimraf": "^2.6.1",
     "sass-loader": "^4.0.2",
@@ -49,6 +50,7 @@
   "dependencies": {
     "app-module-path": "^2.2.0",
     "axios": "^0.16.2",
+    "babel-loader": "^7.0.0",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.1",
     "cheerio": "^0.22.0",
@@ -65,9 +67,8 @@
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "lrc-parser": "^1.0.0",
-    "mongoose": "^4.11.1",
+    "mongoose": "^4.10.8",
     "morgan": "^1.9.0",
-    "on-change": "^0.1.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",
     "react-addons-css-transition-group": "^15.6.0",
@@ -83,7 +84,6 @@
     "redux-thunk": "^2.2.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
-    "validator": "^8.0.0",
-    "ws": "^4.0.0"
+    "validator": "^8.0.0"
   }
 }

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import InputRange from 'react-input-range';
 import { Link, browserHistory } from 'react-router';
 import PlayerLoader from './PlayerLoader';
-// import initAnalyzer from '../../utils/initAnalyzer';
+import initAnalyzer from '../../utils/initAnalyzer';
 import LinksByComma from '../LinksByComma';
 import { requestInterval, clearRequestInterval } from '../../requestInterval';
 import { changeAlias, getSongUrl, isTwoObjectEqual, formatTime } from '../../utils/func';
@@ -31,7 +31,7 @@ class Player extends React.PureComponent {
     this.audio.addEventListener('ended', this.onEnded.bind(this));
 
     // initialize the audio analyzer
-    // initAnalyzer(this.audio);
+    initAnalyzer(this.audio);
   }
 
   windowBlur() {
@@ -104,11 +104,11 @@ class Player extends React.PureComponent {
       if (queue[i].id === currId) {
         switch (prevOrnext) {
         case 'next':
-          index = i === length - 1 ? 0 : i + 1;
+          index = (i + 1) % length;
           // replay the queue if the index is equal the queue length otherwise play the next song
           break;
         case 'prev':
-          index = i === 0 ? length - 1 : i - 1;
+          index = (i + length - 1) % length;
           // play the last song in the queue if the index is 0 otherwise play the prev song
           break;
         default:
