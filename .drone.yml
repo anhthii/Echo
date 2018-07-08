@@ -1,3 +1,3 @@
-image: ubuntu
+image: ubuntu:18.04
 script:
-  - echo hello world
+  - echo 'avc'
