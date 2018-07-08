@@ -1,0 +1,3 @@
+image: ubuntu
+script:
+  - echo hello world
