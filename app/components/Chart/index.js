@@ -34,15 +34,15 @@ Chart.propTypes = {
   renderDropDown: PropTypes.func.isRequired,
 };
 
-const ChartFirstItem = ({ name, order, id, artists, thumbnail, renderDropDown, toggleTrackDropDown }) => (
+const ChartFirstItem = ({ title, order, id, artists, alias, thumbnail, renderDropDown, toggleTrackDropDown }) => (
   <li className="chart-item">
     <div className="chart-item-order order-first">
       { order }
     </div>
     <div className="chart-item-detail detail-first">
       <div className="chart-item-detail-left">
-        <div className="chart-item-title ellipsis" title={name}>
-          <Link to={`/song/${changeAlias(name)}/${id}`}>{name}</Link>
+        <div className="chart-item-title ellipsis" title={title}>
+          <Link to={`/song/alias/${id}`}>{title}</Link>
         </div>
         <LinksByComma
           className="chart-item-artist ellipsis"
@@ -71,7 +71,7 @@ ChartFirstItem.propTypes = {
   renderDropDown: PropTypes.func.isRequired,
 };
 
-const ChartItem = ({ name, order, id, thumbnail, artists, renderDropDown, toggleTrackDropDown }) => (
+const ChartItem = ({ title, order, id, alias, thumbnail, artists, renderDropDown, toggleTrackDropDown }) => (
   <li className="chart-item">
     <div className="chart-item-thumb">
       <img src={thumbnail} />
@@ -80,8 +80,8 @@ const ChartItem = ({ name, order, id, thumbnail, artists, renderDropDown, toggle
       <div className="chart-item-detail-left">
         <div className="chart-item-order">{order}</div>
         <div className="chart-item-info">
-          <div className="chart-item-title ellipsis" title={name}>
-            <Link to={`/song/${changeAlias(name)}/${id}`}>{name}</Link>
+          <div className="chart-item-title ellipsis" title={title}>
+            <Link to={`/song/${alias}/${id}`}>{title}</Link>
           </div>
           <LinksByComma
             className="chart-item-artist ellipsis"
