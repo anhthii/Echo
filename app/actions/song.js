@@ -1,4 +1,5 @@
 import axios from 'axios';
+import lrcParser from 'lrc-parser';
 import { browserHistory } from 'react-router';
 import * as types from '../constant/action_constant';
 import { ROOT_URL, MEDIA_ENDPOINT } from '../constant/endpoint_constant';
@@ -14,7 +15,16 @@ export function fetchSong(name, id) {
     dispatch({ type: types.START_FETCHING_SONG });
 
     axios.get(`/api/media/song?name=${name}&id=${id}`)
-    .then(({ data }) => {
+    .then(resp => {
+      const url = resp.data;
+      return axios.get(`https://mp3.zing.vn/xhr/${url}`)
+    })
+    .then(({ data: { data } }) => {
+      axios.get(data.lyric)
+        .then(({ data: lrcString }) => {
+          data.lyric = lrcParser(lrcString).scripts;
+        })
+        .catch(err => console.log(err));
       data.cover = data.artist.cover;
       const ids = {
         songId: data.id,
