@@ -22,13 +22,13 @@ router.get('/top100/:type', getTop100);
 
 router.get('/search', search);
 
-router.get('/album/default', getDefaultAlbums);
+router.get('/albums/default', getDefaultAlbums);
 
 router.get('/albums', getAlbums);
 
 router.get('/album_playlist', getAlbumPlaylist);
 
-router.get('/artist/default', getDefaultArtists);
+router.get('/artists/default', getDefaultArtists);
 
 router.get('/artists', getArtists);
 

@@ -27,7 +27,7 @@ export function fetchDefaultAlbums() {
   return dispatch => {
     dispatch(startLoading());
 
-    axios.get(`${MEDIA_ENDPOINT}/album/default`)
+    axios.get(`${MEDIA_ENDPOINT}/albums/default`)
       .then(({ data }) => {
         if (data.result && data.origins.length) {
           dispatch({ type: types.FETCH_DEFAULT_ALBUMS, defaultAlbums: data.origins });

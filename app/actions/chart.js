@@ -9,7 +9,7 @@ const popTypes = {
 
 export function getChart(popType) {
   return dispatch => {
-    axios.get(`/api/media/chart/${popTypes[popType]}`)
+    axios.get(`/api/media/chart/${popType}`)
       .then(({ data: res }) => {
         if (res.msg === 'Success') {
           switch (popType) {
@@ -30,7 +30,7 @@ export function getChart(popType) {
           }
         }
       })
-      .catch(err => { throw err; });
+      .catch(err => { console.log("fail haha ") ;throw err; });
   };
 }
 
