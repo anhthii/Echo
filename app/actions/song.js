@@ -1,5 +1,5 @@
 import axios from 'axios';
-import lrcParser from 'lrc-parser';
+import { lrcParser } from '../utils/func';
 import { browserHistory } from 'react-router';
 import * as types from '../constant/action_constant';
 import { ROOT_URL, MEDIA_ENDPOINT } from '../constant/endpoint_constant';
