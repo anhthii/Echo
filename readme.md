@@ -1,5 +1,7 @@
 # :musical_note: Echo
 
+## Demo: http://159.65.129.135:8080/ 
+
 [![Build Status](https://travis-ci.org/dkakashi69/Echo.svg?branch=master)](https://travis-ci.org/dkakashi69/Echo)
 
 A music app made with React + Redux + Nodejs
