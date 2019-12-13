@@ -1,6 +1,6 @@
 # :musical_note: Echo
 
-## **Notes**: I'm sorry this app is broken, i'm not maintaning anymore
+## **Notes**: I'm sorry this app is broken, i'm not maintaning anymore. I will update the source code in the near future
 
 [![Build Status](https://travis-ci.org/dkakashi69/Echo.svg?branch=master)](https://travis-ci.org/dkakashi69/Echo)
 
