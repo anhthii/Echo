@@ -1,6 +1,6 @@
-import * as types from '../constant/action_constant';
-import { fetchSong } from './song';
-import { removeById, changeAlias, isEmpty } from '../utils/func';
+import * as types from "../constant/action_constant";
+import { changeAlias, isEmpty, removeById } from "../utils/func";
+import { fetchSong } from "./song";
 
 export function addSongToQueue(song) {
   const { name, id } = song;
@@ -17,7 +17,6 @@ export function addSongToQueue(song) {
   };
 }
 
-
 export function removeSongFromQueue(id) {
   return (dispatch, getState) => {
     const queueState = getState().queueState;
@@ -25,14 +24,18 @@ export function removeSongFromQueue(id) {
     const newQueue = removeById(queue, id);
     const queueIds = removeById([...queueState.ids], id);
 
-    dispatch({ type: types.REMOVE_SONG_FROM_QUEUE, queue: newQueue, ids: queueIds });
+    dispatch({
+      type: types.REMOVE_SONG_FROM_QUEUE,
+      queue: newQueue,
+      ids: queueIds
+    });
   };
 }
 
 export function togglePushRoute(bool) {
   return {
     type: types.TOGGLE_PUSH_ROUTE,
-    flag: bool,
+    flag: bool
   };
 }
 
@@ -43,13 +46,13 @@ function tweakSongs(songs) {
     return {
       id: song.id,
       name: song.title,
-      artist: song.artist_text ||
+      artist:
+        song.artist_text ||
         (song.artists &&
           Array.isArray(song.artists) &&
-          song.artists.map(artist => artist.name).join(', ')
-        ),
+          song.artists.map(artist => artist.name).join(", ")),
       alias: song.alias,
-      ...song.thumbnail && { thumbnail: song.thumbnail },
+      ...(song.thumbnail && { thumbnail: song.thumbnail })
     };
   });
 
@@ -77,10 +80,16 @@ export function clearQueue() {
     const state = getState();
     const playingSongId = state.songData.data.id;
     const queueState = state.queueState;
-    const clearedQueue = queueState.queue.filter(song => song.id === playingSongId);
+    const clearedQueue = queueState.queue.filter(
+      song => song.id === playingSongId
+    );
     const newQueueIds = queueState.ids.filter(id => id === playingSongId);
 
-    dispatch({ type: types.CLEAR_QUEUE, queue: clearedQueue, ids: newQueueIds });
+    dispatch({
+      type: types.CLEAR_QUEUE,
+      queue: clearedQueue,
+      ids: newQueueIds
+    });
   };
 }
 
@@ -88,6 +97,6 @@ export function playUserPlaylist(songs) {
   return {
     type: types.PLAY_USER_PLAYLIST,
     ids: songs.map(song => song.id),
-    queue: songs,
+    queue: songs
   };
 }

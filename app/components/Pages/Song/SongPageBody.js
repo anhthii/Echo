@@ -1,7 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import SuggestedSection from './SuggestedSection';
-import './index.sass';
+import PropTypes from "prop-types";
+import React from "react";
+import "./index.sass";
+import SuggestedSection from "./SuggestedSection";
 
 const propTypes = {
   suggestedSongs: PropTypes.array.isRequired,
@@ -78,7 +78,7 @@ class SongPageBody extends React.Component {
             </div>
           </div>
         </div> */}
-        <SuggestedSection songs={this.props.suggestedSongs}/>
+        <SuggestedSection songs={this.props.suggestedSongs} />
       </div>
     );
   }

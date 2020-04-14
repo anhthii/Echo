@@ -1,11 +1,15 @@
-import React from 'react';
-import { Link } from 'react-router';
-import { changeAlias } from '../../../utils/func';
-import LazyloadImage from '../../LazyloadImage';
-import './artist_card.sass';
+import React from "react";
+import { Link } from "react-router";
+import LazyloadImage from "../../LazyloadImage";
+import "./artist_card.sass";
 
-const ArtistCard = (props) => {
-  const url = `/artist/${changeAlias(props.name)}`;
+const ArtistCard = props => {
+  let alias;
+  if (props.link) {
+    alias = props.link.substring(props.link.lastIndexOf("/") + 1);
+  }
+
+  const url = `/artist/${alias}`;
 
   return (
     <div className="artist-card">

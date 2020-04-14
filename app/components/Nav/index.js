@@ -1,40 +1,44 @@
-import React from 'react';
-import { Link, IndexLink } from 'react-router';
-import axios from 'axios';
-import PropTypes from 'prop-types';
-import debounce from 'lodash.debounce';
-import SearchMenu from '../SearchMenu';
-import { logout } from '../../actions/auth';
-import { clearUserPlaylist } from '../../actions/user_playlist';
-import './nav.sass';
+import axios from "axios";
+import debounce from "lodash.debounce";
+import PropTypes from "prop-types";
+import React from "react";
+import { IndexLink, Link } from "react-router";
+import { logout } from "../../actions/auth";
+import { clearUserPlaylist } from "../../actions/user_playlist";
+import SearchMenu from "../SearchMenu";
+import "./nav.sass";
 
 class Nav extends React.Component {
   static contextTypes = {
     router: PropTypes.object,
-  }
+  };
 
   constructor() {
     super();
-    this.state = { term: '', searchResult: {} };
-    this.debounceSearch = debounce(this.search, 300);
+    this.state = { term: "", searchResult: {} };
+    this.debounceSearch = debounce(this.search, 600);
   }
 
   search(term) {
-    axios.get(`/api/media/search?term=${term}`)
+    axios
+      .get(`/api/media/search?term=${term}`)
       .then(({ data }) => {
+        console.log(data);
         if (this.state.term.length) {
           this.setState({ searchResult: data });
         }
       })
-      .catch(err => { throw err; });
+      .catch((err) => {
+        throw err;
+      });
   }
 
   handleOnChange(e) {
     let term = e.target.value;
-    if (!term) return this.setState({ term: '' });
+    if (!term) return this.setState({ term: "" });
     this.setState({ term });
-    term = term.replace(/\s+/g, '+');
-    return this.debounceSearch(term);
+
+    return this.debounceSearch(encodeURIComponent(term));
   }
 
   componentWillUpdate(nextProps, nextState) {
@@ -44,14 +48,14 @@ class Nav extends React.Component {
   }
 
   clearSearchResult() {
-    this.setState({ term: '', searchResult: {} });
+    this.setState({ term: "", searchResult: {} });
   }
 
   logOut(e) {
     e.preventDefault();
     this.props.dispatch(clearUserPlaylist());
     this.props.dispatch(logout());
-    this.context.router.push('/');
+    this.context.router.push("/");
   }
 
   render() {
@@ -60,9 +64,7 @@ class Nav extends React.Component {
     return (
       <nav>
         <div className="logo">
-          <Link to="/">
-            Echo
-          </Link>
+          <Link to="/">Echo</Link>
         </div>
         <div className="searchBar">
           <div className="search-wrapper">
@@ -74,40 +76,55 @@ class Nav extends React.Component {
               onChange={this.handleOnChange.bind(this)}
             />
           </div>
-          { this.state.searchResult.result &&
+          {this.state.searchResult.result && (
             <SearchMenu
               searchResult={this.state.searchResult}
               clearSearchResult={this.clearSearchResult.bind(this)}
             />
-          }
+          )}
         </div>
         <div className="navRight">
           <ul className="nav-menu">
             <li>
-              <IndexLink to="/" className="animating_link" activeClassName="nav-menu-link-active">
+              <IndexLink
+                to="/"
+                className="animating_link"
+                activeClassName="nav-menu-link-active"
+              >
                 Home
               </IndexLink>
             </li>
             <li>
-              <Link to="/charts" className="animating_link" activeClassName="nav-menu-link-active">
+              <Link
+                to="/charts"
+                className="animating_link"
+                activeClassName="nav-menu-link-active"
+              >
                 Charts
               </Link>
             </li>
             <li>
-              <Link to="/albums" className="animating_link" activeClassName="nav-menu-link-active">
+              <Link
+                to="/albums"
+                className="animating_link"
+                activeClassName="nav-menu-link-active"
+              >
                 Albums
               </Link>
             </li>
             <li>
-              <Link to="/artists" className="animating_link" activeClassName="nav-menu-link-active">
+              <Link
+                to="/artists"
+                className="animating_link"
+                activeClassName="nav-menu-link-active"
+              >
                 Artists
               </Link>
             </li>
           </ul>
         </div>
-        {
-          !authenticated
-          ? <div className="auth-btns">
+        {!authenticated ? (
+          <div className="auth-btns">
             <Link to="/login" className="animating_link">
               <img src="/svg/login.svg" />
               Log In
@@ -116,15 +133,24 @@ class Nav extends React.Component {
               Sign Up
             </Link>
           </div>
-          : <div className="user">
-            <Link to={`/user/${user.username}`} className="animating_link ellipsis">
+        ) : (
+          <div className="user">
+            <Link
+              to={`/user/${user.username}`}
+              className="animating_link ellipsis"
+            >
               {user.username}
             </Link>
-            <a href="#" title="Log Out" onClick={this.logOut.bind(this)} className="animating_link">
+            <a
+              href="#"
+              title="Log Out"
+              onClick={this.logOut.bind(this)}
+              className="animating_link"
+            >
               <img src="/svg/sign-out-option.svg" />
             </a>
           </div>
-        }
+        )}
       </nav>
     );
   }

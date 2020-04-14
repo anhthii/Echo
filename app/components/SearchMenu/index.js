@@ -28,7 +28,7 @@ class SearchMenu extends Component {
 
 SearchMenu.propTypes = {
   searchResult: PropTypes.object.isRequired,
-  clearSearchResult: PropTypes.func.isRequired,
+  clearSearchResult: PropTypes.func.isRequired
 };
 
 export default onClickOutside(SearchMenu);

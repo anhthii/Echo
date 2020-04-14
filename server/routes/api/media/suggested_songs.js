@@ -1,4 +1,4 @@
-const { request } = require('utils');
+const { request } = require("utils");
 
 module.exports = function getSuggestedSongs(req, res, next) {
   const { songId, artistId } = req.query;
