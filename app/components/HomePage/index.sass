@@ -1,4 +1,5 @@
 @import 'colors'
+
 @import 'mixins'
 
 .hp-track-list-wrapper
@@ -164,6 +165,38 @@ i.ion-more
     &:hover
       border: 1px solid #27DED5
 
+.home-banner
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/home-banner-compressed.jpg');
+  height: 300px
+  background-size: cover
+  display: flex
+  justify-content: center
+  align-items: center
+  position: relative
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap&family=Work+Sans:wght@500&display=swap');
 
+.home-banner-text
+  color: white
+  font-weight: 700
+  margin: 0
+  font-family: 'Montserrat', sans-serif
+  font-size: 40px
 
+.developed-by 
+  position: absolute
+  right: 0
+  bottom: 0
+  padding: 50px
+  color: white
+  font-family: 'Montserrat', sans-serif
+  font-size: 20px
+
+.logo-text 
+  font-weight: 800
+  font-size: 35px
+  background: -webkit-linear-gradient(0deg,#3c50ca,#77d5f7)
+  font-family: "Work Sans","Helvetica Neue","Helvetica",Helvetica,Arial,sans-serif
+  -webkit-background-clip: text
+  background-clip: text
+  -webkit-text-fill-color: transparent
