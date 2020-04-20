@@ -10,8 +10,6 @@ services:
       LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
       ECHO_API: "echoapi.codingstack.ninja/api/v1"
       PORT: "${VIRTUAL_PORT}"
-    depends_on:
-      - letsencrypt-nginx-proxy-companion
 
 networks:
   default:
