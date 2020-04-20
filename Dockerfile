@@ -8,4 +8,4 @@ RUN npm run build
 
 CMD ["npm", "run", "server"]
 
-EXPOSE 3000
+EXPOSE 5000
