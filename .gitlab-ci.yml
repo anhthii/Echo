@@ -1,0 +1,15 @@
+image: alpine:3.10
+
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - "which ssh-agent || ( apk --update add openssh-client )"
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - mkdir -m 700 -p /root/.ssh
+    - ssh -o StrictHostKeyChecking=no deploy@103.92.31.195 "git -C echo pull || git clone git@gitlab.com:t-t-solutions/echo.git && cd echo && docker-compose up -d --build --force-recreate"
+  only:
+    - master

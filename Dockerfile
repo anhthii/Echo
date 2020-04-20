@@ -1,13 +1,11 @@
-FROM node:6.11.1
+FROM node:10.15.2
+WORKDIR /usr/src/echo
+ADD package*.json ./
+RUN npm install
 
-ADD package.json /tmp/package.json
+COPY . .
+RUN npm run build
 
-RUN cd /tmp && npm install
-
-RUN mkdir -p /app && cp -a /tmp/node_modules /app/
-
-WORKDIR /app
-
-ADD . /app
+CMD ["npm", "run", "server"]
 
 EXPOSE 3000

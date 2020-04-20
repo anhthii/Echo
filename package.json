@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "start": "npm run build && npm run server",
+    "server": "cross-env NODE_ENV=production node server",
     "dev:client": "npm run webpack:dev",
     "dev:server": "cross-env DEBUG=server:* npx nodemon ./server",
-    "server": "cross-env NODE_ENV=production node server",
     "clean": "node rimraf",
     "webpack:dev": "./node_modules/.bin/webpack-dev-server --content-base public --inline --hot --progress",
     "webpack:prod": "./node_modules/.bin/webpack --env=prod --progress --profile --colors",

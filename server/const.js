@@ -1,3 +1,5 @@
+const ECHO_API = process.env.ECHO_API;
+
 module.exports = {
-  ECHO_API: "http://localhost:5000/api/v1",
+  ECHO_API: ECHO_API,
 };

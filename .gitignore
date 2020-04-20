@@ -6,3 +6,4 @@ public/*
 !public/fonts
 !public/svg
 !public/images
+.env

@@ -1,20 +1,19 @@
-version: '3'
-
+version: "3"
 services:
-  mongodb:
-    image: mongo
-    volumes:
-      - /data/mongodb/db:/data/db
-    ports:
-      - "27017:27017"
-
-  web:
-    build: .
-    ports:
-      - "3000:3000"
-    links:
-      - mongodb
-    command: npm start
+  echo:
+    build:
+      context: .
+    environment:
+      VIRTUAL_HOST: "${VIRTUAL_HOST}"
+      VIRTUAL_PORT: "${VIRTUAL_PORT}"
+      LETSENCRYPT_HOST: "${LETSENCRYPT_HOST}"
+      LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
+      ECHO_API: "echoapi.codingstack.ninja/api/v1"
+      PORT: "${VIRTUAL_PORT}"
     depends_on:
-      - mongodb
+      - letsencrypt-nginx-proxy-companion
 
+networks:
+  default:
+    external:
+      name: echo-api_default
