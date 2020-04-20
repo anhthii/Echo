@@ -8,7 +8,7 @@ services:
       VIRTUAL_PORT: "${VIRTUAL_PORT}"
       LETSENCRYPT_HOST: "${LETSENCRYPT_HOST}"
       LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
-      ECHO_API: "echoapi.codingstack.ninja/api/v1"
+      ECHO_API: "https://echoapi.codingstack.ninja/api/v1"
       PORT: "${VIRTUAL_PORT}"
       JWT_SECRET: "${JWT_SECRET}"
       MONGODB_URI: "${MONGODB_URI}"
