@@ -68,7 +68,7 @@
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
     "lrc-parser": "^1.0.0",
-    "mongoose": "^5.0.15",
+    "mongoose": "^5.7.5",
     "morgan": "^1.9.0",
     "prop-types": "^15.5.10",
     "react": "^15.4.1",
