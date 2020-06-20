@@ -1,6 +1,6 @@
 # :musical_note: Echo
 
-Visit website at: (https://echo.codingstack.ninja)
+Visit website at: https://echo.codingstack.ninja
 
 [![Build Status](https://travis-ci.org/dkakashi69/Echo.svg?branch=master)](https://travis-ci.org/dkakashi69/Echo)
 
