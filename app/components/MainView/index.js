@@ -85,18 +85,18 @@ const ArtistView = (props) => {
 
 const Default = ({ origins, Card, chunkSize }) => (
   <div>
-    { origins.map(origin =>
-      <DefaultCards key={origin.id} {...origin} Card={Card} chunkSize={chunkSize} />
+    { origins.map((origin, index) =>
+      <DefaultCards key={"default cards "+ index} {...origin} Card={Card} chunkSize={chunkSize} />
     )}
   </div>
 );
 
-const DefaultCards = ({ title, id, albums, artists, Card, chunkSize }) => (
+const DefaultCards = ({ title, id, albums, artists, Card, chunkSize , items}) => (
   <div className="view-cards">
     <div className="view-cards-title">
       <a href='#'>{title} <i className='ion-chevron-right'></i></a>
     </div>
-    { chunk(albums || artists, chunkSize).map((chunk, index) => (
+    { chunk(items || albums || artists, chunkSize).map((chunk, index) => (
       <Row key={`row-chunk${index}`} chunk={chunk} Card={Card} chunkSize={chunkSize}/>
     ))}
   </div>
@@ -104,7 +104,7 @@ const DefaultCards = ({ title, id, albums, artists, Card, chunkSize }) => (
 
 const Row = ({ chunk, Card }) => (
   <div className="view-cards-row">
-    { chunk.map(item => <Card key={item.id || item.name} {...item} />) }
+    { chunk.map(item => <Card key={item.encodeId || item.name} {...item} />) }
   </div>
 );
 
