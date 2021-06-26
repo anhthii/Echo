@@ -38,13 +38,14 @@ const Track = props => {
 
   return (
     <li>
+      {console.log("track", props)}
       {props.renderDropDown("Track", { id, name, thumbnail, artists })}
       <div className="trackPosition">{order}</div>
       <LazyloadImage src={thumbnail} className="track-thumb image-wrapper" />
       <div className="trackDetail">
         <div className="trackTitle">
           <Link
-            to={`song/${alias}/${id}`}
+            to={`song/${name}/${id}`}
             onClick={e => {
               if (streaming_status == 2) {
                 e.preventDefault();
