@@ -19,10 +19,10 @@ const Chart = props => {
         {chart.items.map((item, index) => {
           if (index === 0) {
             return (
-              <ChartFirstItem key={`chart-${item.id}`} {...item} {...props} />
+              <ChartFirstItem key={`chart-${item.encodeId}`} id={item.encodeId} name={item.title} {...item} {...props} />
             );
           }
-          return <ChartItem key={`chart-${item.id}`} {...item} {...props} />;
+          return <ChartItem key={`chart-${item.encodeId}`} id={item.encodeId} name={item.title} {...item} {...props} />;
         })}
       </ul>
     </div>
@@ -39,10 +39,11 @@ const ChartFirstItem = ({
   id,
   artists,
   alias,
+  name,
   thumbnail,
   renderDropDown,
   toggleTrackDropDown,
-  streaming_status
+  streamingStatus
 }) => (
   <li className="chart-item">
     <div className="chart-item-order order-first chart-item-thumb">
@@ -51,15 +52,15 @@ const ChartFirstItem = ({
     <div className="chart-item-detail detail-first">
       <div className="chart-item-detail-left">
         <div className="chart-item-order">
-          {streaming_status == 2 ? (
+          {streamingStatus == 2 ? (
             <span className="vip-required">Vip</span>
           ) : null}
         </div>
         <div className="chart-item-title ellipsis" title={title}>
           <Link
-            to={`/song/alias/${id}`}
+            to={`/song/${alias}/${id}`}
             onClick={e => {
-              if (streaming_status == 2) {
+              if (streamingStatus == 2) {
                 e.preventDefault();
                 alert("only vip users can see this");
               }
@@ -103,12 +104,13 @@ const ChartItem = ({
   title,
   order,
   id,
+  name,
   alias,
   thumbnail,
   artists,
   renderDropDown,
   toggleTrackDropDown,
-  streaming_status
+  streamingStatus
 }) => (
   <li className="chart-item">
     <div className="chart-item-thumb">
@@ -117,7 +119,7 @@ const ChartItem = ({
     <div className="chart-item-detail">
       <div className="chart-item-detail-left">
         <div className="chart-item-order">
-          {streaming_status == 2 ? (
+          {streamingStatus == 2 ? (
             <span className="vip-required">Vip</span>
           ) : null}
         </div>
@@ -126,7 +128,7 @@ const ChartItem = ({
             <Link
               to={`/song/${alias}/${id}`}
               onClick={e => {
-                if (streaming_status == 2) {
+                if (streamingStatus == 2) {
                   e.preventDefault();
                   alert("only vip users can see this");
                 }
