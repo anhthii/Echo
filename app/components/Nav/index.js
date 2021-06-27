@@ -23,7 +23,6 @@ class Nav extends React.Component {
     axios
       .get(`/api/media/search?term=${term}`)
       .then(({ data }) => {
-        console.log(data);
         if (this.state.term.length) {
           this.setState({ searchResult: data });
         }
@@ -76,7 +75,7 @@ class Nav extends React.Component {
               onChange={this.handleOnChange.bind(this)}
             />
           </div>
-          {this.state.searchResult.result && (
+          {this.state.searchResult.msg ==="Success" && (
             <SearchMenu
               searchResult={this.state.searchResult}
               clearSearchResult={this.clearSearchResult.bind(this)}
