@@ -1,7 +1,7 @@
 const { request, pageQuery } = require("utils");
 const Scraper = require("lib/PageScraper");
 require('dotenv').config();
-var crypt = require("./Crypto")
+var crypt = require("lib/Crypto")
 const { ECHO_API } = require("const");
 const rp = require("request-promise");
 const request_total = require('request');
@@ -28,6 +28,6 @@ module.exports = function getAlbums(req, res, next) {
         res.send(response.data);
       })
       .catch(err => next(err));
-  
-  
+
+
 };

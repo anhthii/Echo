@@ -1,6 +1,6 @@
 const { request } = require("utils");
 var cheerio = require('cheerio');
-var crypt = require("./Crypto")
+var crypt = require("lib/Crypto")
 require('dotenv').config();
 const rp = require("request-promise");
 // const { getRedisKey } = require('utils');
@@ -23,6 +23,6 @@ module.exports = function (req, res, next) {
       res.send(response);
     })
     .catch(err => next(err));
-  
-    
+
+
 };
