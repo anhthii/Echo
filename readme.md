@@ -55,3 +55,7 @@ $ docker-compose up
 ```
 
 After building the app, frontend and backend servers will be merged into a single server and be available at http://localhost:3000
+
+## Contributors
+- [Anh Thi](https://github.com/anhthii)
+- [Nguyen Van Quyen Luc](https://github.com/quyenluc22082000)
