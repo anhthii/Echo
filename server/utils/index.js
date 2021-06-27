@@ -1,18 +1,16 @@
 const rp = require('request-promise');
-var crypt = require("../routes/api/media/Crypto");
-const { response } = require('express');
-const request_cookie = require('request');
+const request = require('request');
 
 async function getHeaders() {
     const options = {
       url: 'https://zingmp3.vn/',
       method: 'GET',
     };
-  
+
     // Return new promise
     return new Promise(function(resolve, reject) {
       // Do async job
-      request_cookie.get(options, function(err, response, body) {
+      request.get(options, function(err, response, body) {
         if (err) {
           reject(err);
         } else {
@@ -25,16 +23,16 @@ async function getHeaders() {
 
 
 exports.request = async function (uri) {
-  let header = await getHeaders();
-  let version = header["set-cookie"][0].split(";")[0];
-  let request_id = header["set-cookie"][1].split(";")[0];
-  
+  const headers = await getHeaders();
+  const version = headers["set-cookie"][0].split(";")[0];
+  const requestId = headers["set-cookie"][1].split(";")[0];
+
   return rp({
     method: 'GET',
     uri,
     gzip: true,
     headers: {
-      'cookie': version+";"+request_id,
+      'cookie': version+";"+requestId,
       'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36',
       'Access-Control-Allow-Origin': 'https://zingmp3.vn',
       'Access-Control-Allow-Credentials': 'true',
