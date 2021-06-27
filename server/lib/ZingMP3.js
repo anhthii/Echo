@@ -12,6 +12,9 @@ const V2 = {
 
   resources: {
     album: "/api/v2/album/getList",
+    defaultAlbums: "/api/v2/album/getByGenreHome",
+    chart: "/api/v2/chart/getWeekChart",
+    search: "/api/v2/search/multi",
   }
 }
 
@@ -27,9 +30,8 @@ const composeParamMessage = paramStr => {
     'page',
     'count',
     'ctime',
-    'version'
+    'version',
   ]
-
   return sortedKeys
     .filter(key => pickOnly.includes(key))
     .map(key => `${key}=${urlParams.get(key)}`).join("");
@@ -49,6 +51,7 @@ const composeURL = (resourcePath, params) => {
   params.version = ZING_MP3_VERSION
 
   let paramStr = querystring.stringify(params);
+
   const signature = computeSignature(paramStr, resourcePath);
 
   const extendedParams = {
