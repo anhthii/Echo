@@ -26,26 +26,25 @@ const RenderButton = ({ alias, id, download, streaming_status }) => {
 const Track = props => {
   const {
     name,
+    link,
     thumbnail,
     order,
     id,
     title,
     artists,
-    alias,
     downloadProgress,
     streaming_status
   } = props;
 
   return (
     <li>
-      {console.log("track", props)}
-      {props.renderDropDown("Track", { id, name, thumbnail, artists })}
+      {props.renderDropDown("Track", { id, link, thumbnail, artists })}
       <div className="trackPosition">{order}</div>
       <LazyloadImage src={thumbnail} className="track-thumb image-wrapper" />
       <div className="trackDetail">
         <div className="trackTitle">
           <Link
-            to={`song/${name}/${id}`}
+            to={`song/${link.split("/")[2]}/${id}`}
             onClick={e => {
               if (streaming_status == 2) {
                 e.preventDefault();
