@@ -1,29 +1,40 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { changeAlias } from '../../utils/func';
+import LinksByComma from '../LinksByComma';
 
-function AlbumResult(props) {
+function AlbumResult({albums , clearSearchResult}) {
   return (
     <ul className='album-result'>
       <div className='search-li-title'>
         Albums
       </div>
       {
-        props.albums.map(album =>
-          <li key={`search-${album.id}`}>
+        albums.map(album =>
+          <li key={`search-${album.encodeId}`}>
             <div className='search-li-detail'>
-              <img src={`http://image.mp3.zdn.vn/thumb/94_94/${album.thumb}`} alt='' />
+              <img src={album.thumbnailM} alt='' />
               <div className='search-li-info'>
                 <div>
                   <Link
-                    to={`/album/playlist/${changeAlias(album.name)}/${album.id}`}
-                    onClick={() => props.clearSearchResult() }
+                    to={`/album/playlist/${album.link.split("/")[2]}/${album.encodeId}`}
+                    onClick={() => clearSearchResult() }
                   >
-                    {album.name}
+                    {album.title}
                   </Link>
                 </div>
                 <div className='search-li-artist'>
-                  {album.artist}
+                  {/* <LinksByComma
+                    className="chart-item-artist ellipsis"
+                    data={album.artists}
+                    definePath={url => url.replace("nghe-si", "artist")}
+                    defineTitle={title =>
+                      title.replace("Nhiều nghệ sĩ", "Various artists")
+                    }
+                    pathEntry="link"
+                    titleEntry="name"
+                  /> */}
+                  {album.artistsNames}
                 </div>
               </div>
             </div>

@@ -4,6 +4,7 @@ import CircularProgressbar from "react-circular-progressbar";
 import { Link } from "react-router";
 import LazyloadImage from "../LazyloadImage";
 import LinksByComma from "../LinksByComma";
+import { extractAlias } from "../../utils/func"
 
 const RenderButton = ({ alias, id, download, streaming_status }) => {
   if (streaming_status == 2) {
@@ -25,20 +26,21 @@ const RenderButton = ({ alias, id, download, streaming_status }) => {
 };
 const Track = props => {
   const {
-    name,
+    link,
     thumbnail,
     order,
     id,
     title,
     artists,
-    alias,
     downloadProgress,
     streaming_status
   } = props;
 
+  const alias = extractAlias(link)
+
   return (
     <li>
-      {props.renderDropDown("Track", { id, name, thumbnail, artists })}
+      {props.renderDropDown("Track", { id, link, thumbnail, artists })}
       <div className="trackPosition">{order}</div>
       <LazyloadImage src={thumbnail} className="track-thumb image-wrapper" />
       <div className="trackDetail">

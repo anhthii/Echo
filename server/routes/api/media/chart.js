@@ -1,15 +1,17 @@
-const { request } = require("utils");
-// const redisClient = require('lib/Redis');
-// const { getRedisKey } = require('utils');
-const { ECHO_API } = require("const");
+const { request } = require('utils')
+const ZingMP3 = require('../../../lib/ZingMP3')
 
 module.exports = function (req, res, next) {
   const { id } = req.params;
+  console.log("chart", id)
+  const url = ZingMP3.composeURL(ZingMP3.V2.resources.chart,{id});
 
-  request(`${ECHO_API}/chart/${id}`)
-    .then((data) => {
-      // redisClient.set(getRedisKey(req), data, 'EX', 60 * 60 * 24 * 5);
-      res.json(JSON.parse(data));
+  request(url)
+    .then(response => {
+      response = JSON.parse(response);
+      res.send(response);
     })
-    .catch((err) => next(err));
+    .catch(err => next(err));
+
+
 };

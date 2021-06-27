@@ -22,11 +22,7 @@ module.exports = function getArtist(req, res, next) {
       break;
 
     case "songs":
-      request(`${ECHO_API}/artist/${name}`)
-        .then((data) => {
-          res.json(JSON.parse(data));
-        })
-        .catch((err) => next(err));
+      getSongs(name, page, res, next);
       break;
     case "biography":
       getBio(name, res, next);
@@ -44,17 +40,30 @@ const getSongs = (name, page, res, next) => {
         .extract("src", ".box-info-artist img", "avatar")
         .extract("src", ".container > img", "cover")
         .extract("text", ".info-summary > h1", "artistName")
-        .list(".group.fn-song")
+        .list(".group .fn-song")
         .setKey("song")
-        .extractAttrs(["href", "href"], "._trackLink", ["id", "alias"])
+        .extractAttr('href', "._trackLink", "link")
         .extractAttr("text", "._trackLink", "title", (string) => {
           return string.replace(/\s*-\s*.+/g, "");
         })
         .extractAttr("text", "._trackLink span", "artist_text")
         .paginate();
-      res.json(parser.get());
-    })
-    .catch((err) => next(err));
+        
+        let data = parser.get();
+        data.songs = data.songs.map(item =>{ 
+          let link = item.link.split(/[/.]/);
+          let alias = link[2];
+          let id = link[3];
+          return {
+            title: item.title,
+            artist_text: item.artist_text,
+            id: id,
+            alias: alias
+          }
+        })
+        res.json(data);
+      })
+      .catch((err) => next(err));
 };
 
 const getAlbums = (name, res, next) => {

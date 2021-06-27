@@ -1,10 +1,12 @@
-const Scraper = require("lib/PageScraper");
-const request = require("utils").request;
-const { ECHO_API } = require("const");
-const rp = require("request-promise");
+const { request } = require('utils')
+const ZingMP3 = require('../../../lib/ZingMP3')
 
 module.exports = function getDefaultAlbums(req, res, next) {
-  rp(`${ECHO_API}/album/default`)
-    .then((resp) => res.send(resp))
-    .catch((err) => next(err));
+  const url = ZingMP3.composeURL(ZingMP3.V2.resources.defaultAlbums,{});
+  request(url)
+    .then(response => {
+      response = JSON.parse(response);
+      res.send(response.data);
+    })
+    .catch(err => next(err));
 };

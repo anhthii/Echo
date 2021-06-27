@@ -16,7 +16,8 @@ export function fetchSong(name, id) {
 
     axios
       .get(`/api/media/song?name=${name}&id=${id}`)
-      .then(({ data: { data } }) => {
+      .then(response => {
+        let data = response.data;
         axios
           .get(data.lyric)
           .then(({ data: lrcString }) => {

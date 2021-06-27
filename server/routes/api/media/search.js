@@ -1,10 +1,14 @@
-const { request, spliceOne } = require("utils");
-const rp = require("request-promise");
-const { ECHO_API } = require("const");
+const { request } = require('utils')
+const ZingMP3 = require('../../../lib/ZingMP3')
 
 module.exports = function (req, res, next) {
   const { term } = req.query;
-  rp(`${ECHO_API}/search?term=${term}`)
-    .then((resp) => res.send(resp))
-    .catch((err) => next(err));
+  const url = ZingMP3.composeURL(ZingMP3.V2.resources.search,{q: term});
+
+  request(url)
+    .then(response => {
+      response = JSON.parse(response);
+      res.send(response);
+    })
+    .catch(err => next(err));
 };
