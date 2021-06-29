@@ -162,3 +162,12 @@ function convertTime(string) {
   }
   return seconds;
 }
+
+// Resolve a link to alias
+export const extractAlias = function (link) {
+  if (!link) {
+    return ''
+  }
+
+  return link.split('/')[2]
+}

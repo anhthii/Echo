@@ -45,12 +45,6 @@ const HomePage = (props) => (
         <span style={{ color: "#10c7fd" }}>Listen</span> to music for free, no
         ads
       </h2>
-      <div className="developed-by">
-        Developed by{" "}
-        <a href="https://brandly.vn" className="logo-text">
-          Brandly
-        </a>
-      </div>
     </div>
     <div className="homepage home-container">
       <div className="home-nav">

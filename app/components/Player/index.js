@@ -5,6 +5,7 @@ import { browserHistory, Link } from "react-router";
 import { clearRequestInterval, requestInterval } from "../../requestInterval";
 import { changeAlias, formatTime, isTwoObjectEqual } from "../../utils/func";
 import initAnalyzer from "../../utils/initAnalyzer";
+import { extractAlias } from "../../utils/func";
 import LinksByComma from "../LinksByComma";
 import "./index.sass";
 import PlayerLoader from "./PlayerLoader";
@@ -223,7 +224,9 @@ class Player extends React.PureComponent {
 
   render() {
     const { songData, queue } = this.props;
-    const { id, title, alias } = songData;
+    const { id, title, link } = songData;
+    const alias = extractAlias(link)
+
     return (
       <div className="player">
         <audio
