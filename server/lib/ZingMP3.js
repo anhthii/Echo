@@ -15,7 +15,8 @@ const V2 = {
     defaultAlbums: "/api/v2/album/getByGenreHome",
     chart: "/api/v2/chart/getWeekChart",
     search: "/api/v2/search/multi",
-    getStream: "/api/v2/song/getStreaming"
+    getStream: "/api/v2/song/getStreaming",
+    getDetail: "/api/v2/playlist/getDetail",
   }
 }
 
