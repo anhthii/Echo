@@ -17,7 +17,7 @@ export function fetchTracks(page, id = 'ZWZB96AB') {
 
     axios.get(`${MEDIA_ENDPOINT}/top100/${id}${pageQuery(page)}`)
       .then(({ data }) => {
-        dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.data.items, page, id });
+        dispatch({ type: types.FETCH_TRACK_SUCCESS, tracks: data.items, page, id });
         dispatch(stopFading());
       })
       .catch(() => {

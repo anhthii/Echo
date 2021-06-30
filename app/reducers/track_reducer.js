@@ -24,7 +24,7 @@ export default function (state = initialState, action) {
 }
 
 function compareTwoFirstTrack(track1, track2) {
-  return track1.id === track2.id;
+  return track1.encodeId === track2.encodeId;
 }
 
 function fetchTrackSuccess(state, action) {
