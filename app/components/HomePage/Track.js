@@ -4,11 +4,14 @@ import CircularProgressbar from "react-circular-progressbar";
 import { Link } from "react-router";
 import LazyloadImage from "../LazyloadImage";
 import LinksByComma from "../LinksByComma";
-import { extractAlias } from "../../utils/func"
 
-const RenderButton = ({ alias, id, download, streaming_status }) => {
-  if (streaming_status == 2) {
-    return null;
+const RenderButton = ({ alias, encodeId, download, streamingStatus }) => {
+  if (streamingStatus == 2) {
+    return (
+      <button className="sc-ir">
+        <i className="ion-android-remove-circle" title="download the track" />
+      </button>
+    )
   }
   return (
     <button
@@ -16,7 +19,7 @@ const RenderButton = ({ alias, id, download, streaming_status }) => {
       onClick={() =>
         download({
           songName: alias,
-          id
+          id: encodeId
         })
       }
     >
@@ -27,20 +30,21 @@ const RenderButton = ({ alias, id, download, streaming_status }) => {
 const Track = props => {
   const {
     link,
+    alias,
     thumbnail,
     order,
-    id,
+    encodeId,
     title,
     artists,
     downloadProgress,
-    streaming_status
+    streamingStatus
   } = props;
-
-  const alias = extractAlias(link)
-
+  const dataArtists = artists ? artists : [];
+  const id = encodeId
+  const name = title
   return (
     <li>
-      {props.renderDropDown("Track", { id, link, thumbnail, artists })}
+      {props.renderDropDown("Track", { id, name, thumbnail, artists })}
       <div className="trackPosition">{order}</div>
       <LazyloadImage src={thumbnail} className="track-thumb image-wrapper" />
       <div className="trackDetail">
@@ -56,13 +60,13 @@ const Track = props => {
           >
             {title}
           </Link>
-          {streaming_status == 2 ? (
+          {streamingStatus == 2 ? (
             <span className="vip-required">Vip</span>
           ) : null}
         </div>
         <LinksByComma
           className="trackArtist"
-          data={artists}
+          data={dataArtists}
           titleEntry="name"
           pathEntry="link"
           definePath={link => link.replace("/nghe-si/", "/artist/")}
