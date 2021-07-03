@@ -1,6 +1,7 @@
 // const redisClient = require('lib/Redis');
 const { request } = require("utils");
 const rp = require("request-promise");
+const ZingMp3 = require("../../../lib/ZingMP3");
 const { ECHO_API } = require("const");
 
 module.exports = function getTop100(req, res, next) {
@@ -22,17 +23,16 @@ module.exports = function getTop100(req, res, next) {
 
   const pageNum = req.query.page;
   const start = pageNum ? (pageNum - 1) * 20 : 0;
-  const uri = `https://mp3.zing.vn/xhr/media/get-list?op=top100&start=${start}&length=20&id=${id}`;
+ 
+  const url = ZingMp3.composeURL(ZingMp3.V2.resources.getDetail, {id})
   
-  request(uri)
+  //get All 100 data from Zingmp3 Detail id
+  request(url)
     .then(response => {
       response = JSON.parse(response);
-      if (start === 0) {
-        // this will fetch all of the 100 songs so we have to truncate it down to 20
-        response.data.items.length = 20; // this won't casue any memory leaks
-      }
-      // redisClient.set(getRedisKey(req), data, 'EX', 60 * 60 * 24 * 5); // cache the data for 5 days
-      res.send(response);
+      //only fetch 20 items
+      response.data.song.items = response.data.song.items.splice(start,20);
+      res.send({items : response.data.song.items});
     })
     .catch(err => next(err));
 };

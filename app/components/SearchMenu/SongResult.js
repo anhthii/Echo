@@ -4,14 +4,15 @@ import { Link } from "react-router";
 function SongResult({ songs, clearSearchResult }) {
   return (
     <ul className="song-result">
-      <div className="search-li-title search-song-title">Songs</div>
+      <div className="search-li-title">Songs</div>
       {songs.map(song => (
-        <li key={`song-result${song.id}`}>
-          <div className="search-li-detail search-song-detail">
-            <div className="search-li-info search-song">
+        <li key={`song-result${song.encodeId}`}>
+          <div className="search-li-detail">
+            <img src={`${song.thumbnailM}`} alt="" />
+            <div className="search-li-info">
               <div>
                 <Link
-                  to={`/song/${song.alias}/${song.id}`}
+                  to={`/song/${song.alias}/${song.encodeId}`}
                   onClick={e => {
                     if (song.streaming_status == 2) {
                       e.preventDefault();
@@ -25,8 +26,8 @@ function SongResult({ songs, clearSearchResult }) {
                 </Link>
               </div>
               <div className="search-li-artist">
-                {song.artists_names}{" "}
-                {song.streaming_status == 2 ? (
+                {song.artistsNames}
+                {song.streamingStatus == 2 ? (
                   <span className="vip-required">Vip</span>
                 ) : null}
               </div>
