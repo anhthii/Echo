@@ -1,19 +1,34 @@
 version: "3"
 services:
-  echo:
+  web-echo:
     build:
       context: .
+      dockerfile: Dockerfile
+    restart: always 
+    ports: 
+      - "3000:3000"
     environment:
-      VIRTUAL_HOST: "${VIRTUAL_HOST}"
-      VIRTUAL_PORT: "${VIRTUAL_PORT}"
-      LETSENCRYPT_HOST: "${LETSENCRYPT_HOST}"
-      LETSENCRYPT_EMAIL: "${LETSENCRYPT_EMAIL}"
-      ECHO_API: "https://echoapi.codingstack.ninja/api/v1"
-      PORT: "${VIRTUAL_PORT}"
-      JWT_SECRET: "${JWT_SECRET}"
-      MONGODB_URI: "${MONGODB_URI}"
+      # connect mongodb img
+      # - MONGODB_URI=mongodb://mongo:27017/mydb
 
-networks:
-  default:
-    external:
-      name: echo-api_default
+      # connect a mongodb atlas
+      - MONGODB_URI=mongodb+srv://<username>:<password>@cluster0.phzg7.mongodb.net/mydb?retryWrites=true&w=majority
+      - JWT_SECRET=${JWT_SECRET}
+      - ZING_MP3_VERSION=${ZING_MP3_VERSION}
+      - ZING_MP3_SECRET=${ZING_MP3_SECRET}
+      - ZING_MP3_API_KEY=${ZING_MP3_API_KEY}
+
+  # deploy image mongo data in docker
+  #   depends_on: 
+  #     - mongo
+  #   networks: 
+  #     - echo-app
+  # mongo:
+  #   image: mongo
+  #   ports:
+  #     - "27017:27017"
+  #   networks: 
+  #     - echo-app
+  #   volumes:
+  #     - mydb:/data/db
+
