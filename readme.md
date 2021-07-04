@@ -1,6 +1,6 @@
 # :musical_note: Echo
 
-Visit website at: http://www.echo-music-app.me:3000/
+Visit website at: https://www.echo-music-app.me/
 
 [![Build Status](https://travis-ci.org/dkakashi69/Echo.svg?branch=master)](https://travis-ci.org/dkakashi69/Echo)
 
