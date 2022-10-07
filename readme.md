@@ -59,4 +59,4 @@ After building the app, frontend and backend servers will be merged into a singl
 
 ## Contributors
 - [Anh Thi](https://github.com/anhthii)
-- [Nguyen Van Quyen Luc](https://github.com/quyenluc22082000)
+- [Nguyen Van Quyen Luc](https://github.com/Poseidon-God2k)
