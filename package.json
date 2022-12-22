@@ -64,7 +64,7 @@
     "ejs": "^2.5.6",
     "express": "^4.15.2",
     "extract-text-webpack-plugin": "^2.1.0",
-    "jsonwebtoken": "^7.4.1",
+    "jsonwebtoken": "^9.0.0",
     "lodash.chunk": "^4.2.0",
     "lodash.debounce": "^4.0.8",
     "lodash.throttle": "^4.1.1",
